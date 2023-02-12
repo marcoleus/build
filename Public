@@ -102,9 +102,10 @@ curl_close($ch);
 return $body;}}
 
 function curlp($url,$httpheader=0,$post=0){
-while(true){$api_proxy=save("api_proxy");
+while(true){$ip_proxy=ip_proxy();$ip_proxy.n;
 $ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
+curl_setopt($ch,CURLOPT_DOH_URL,'https://cloudflare-dns.com/dns-query');
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
 curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
@@ -115,15 +116,14 @@ if($post){curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS,$post);}
 if($httpheader){curl_setopt($ch,CURLOPT_HTTPHEADER,$httpheader);}
 curl_setopt($ch,CURLOPT_HEADER,true);
-curl_setopt($ch,CURLOPT_PROXY,api_proxy($api_proxy));
+curl_setopt($ch,CURLOPT_PROXY,$ip_proxy);
 $response=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
 $header=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 curl_close($ch);
-if(!$body){print m."error network!";r();continue;}
+if(!$body){print k."proxy down waiting!";r();continue;}
 return array($header,$body);}}}
-
 
 function webshare(){
 $uspw=[
@@ -153,6 +153,8 @@ function asci($string){$res=ip();date_default_timezone_set($res["t"]);$acssi = [
 
 function ip(){$if=json_decode(file_get_contents("https://ipinfo.io/?utm_source=ipecho.net&utm_medium=referral&utm_campaign=upsell_sister_sites"));return ["i"=>$if->ip,"r"=>$if->region,"c"=>$if->country,"t"=>$if->timezone];}
 
+function ip_proxy(){$api=explode(n,file_get_contents("proxy"));for($i=0;$i<5000;$i++){if($api[$i]==null){return $api[rand(0,$i-1)];}}}
+
 function re2($su,$skey,$akey){$ua=["Host: api.anycaptcha.com","Content-Type: application/json"];$c=json_decode(curl("https://api.anycaptcha.com/createTask",$ua,json_encode(array("clientKey"=>$akey,"task"=>array("type"=>"RecaptchaV2TaskProxyless","websiteURL"=>$su,"websiteKey"=>$skey,"isInvisible"=>false))))[1]);if($c->errorId==1){return 0;}else{while(true){$res=json_decode(curl("https://api.anycaptcha.com/getTaskResult",$ua,json_encode(array("clientKey"=>$akey,"taskId"=>$c->taskId)))[1]);if($res->status=='ready'){return $res->solution->gRecaptchaResponse;}elseif($res->status=='processing'){print h."processing";sleep(5);r();}else{return 0;break;}}}}
 
 function rev3($site_url,$sitekey){global $Rv3_gt;
@@ -177,9 +179,6 @@ $data=http_build_query(["v"=>$v[1],
 "vh"=>rand(11111111111,99999999999),
 "bg"=>$gen]);
 $reload=curlp($host."api2/reload?k=".$sitekey,$h,$data)[1];
-$status=json_decode($reload);
-if($status->StatusCode==401){
-print "Your Free Plan has been suspended. You can re-order for activation".n;unlink("api_proxy");}
 preg_match('#rresp","(.*?)"#is',$reload,$bypas);
 if($bypas[1]){return $bypas[1];}}
 
