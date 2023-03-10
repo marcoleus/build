@@ -206,8 +206,7 @@ return $h;}
 
 function antb($ab){
 $a=$ab[1][0];$b=$ab[1][1];$c=$ab[1][2];
-return [[" ".$a,$b,$c],[" ".$a,$c,$b],[" ".$b,$c,$a],[" ".$b,$a,$b],[" ".$c,$a,$b],[" ".$c,$b,$a]];}
-
+return [[" ".$b,$c,$a],[" ".$a,$b,$c],[" ".$a,$c,$b],[" ".$b,$a,$c],[" ".$c,$b,$a],[" ".$c,$a,$b]];}
 
 function valid($inp,$ar=0){$h1=["fis","buz","ezz","lin","web","url","up","wef","sho","cli"];
 $h2=["fishfly","buzzfly","ezzfly","linksfly","webfly","urlsfly","upperfly","wefly","shortsfly","clicksfly"];
