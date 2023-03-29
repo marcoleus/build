@@ -46,6 +46,7 @@ curl_setopt($ch,CURLOPT_HEADER,true);
 $response=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
 $respHeaders=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$info=curl_getinfo($ch);
 $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
 if($i===0){$headers['http_code']=$line;}else{
@@ -73,11 +74,16 @@ if($httpheader){curl_setopt($ch,CURLOPT_HTTPHEADER,$httpheader);}
 curl_setopt($ch,CURLOPT_HEADER,true);
 $response=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-$header=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$respHeaders=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$info=curl_getinfo($ch);
 $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
+if($i===0){$headers['http_code']=$line;}else{
+list($key, $value)=explode(': ',$line);
+$header[$key]=$value;}}
 curl_close($ch);
 if(!$body){print m."error network!";r();continue;}
-return array($header,$body);}}}
+return [[$header,$info],$body];}}}
 
 
 
@@ -117,8 +123,8 @@ curl_setopt($ch,CURLOPT_PROXY,$proxy);
 curl_setopt($ch,CURLOPT_PROXYTYPE,0);
 $response=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-$info=curl_getinfo($ch);
 $respHeaders=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$info=curl_getinfo($ch);
 $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
 if($i===0){$headers['http_code']=$line;}else{
