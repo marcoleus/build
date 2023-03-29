@@ -29,6 +29,7 @@ function line(){print str_repeat(p.'─',50).n;}
 
 function ket($a,$aa,$b=0,$bb=0,$c=0,$cc=0,$d=0,$dd=0){if($a or $aa){print h.$a.c." > ".p.$aa.n;}if($b or $bb){print h.$b.c." > ".p.$bb.n;}if($c or $cc){print h.$c.c." > ".p.$cc.n;}if($d or $dd){print h.$d.c." > ".p.$dd.n;}}
 
+
 function curl($url,$httpheader=0,$post=0){
 while(true){$ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
@@ -36,24 +37,25 @@ curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
 curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
 curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
-curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,30);
-curl_setopt($ch,CURLOPT_TIMEOUT,50);
+curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,10);
+curl_setopt($ch,CURLOPT_TIMEOUT,15);
 if($post){curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS,$post);}
 if($httpheader){curl_setopt($ch,CURLOPT_HTTPHEADER,$httpheader);}
 curl_setopt($ch,CURLOPT_HEADER,true);
 $response=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-$header=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$respHeaders=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
+if($i===0){$headers['http_code']=$line;}else{
+list($key, $value)=explode(': ',$line);
+$header[$key]=$value;}}
 curl_close($ch);
 if(!$body){print m."error network!";r();continue;}
-return array($header,$body);}}}
+return [[$header,$info],$body];}}}
 
-
-
-function curlc($url,$httpheader=0,$post=0){
-$file=explode("/",host)[2].".txt";
+function curlc($url,$httpheader=0,$post=0){global $asu;
 while(true){$ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
@@ -63,9 +65,8 @@ curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
 curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,30);
 curl_setopt($ch,CURLOPT_TIMEOUT,50);
 curl_setopt($ch,CURLOPT_COOKIE,TRUE);
-curl_setopt($ch,CURLOPT_COOKIEFILE,$file);
-
-curl_setopt($ch,CURLOPT_COOKIEJAR,$file);
+curl_setopt($ch,CURLOPT_COOKIEFILE,$asu);
+curl_setopt($ch,CURLOPT_COOKIEJAR,$asu);
 if($post){curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS,$post);}
 if($httpheader){curl_setopt($ch,CURLOPT_HTTPHEADER,$httpheader);}
@@ -77,7 +78,6 @@ $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 curl_close($ch);
 if(!$body){print m."error network!";r();continue;}
 return array($header,$body);}}}
-
 
 
 
@@ -101,9 +101,7 @@ $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 curl_close($ch);
 return $body;}}
 
-function curlp($url,$httpheader=0,$post=0){
-while(true){$api_proxy=save("api_proxy");
-$ch=curl_init();
+function curlp($url,$httpheader=0,$post=0){global $proxy;while(true){$ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
@@ -115,14 +113,20 @@ if($post){curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS,$post);}
 if($httpheader){curl_setopt($ch,CURLOPT_HTTPHEADER,$httpheader);}
 curl_setopt($ch,CURLOPT_HEADER,true);
-curl_setopt($ch,CURLOPT_PROXY,api_proxy($api_proxy));
+curl_setopt($ch,CURLOPT_PROXY,$proxy);
+curl_setopt($ch,CURLOPT_PROXYTYPE,0);
 $response=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-$header=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$info=curl_getinfo($ch);
+$respHeaders=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 $body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
+if($i===0){$headers['http_code']=$line;}else{
+list($key, $value)=explode(': ',$line);
+$header[$key]=$value;}}
 curl_close($ch);
 if(!$body){print m."error network!";r();continue;}
-return array($header,$body);}}}
+return [[$header,$info],$body];}}}
 
 
 function webshare(){
