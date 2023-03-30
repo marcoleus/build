@@ -170,7 +170,7 @@ function reload_recaptchav3($grecaptcha){$render=curl("https://www.google.com/re
 function recaptchav3($grecaptcha,$v,$referer){
 $cookie=cookie_recaptchav3();
 $google="https://www.google.com/recaptcha/";
-$hash=str_replace("=",".",base64_encode("https://".explode("/",host)[2].":443"));
+$hash=str_replace("=","",base64_encode("https://".explode("/",host)[2].":443"));
 $country=["id","en"][1];
 $url_anchor=$google."api2/anchor?".http_build_query(["ar"=>1,"k"=>$grecaptcha,"co"=>$hash,"hl"=>$country,"v"=>$v,"size"=>"invisible","cb"=>substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"),0,12)]);
 $anchor=curl($url_anchor,h_google($referer,$cookie))[1];
