@@ -27,6 +27,7 @@ function line(){print str_repeat(p.'─',50).n;}
 
 function ket($a,$aa,$b=0,$bb=0,$c=0,$cc=0,$d=0,$dd=0){if($a or $aa){print h.$a.c." > ".p.$aa.n;}if($b or $bb){print h.$b.c." > ".p.$bb.n;}if($c or $cc){print h.$c.c." > ".p.$cc.n;}if($d or $dd){print h.$d.c." > ".p.$dd.n;}}
 
+function ket_line($a,$aa,$b=0,$bb=0,$c=0,$cc=0){if($a or $aa){print h.$a.c." > ".p.$aa;}if($b or $bb){print " | ".h.$b.c." > ".p.$bb;}if($c or $cc){print " | ".h.$c.c." > ".p.$cc;}print n;}
 
 function curl($url,$httpheader=0,$post=0){
 while(true){$ch=curl_init();
