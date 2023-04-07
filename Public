@@ -21,7 +21,7 @@ function tmr($a,$tmr){date_default_timezone_set('UTC').r();$timr=time()+$tmr;$co
 
 function L($t){r();$col=[b,c,h,k,m,p,u];for($i=1;$i<=$t;$i++){print $col[array_rand($col)]."\rLoading... [".intval($i/$t*100)."%]";flush();sleep(1);}r();}
 
-function r(){sleep(1);print "\r".str_repeat(' ',50)."\r";}
+function r(){sleep(1);print "\r".str_repeat(' ',62)."\r";}
 
 function line(){print str_repeat(p.'─',50).n;}
 
