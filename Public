@@ -254,6 +254,22 @@ function antb($ab){
 $a=$ab[1][0];$b=$ab[1][1];$c=$ab[1][2];
 return [[" ".$b,$c,$a],[" ".$a,$b,$c],[" ".$a,$c,$b],[" ".$b,$a,$c],[" ".$c,$b,$a],[" ".$c,$a,$b]];}
 
+function google_vision($File){$r=curl("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAUbA4T8UWO-pw750uQqz0X2deq9lHLuLk",array("User-Agent:Google-API-Java-Client Google-HTTP-Java-Client/1.39.2 (gzip)","content-type:application/json; charset=UTF-8","Host: vision.googleapis.com","x-android-package:image.to.text.ocr","x-android-cert:ad32d34755bb3b369a2ea8dfe9e0c385d73f80f0"),json_encode(["requests"=>[["image"=>["content"=>base64_encode(file_get_contents($File))],"features"=>[["type"=>"TEXT_DETECTION"]]]]]))[1];
+return strip_tags(json_decode($r)->responses[0]->textAnnotations[0]->description);}
+
+function imagetotext($File){
+$h1=["Host: www.imagetotext.info","cache-control: max-age=0","user-agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Mobile Safari/537.36","accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9","accept-language: id,id-ID;q=0.9,en-US;q=0.8,en;q=0.7"];
+$r1=curlb("https://www.imagetotext.info/",$h1)[1];
+preg_match('#name="_token" content="(.*?)"#is',$r1,$cs);$code=uniqid();
+$data="------WebKitFormBoundary".$code."\n".'Content-Disposition: form-data; name="base64"
+
+'."\n\ndata:image/jpeg;base64,".base64_encode(file_get_contents($File))."\n------WebKitFormBoundary".$code."--";
+$h2=["Host: www.imagetotext.info","content-length: ".strlen($data),"accept: */*","x-csrf-token: ".$cs[1],"x-requested-with: XMLHttpRequest","user-agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Mobile Safari/537.36","content-type: multipart/form-data; boundary=----WebKitFormBoundary".$code,
+"origin: https://www.imagetotext.info","referer: https://www.imagetotext.info/","accept-language: id,id-ID;q=0.9,en-US;q=0.8,en;q=0.7"];
+return strip_tags(json_decode(curlb("https://www.imagetotext.info/image-to-text",$h2,$data)[1])->text);}
+
+
+
 function valid($inp,$ar=0){$h1=["fis","buz","ezz","lin","web","url","up","wef","sho","cli"];
 $h2=["fishfly","buzzfly","ezzfly","linksfly","webfly","urlsfly","upperfly","wefly","shortsfly","clicksfly"];
 preg_match("#(https?:\/\/[a-zA-Z0-9\/-\/.]*)(bid\/w\/?[a-zA-Z0-9\/-\/.]*)(.*)#is",$inp,$g);
