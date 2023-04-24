@@ -218,54 +218,118 @@ $r3=base_short($link["go"][1],1,$data2);unlink("short.txt");
 if($r3["url"]){return $r3["url"];}}}
 
 
-function short_petafly($url){
+function short_petafly($url){refresh:
 $link=ket_link($url);
 $r=base_short($link["link"]);
 $r1=base_short($r["url"]);
 $r2=base_short($r1["url"]);
 $link=ket_link($r2["href"]);
 $r3=base_short($link["link"]);
-$t3=$r3["token"];$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
-$r4=base_short($link["link"],"",$data3);
-$t4=$r4["token"];$data4=http_build_query([$t4[1][0]=>$t4[2][0],explode('"',$t4[1][1])[0]=>$t4[2][1],$t4[1][2]=>$t4[2][2],$t4[1][3]=>$t4[2][3],explode('"',$t4[1][4])[0]=>$t4[2][4],explode('"',$t4[1][5])[0]=>$t4[2][5]]);
-$r5=base_short($link["link"],"",$data4);
-$t5=$r5["token"];$data5=http_build_query([$t5[1][0]=>$t5[2][0],explode('"',$t5[1][1])[0]=>$t5[2][1],$t5[1][2]=>$t5[2][2],$t5[1][3]=>$t5[2][3],explode('"',$t5[1][4])[0]=>$t5[2][4],explode('"',$t5[1][5])[0]=>$t5[2][5]]);
-$r6=base_short($link["link"],"",$data5);
-$t6=$r6["token"];$data6=http_build_query([$t6[1][0]=>$t6[2][0],explode('"',$t6[1][1])[0]=>$t6[2][1],$t6[1][2]=>$t6[2][2],$t6[1][3]=>$t6[2][3],explode('"',$t6[1][4])[0]=>$t6[2][4],explode('"',$t6[1][5])[0]=>$t6[2][5]]);
-$r7=base_short($link["link"],"",$data6);
-$t7=$r7["token"];$data7=http_build_query([$t7[1][0]=>$t7[2][0],explode('"',$t7[1][1])[0]=>$t7[2][1],$t7[1][2]=>$t7[2][2],$t7[1][3]=>$t7[2][3],explode('"',$t7[1][4])[0]=>$t7[2][4],explode('"',$t7[1][5])[0]=>$t7[2][5]]);
-$r8=base_short($link["link"],"",$data7);
-$t8=$r8["token"];$data8=http_build_query([$t8[1][0]=>$t8[2][0],explode('"',$t8[1][1])[0]=>$t8[2][1],$t8[1][2]=>$t8[2][2],$t8[1][3]=>$t8[2][3],explode('"',$t8[1][4])[0]=>$t8[2][4],explode('"',$t8[1][5])[0]=>$t8[2][5]]);
-$r9=base_short($link["link"],"",$data8);
-if($r9["time"]){L($r9["time"]);
-$t9=$r9["token"];$data9=http_build_query([$t9[1][0]=>$t9[2][0],explode('"',$t9[1][1])[0]=>$t9[2][1],$t9[1][2]=>$t9[2][2],explode('"',$t9[1][3])[0]=>$t9[2][3],explode('"',$t9[1][4])[0]=>$t9[2][4]]);
-$r10=base_short($link["go"][2],1,$data9)["json"];
-if($r10->status=="success"){return $r10->url;}}}
+$t3=$r3["token"];if($t3[2][3]==2){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);}
+
+$t3=$r3["token"];if($t3[2][3]==3){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==4){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==5){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==6){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==7){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==8){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==9){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+//die(print_r($r3));
+$t3=$r3["token"];if($t3[2][3]==10){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==11){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==12){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);}}}}}}}}}}
+
+if($r3["time"]){L($r3["time"]);
+$t3=$r3["token"];$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],explode('"',$t3[1][3])[0]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4]]);
+$r4=base_short($link["go"][2],1,$data3)["json"];
+if($r4->status=="success"){return $r4->url;}}}
 
 
-function short_nonofly($url){
+function short_nonofly($url){refresh:
 $link=ket_link($url);
 $r=base_short($link["link"]);
 $r1=base_short($r["url"]);
 $r2=base_short($r1["url"]);
 $link=ket_link($r2["href"]);
 $r3=base_short($link["link"]);
-$t3=$r3["token"];$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
-$r4=base_short($link["link"],"",$data3);
-$t4=$r4["token"];$data4=http_build_query([$t4[1][0]=>$t4[2][0],explode('"',$t4[1][1])[0]=>$t4[2][1],$t4[1][2]=>$t4[2][2],$t4[1][3]=>$t4[2][3],explode('"',$t4[1][4])[0]=>$t4[2][4],explode('"',$t4[1][5])[0]=>$t4[2][5]]);
-$r5=base_short($link["link"],"",$data4);
-$t5=$r5["token"];$data5=http_build_query([$t5[1][0]=>$t5[2][0],explode('"',$t5[1][1])[0]=>$t5[2][1],$t5[1][2]=>$t5[2][2],$t5[1][3]=>$t5[2][3],explode('"',$t5[1][4])[0]=>$t5[2][4],explode('"',$t5[1][5])[0]=>$t5[2][5]]);
-$r6=base_short($link["link"],"",$data5);
-$t6=$r6["token"];$data6=http_build_query([$t6[1][0]=>$t6[2][0],explode('"',$t6[1][1])[0]=>$t6[2][1],$t6[1][2]=>$t6[2][2],$t6[1][3]=>$t6[2][3],explode('"',$t6[1][4])[0]=>$t6[2][4],explode('"',$t6[1][5])[0]=>$t6[2][5]]);
-$r7=base_short($link["link"],"",$data6);
-$t7=$r7["token"];$data7=http_build_query([$t7[1][0]=>$t7[2][0],explode('"',$t7[1][1])[0]=>$t7[2][1],$t7[1][2]=>$t7[2][2],$t7[1][3]=>$t7[2][3],explode('"',$t7[1][4])[0]=>$t7[2][4],explode('"',$t7[1][5])[0]=>$t7[2][5]]);
-$r8=base_short($link["link"],"",$data7);
-$t8=$r8["token"];$data8=http_build_query([$t8[1][0]=>$t8[2][0],explode('"',$t8[1][1])[0]=>$t8[2][1],$t8[1][2]=>$t8[2][2],$t8[1][3]=>$t8[2][3],explode('"',$t8[1][4])[0]=>$t8[2][4],explode('"',$t8[1][5])[0]=>$t8[2][5]]);
-$r9=base_short($link["link"],"",$data8);
-if($r9["time"]){L($r9["time"]);
-$t9=$r9["token"];$data9=http_build_query([$t9[1][0]=>$t9[2][0],explode('"',$t9[1][1])[0]=>$t9[2][1],$t9[1][2]=>$t9[2][2],explode('"',$t9[1][3])[0]=>$t9[2][3],explode('"',$t9[1][4])[0]=>$t9[2][4]]);
-$r10=base_short($link["go"][2],1,$data9)["json"];
-if($r10->status=="success"){return $r10->url;}}}
+$t3=$r3["token"];if($t3[2][3]==2){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);}
+
+$t3=$r3["token"];if($t3[2][3]==3){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==4){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==5){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==6){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==7){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==8){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==9){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+//die(print_r($r3));
+$t3=$r3["token"];if($t3[2][3]==10){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==11){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);
+
+$t3=$r3["token"];if($t3[2][3]==12){
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r3=base_short($link["link"],"",$data3);}}}}}}}}}}
+
+if($r3["time"]){L($r3["time"]);
+$t3=$r3["token"];$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],explode('"',$t3[1][3])[0]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4]]);
+$r4=base_short($link["go"][2],1,$data3)["json"];
+if($r4->status=="success"){return $r4->url;}}}
 
 
 function azcaptcha($method,$sitekey,$pageurl){refresh:
