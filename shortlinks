@@ -1,0 +1,281 @@
+function visit_short($r){
+$asf=["link1snet","link1s","cbshort","try2link","petafly","nonofly","shrinkearn","shrinkme","shortnow","clk-sh","cuty"];
+for($i=0;$i<50;$i++){for($s=0;$s<50;$s++){
+$open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-]/","",$r["name"][$s]))));
+if($open==$asf[$i]){
+if(trim($r["left"][$s])==0 or explode("/",trim($r["left"][$s]))[0]==0){goto up;}
+if(preg_replace("/[^0-9]/","",$r["id"][$s])){
+return [
+"autofaucet.org"=>
+["id"=>preg_replace("/[^0-9]/","",$r["id"][$s]),
+"url"=>host."dashboard/shortlinks/visit/".$r["id"][$s],
+"data"=>http_build_query([$r["token"][1][$s]=>$r["token"][2][$s]]),"no"=>$s],
+
+"autoclaim.in"=>
+["id"=>preg_replace("/[^0-9]/","",$r["id"][$s]),
+"url"=>host."dashboard/shortlinks/visit/".$r["id"][$s],
+"data"=>http_build_query([$r["token"][1][$s]=>$r["token"][2][$s]]),"no"=>$s],
+
+"autobitco.in"=>
+["id"=>preg_replace("/[^0-9]/","",$r["id"][$s]),
+"url"=>host."dashboard/shortlinks/visit/".$r["id"][$s],
+"data"=>http_build_query([$r["token"][1][$s]=>$r["token"][2][$s]]),"no"=>$s]
+];}}}up:}}
+
+
+
+function bypas_short($n,$url){$n=strtolower($n);
+if($n=="link1snet"){return short_link1snet($url);}
+elseif($n=="link1s"){return short_link1s($url);}
+elseif($n=="cbshort"){return short_cbshort($url);}
+elseif($n=="try2link"){return short_try2link($url);}
+elseif($n=="petafly"){return short_Petafly($url);}
+elseif($n=="nonofly"){return short_nonofly($url);}
+elseif($n=="shrinkearn"){return short_shrinkearn($url);}
+elseif($n=="shrinkme"){return short_shrinke($url);}
+elseif($n=="shortnow"){return short_shortnow($url);}
+elseif($n=="clk-sh"){return short_clksh($url);}
+elseif($n=="cuty"){return short_cuty($url);}}
+
+function h_short($xml=0){
+if($xml){$headers[] = 'Accept: */*';}else{
+$headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9';}
+if($xml){$headers[] = 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8';}
+$headers[] = 'Accept-Language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7';
+$headers[] = 'User-Agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36';
+if($xml){$headers[] = 'X-Requested-With: XMLHttpRequest';}
+return $headers;}
+
+function base_short($url,$xml=0,$data=0){
+$r=short_curl($url,h_short($xml),$data);
+preg_match('#(reCAPTCHA_site_key":"|data-sitekey=")(.*?)(")#is',$r[1],$recaptchav2);
+preg_match('#(hcaptcha_checkbox_site_key":")(.*?)(")#is',$r[1],$hcaptcha);
+preg_match('#submit_data" action="(.*?)"#is',$r[1],$urlr);
+preg_match("#(url='|location.href =')(.*?)(')#is",$r[1],$href);
+
+preg_match_all('#hidden" name="(.*?)" value="(.*?)"#is',$r[1],$t_cs);
+preg_match('#(Please Wait |class="timer" value="|class="timer">)(.*?)("|<|s)#is',$r[1],$tmr);
+//print_r($amn);
+//die(print_r($tmr));
+return ["res"=>$r[1],"hcaptcha"=>$hcaptcha[2],"recaptchav2"=>$recaptchav2[2],"token"=>$t_cs,"time"=>$tmr[2],"json"=>json_decode($r[1]),"url"=>$r[0][1]["redirect_url"],"urlr"=>$urlr[1],"href"=>$href[2]];}
+function dec64($input){return base64_decode(explode("=",$input)[2]);}
+function ket_link($url){$r=parse_url($url);return ["link"=>"https://".$r["host"].$r["path"],"go"=>["https://".$r["host"]."/links/go","https://".$r["host"]."/go".$r["path"],"https://".$r["host"]."/".explode("/",$r["path"])[1]."/links/go"]];}
+
+
+
+function short_curl($url,$head=0,$data=0){while(true){
+$ch=curl_init();
+curl_setopt($ch,CURLOPT_URL,$url);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+if($data){curl_setopt($ch,CURLOPT_POST,1);
+curl_setopt($ch,CURLOPT_POSTFIELDS,$data);}
+curl_setopt($ch,CURLOPT_ENCODING,'gzip,deflate');
+if($head){
+curl_setopt($ch,CURLOPT_HTTPHEADER,$head);}
+curl_setopt($ch,CURLOPT_HEADER,true);
+curl_setopt($ch,CURLOPT_COOKIEFILE,'short.txt');
+curl_setopt($ch,CURLOPT_COOKIEJAR,'short.txt');
+$result=curl_exec($ch);
+if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
+$respHeaders=substr($result,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$info=curl_getinfo($ch);
+$body=substr($result,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
+if($i===0){$headers['http_code']=$line;}else{
+list($key,$value)=explode(': ',$line);
+$header[$key]=$value;}}
+curl_close($ch);
+//if(!$body){print "error network!";r();continue;}
+return [[$header,$info],$body];}}}
+
+//https://link1s.com/MNL3Uv
+function short_link1s($url){
+$link=ket_link($url);
+$r=base_short($link["link"]);
+if($r["time"]){L($r["time"]);$t=$r["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],explode('"',$t[1][3])[0]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4]]);
+$r1=base_short($link["go"][0],1,$data)["json"];
+if($r1->status=="success"){return $r1->url;}}}
+
+
+//https://link1s.net/qIubn
+function short_link1snet($url){
+$link=ket_link($url);
+$r=base_short($link["link"]);
+if($r["time"]){L($r["time"]);$t=$r["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],explode('"',$t[1][3])[0]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4]]);
+$r1=base_short($link["go"][0],1,$data)["json"];
+if($r1->status=="success"){return $r1->url;}}}
+
+
+//https://try2link.com/5CekEsQ
+function short_try2link($url){
+$link=ket_link($url);
+$r=base_short($link["link"]);
+$r1=base_short(dec64(dec64(dec64(dec64($r["url"])))));
+$r2=base_short($r1["url"]);
+if($r2["time"]){L($r2["time"]);$t=$r2["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],explode('"',$t[1][3])[0]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4]]);
+$r3=base_short($link["go"][0],1,$data)["json"];
+if($r3->status=="success"){return $r3->url;}}}
+
+
+
+//https://tii.la/NCdwxQip2I
+function short_shrinkearn($url){
+$link=ket_link($url);
+$r=base_short($link["link"]);$t=$r["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],$t[1][1]=>$t[2][1],$t[1][2]=>$t[2][2],$t[1][3]=>$t[2][3]]);
+$r1=base_short($link["link"],"",$data);
+if($r1["time"]){L($r1["time"]);$t=$r1["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],$t[1][1]=>$t[2][1],$t[1][2]=>$t[2][2]]);
+$r2=base_short($link["go"][0],1,$data)["json"];
+if($r2->status=="success"){return $r2->url;}}}
+
+
+
+//https://ser2.crazyblog.in/WVHKv
+function short_cbshort($url){
+$url=str_replace("ser2","ser3",$url);
+$link=ket_link($url);
+$r=base_short($link["link"]);
+if($r["time"]){L($r["time"]);$t=$r["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],explode('"',$t[1][3])[0]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4]]);
+$r1=base_short($link["go"][0],1,$data)["json"];
+if($r1->status=="success"){return $r1->url;}}}
+
+
+//https://shrinke.me/rbOur54
+function short_shrinke($url){refresh:
+$link=ket_link($url);
+$r=base_short($link["link"]);
+$method="recaptchav2";
+if($r[$method]==null){goto refresh;}
+$cap=azcaptcha($method,$r[$method],$link["link"]);
+$t=$r["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],$t[1][3]=>$t[2][3],"g-recaptcha-response"=>$cap,explode('"',$t[1][4])[0]=>$t[2][4],explode('"',$t[1][5])[0]=>$t[2][5]]);
+$r1=base_short($link["link"],"",$data);
+if($r1["time"]){L($r1["time"]);$t1=$r1["token"];
+$data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][1],$t1[1][2]=>$t1[2][2],explode('"',$t1[1][3])[0]=>$t1[2][3],explode('"',$t1[1][4])[0]=>$t1[2][4]]);
+$r2=base_short($link["go"][0],1,$data1)["json"];
+if($r2->status=="success"){return $r2->url;}}}
+
+
+//https://oko.sh/NA16
+function short_clksh($url){refresh:
+$link=ket_link($url);
+$r=base_short($link["link"]);
+$method="recaptchav2";
+$t=$r["token"];$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],$t[1][3]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4],explode('"',$t[1][5])[0]=>$t[2][5]]);
+$r1=base_short($link["link"],"",$data);$t1=$r1["token"];
+if($r[$method]==null){goto refresh;}
+$cap=azcaptcha($method,$r[$method],$link["link"]);
+$data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][1],$t1[1][2]=>$t1[2][2],$t1[1][3]=>$t1[2][3],"g-recaptcha-response"=>$cap,explode('"',$t1[1][4])[0]=>$t1[2][4],explode('"',$t1[1][5])[0]=>$t1[2][5]]);
+$r2=base_short($link["link"],"",$data1);
+if($r2["time"]){L($r2["time"]);$t2=$r2["token"];
+$data2=http_build_query([$t2[1][0]=>$t2[2][0],explode('"',$t2[1][1])[0]=>$t2[2][1],$t2[1][2]=>$t2[2][2],explode('"',$t2[1][3])[0]=>$t2[2][3],explode('"',$t2[1][4])[0]=>$t2[2][4]]);
+$r3=base_short($link["go"][0],1,$data2)["json"];
+if($r3->status=="success"){return $r3->url;}}}
+
+
+//https://shortnow.xyz/glZt4L1N
+function short_shortnow($url){refresh:
+$link=ket_link($url);
+$r=base_short($link["link"]);$t=$r["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],$t[1][3]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4],explode('"',$t[1][5])[0]=>$t[2][5]]);
+$r1=base_short($link["link"],1,$data);$t1=$r1["token"];
+$data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][1],$t1[1][2]=>$t1[2][2],$t1[1][3]=>$t1[2][3],explode('"',$t1[1][4])[0]=>$t1[2][4],explode('"',$t1[1][5])[0]=>$t1[2][5]]);
+$r2=base_short($link["link"],1,$data1);
+$t2=$r2["token"];$method="recaptchav2";
+if($r2[$method]==null){goto refresh;}
+$cap=azcaptcha($method,$r2[$method],$link["link"]);
+$data2=http_build_query([$t2[1][0]=>$t2[2][0],explode('"',$t2[1][1])[0]=>$t2[2][1],$t2[1][2]=>$t2[2][2],$t2[1][3]=>$t2[2][3],"g-recaptcha-response"=>$cap,explode('"',$t2[1][4])[0]=>$t2[2][4],explode('"',$t2[1][5])[0]=>$t2[2][5]]);
+$r3=base_short($link["link"],"",$data2);
+if($r3["time"]){L($r3["time"]);$t3=$r3["token"];
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],explode('"',$t3[1][3])[0]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4]]);
+$r4=base_short($link["go"][0],1,$data3)["json"];
+if($r4->status=="success"){return $r4->url;}}}
+
+
+//https://cutty.app/RLRyB
+function short_cuty($url){refresh:
+
+$rp=base_short($url);
+$link=ket_link($rp["url"]);
+$r=base_short($link["link"]);
+$t=$r["token"];
+$data=http_build_query([$t[1][0]=>$t[2][0]]);
+$r1=base_short($link["link"],"",$data);$t1=$r1["token"];
+$method="recaptchav2";
+if($r1[$method]==null){goto refresh;}
+$cap=azcaptcha($method,$r1[$method],$link["link"]);
+$data1=http_build_query([$t1[1][0]=>$t1[2][0],"g-recaptcha-response"=>$cap]);
+$r2=base_short($link["link"],"",$data1);
+if($r2["time"]){L(10);$t2=$r2["token"];
+$data2=http_build_query([$t2[1][0]=>$t2[2][0],
+$t2[1][1]=>$t2[2][1],explode('"',$t2[1][2])[0]=>rand(11111111,99999999)]);
+$r3=base_short($link["go"][1],1,$data2);unlink("short.txt");
+if($r3["url"]){return $r3["url"];}}}
+
+
+function short_petafly($url){
+$link=ket_link($url);
+$r=base_short($link["link"]);
+$r1=base_short($r["url"]);
+$r2=base_short($r1["url"]);
+$link=ket_link($r2["href"]);
+$r3=base_short($link["link"]);
+$t3=$r3["token"];$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r4=base_short($link["link"],"",$data3);
+$t4=$r4["token"];$data4=http_build_query([$t4[1][0]=>$t4[2][0],explode('"',$t4[1][1])[0]=>$t4[2][1],$t4[1][2]=>$t4[2][2],$t4[1][3]=>$t4[2][3],explode('"',$t4[1][4])[0]=>$t4[2][4],explode('"',$t4[1][5])[0]=>$t4[2][5]]);
+$r5=base_short($link["link"],"",$data4);
+$t5=$r5["token"];$data5=http_build_query([$t5[1][0]=>$t5[2][0],explode('"',$t5[1][1])[0]=>$t5[2][1],$t5[1][2]=>$t5[2][2],$t5[1][3]=>$t5[2][3],explode('"',$t5[1][4])[0]=>$t5[2][4],explode('"',$t5[1][5])[0]=>$t5[2][5]]);
+$r6=base_short($link["link"],"",$data5);
+$t6=$r6["token"];$data6=http_build_query([$t6[1][0]=>$t6[2][0],explode('"',$t6[1][1])[0]=>$t6[2][1],$t6[1][2]=>$t6[2][2],$t6[1][3]=>$t6[2][3],explode('"',$t6[1][4])[0]=>$t6[2][4],explode('"',$t6[1][5])[0]=>$t6[2][5]]);
+$r7=base_short($link["link"],"",$data6);
+$t7=$r7["token"];$data7=http_build_query([$t7[1][0]=>$t7[2][0],explode('"',$t7[1][1])[0]=>$t7[2][1],$t7[1][2]=>$t7[2][2],$t7[1][3]=>$t7[2][3],explode('"',$t7[1][4])[0]=>$t7[2][4],explode('"',$t7[1][5])[0]=>$t7[2][5]]);
+$r8=base_short($link["link"],"",$data7);
+$t8=$r8["token"];$data8=http_build_query([$t8[1][0]=>$t8[2][0],explode('"',$t8[1][1])[0]=>$t8[2][1],$t8[1][2]=>$t8[2][2],$t8[1][3]=>$t8[2][3],explode('"',$t8[1][4])[0]=>$t8[2][4],explode('"',$t8[1][5])[0]=>$t8[2][5]]);
+$r9=base_short($link["link"],"",$data8);
+if($r9["time"]){L($r9["time"]);
+$t9=$r9["token"];$data9=http_build_query([$t9[1][0]=>$t9[2][0],explode('"',$t9[1][1])[0]=>$t9[2][1],$t9[1][2]=>$t9[2][2],explode('"',$t9[1][3])[0]=>$t9[2][3],explode('"',$t9[1][4])[0]=>$t9[2][4]]);
+$r10=base_short($link["go"][2],1,$data9)["json"];
+if($r10->status=="success"){return $r10->url;}}}
+
+
+function short_nonofly($url){
+$link=ket_link($url);
+$r=base_short($link["link"]);
+$r1=base_short($r["url"]);
+$r2=base_short($r1["url"]);
+$link=ket_link($r2["href"]);
+$r3=base_short($link["link"]);
+$t3=$r3["token"];$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],$t3[1][3]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4],explode('"',$t3[1][5])[0]=>$t3[2][5]]);
+$r4=base_short($link["link"],"",$data3);
+$t4=$r4["token"];$data4=http_build_query([$t4[1][0]=>$t4[2][0],explode('"',$t4[1][1])[0]=>$t4[2][1],$t4[1][2]=>$t4[2][2],$t4[1][3]=>$t4[2][3],explode('"',$t4[1][4])[0]=>$t4[2][4],explode('"',$t4[1][5])[0]=>$t4[2][5]]);
+$r5=base_short($link["link"],"",$data4);
+$t5=$r5["token"];$data5=http_build_query([$t5[1][0]=>$t5[2][0],explode('"',$t5[1][1])[0]=>$t5[2][1],$t5[1][2]=>$t5[2][2],$t5[1][3]=>$t5[2][3],explode('"',$t5[1][4])[0]=>$t5[2][4],explode('"',$t5[1][5])[0]=>$t5[2][5]]);
+$r6=base_short($link["link"],"",$data5);
+$t6=$r6["token"];$data6=http_build_query([$t6[1][0]=>$t6[2][0],explode('"',$t6[1][1])[0]=>$t6[2][1],$t6[1][2]=>$t6[2][2],$t6[1][3]=>$t6[2][3],explode('"',$t6[1][4])[0]=>$t6[2][4],explode('"',$t6[1][5])[0]=>$t6[2][5]]);
+$r7=base_short($link["link"],"",$data6);
+$t7=$r7["token"];$data7=http_build_query([$t7[1][0]=>$t7[2][0],explode('"',$t7[1][1])[0]=>$t7[2][1],$t7[1][2]=>$t7[2][2],$t7[1][3]=>$t7[2][3],explode('"',$t7[1][4])[0]=>$t7[2][4],explode('"',$t7[1][5])[0]=>$t7[2][5]]);
+$r8=base_short($link["link"],"",$data7);
+$t8=$r8["token"];$data8=http_build_query([$t8[1][0]=>$t8[2][0],explode('"',$t8[1][1])[0]=>$t8[2][1],$t8[1][2]=>$t8[2][2],$t8[1][3]=>$t8[2][3],explode('"',$t8[1][4])[0]=>$t8[2][4],explode('"',$t8[1][5])[0]=>$t8[2][5]]);
+$r9=base_short($link["link"],"",$data8);
+if($r9["time"]){L($r9["time"]);
+$t9=$r9["token"];$data9=http_build_query([$t9[1][0]=>$t9[2][0],explode('"',$t9[1][1])[0]=>$t9[2][1],$t9[1][2]=>$t9[2][2],explode('"',$t9[1][3])[0]=>$t9[2][3],explode('"',$t9[1][4])[0]=>$t9[2][4]]);
+$r10=base_short($link["go"][2],1,$data9)["json"];
+if($r10->status=="success"){return $r10->url;}}}
+
+
+function azcaptcha($method,$sitekey,$pageurl){refresh:
+$apikey=save("apikey").line();
+$recaptchav2=http_build_query(["key"=>$apikey,"method"=>"userrecaptcha","googlekey"=>$sitekey,"pageurl"=>$pageurl]);
+$hcaptcha=http_build_query(["key"=>$apikey,"method"=>"hcaptcha","sitekey"=>$sitekey,"pageurl"=>$pageurl]);
+$type=["hcaptcha"=>$hcaptcha,"recaptchav2"=>$recaptchav2];
+$ua=["host: azcaptcha.com","content-type: application/json/x-www-form-urlencoded"];while(true){
+$r=curl("http://azcaptcha.com/in.php?".$type[$method],$ua)[1];
+if($r=="ERROR_USER_BALANCE_ZERO"){unlink("apikey");goto refresh;}
+$id=explode('|',$r)[1];if(!$id){sleep(15);continue;}sleep(5);while(true){
+$r1=curl("http://azcaptcha.com/res.php?".http_build_query(["key"=>$apikey,"action"=>"get","id"=>$id]),$ua)[1];
+if($r1=="ERROR_CAPTCHA_UNSOLVABLE"){print str_replace("_"," ",$r1);sleep(5);r();goto refresh;}elseif($r1=="ERROR_INVALID_SITEKEY"){str_replace("_"," ",$r1);r();goto refresh;}elseif($r1=="CAPCHA_NOT_READY"){r();print str_replace("_"," ",$r1);sleep(5);r();continue;}r();return explode('|', $r1)[1];}}}
