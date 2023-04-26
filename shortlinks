@@ -276,17 +276,16 @@ curl_close($ch);
 //if(!$body){print "error network!";r();continue;}
 return [[$header,$info],$body];}}}
 
-
 function azcaptcha($method,$sitekey,$pageurl){refresh: print p;
 $apikey=save("apikey");
 $recaptchav2=http_build_query(["key"=>$apikey,"method"=>"userrecaptcha","googlekey"=>$sitekey,"pageurl"=>$pageurl]);
 $hcaptcha=http_build_query(["key"=>$apikey,"method"=>"hcaptcha","sitekey"=>$sitekey,"pageurl"=>$pageurl]);
 $type=["hcaptcha"=>$hcaptcha,"recaptchav2"=>$recaptchav2];
-$ua=["host: azcaptcha.com","content-type: application/json/x-www-form-urlencoded"];while(true){
+$ua=["host: azcaptcha.com","content-type: application/json/x-www-form-urlencoded"];
+$s=0;while(true){$s++;
 $r=curl("http://azcaptcha.com/in.php?".$type[$method],$ua)[1];
-if($r=="ERROR_USER_BALANCE_ZERO" or $r=="ERROR_WRONG_USER_KEY"){unlink("apikey");goto refresh;}
+if($r=="ERROR_USER_BALANCE_ZERO"){unlink("apikey");goto refresh;}elseif($r=="ERROR_WRONG_USER_KEY"){if($s==3){unlink("apikey");goto refresh;}}
 $id=explode('|',$r)[1];if(!$id){sleep(15);continue;}sleep(5);while(true){
 $r1=curl("http://azcaptcha.com/res.php?".http_build_query(["key"=>$apikey,"action"=>"get","id"=>$id]),$ua)[1];
 if($r1=="ERROR_CAPTCHA_UNSOLVABLE"){print str_replace("_"," ",$r1);sleep(5);r();goto refresh;}elseif($r1=="ERROR_INVALID_SITEKEY"){str_replace("_"," ",$r1);r();goto refresh;}elseif($r1=="CAPCHA_NOT_READY"){r();print str_replace("_"," ",$r1);sleep(5);r();continue;}r();return explode('|', $r1)[1];}}}
-
 
