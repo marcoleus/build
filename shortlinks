@@ -61,7 +61,7 @@ $data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t
 $r1=base_short($run["go"][0],1,$data)["json"];
 if($r1->status=="success"){print h.$r1->status;r(); return $r1->url;}}
 
-}elseif($host=="petafly.me" or $host=="nanofly.me"){$run=build($url);
+}elseif($host=="petafly.me" or $host=="nonofly.me"){$run=build($url);
 $r=base_short($run["links"]);
 $r1=base_short($r["url"]);
 $r2=base_short($r1["url"]);
