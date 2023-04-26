@@ -52,7 +52,7 @@ $data=http_build_query([$t[1][0]=>$t[2][0],$t[1][1]=>$t[2][1],$t[1][2]=>$t[2][2]
 $r2=base_short($run["go"][0],1,$data)["json"];
 if($r2->status=="success"){print h.$r2->status;r(); return $r2->url;}}
 
-}elseif($host=="ser3.crazyblog.in"){
+}elseif($host=="ser2.crazyblog.in" or$host=="ser3.crazyblog.in"){
 $url=str_replace("ser2","ser3",$url);
 $run=build($url);
 $r=base_short($run["links"]);
