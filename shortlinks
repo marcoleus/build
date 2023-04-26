@@ -25,7 +25,6 @@ return [
 function bypass_shortlinks($url){
 if(file("short.txt")){unlink("short.txt");}
 $host=parse_url($url)["host"];
-print k."bypass url: ".p.$url.n;
 if($host=="link1s.net" or $host=="link1s.com"){
 $run=build($url);
 $r=base_short($run["links"]);
