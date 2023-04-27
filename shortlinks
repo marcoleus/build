@@ -1,5 +1,5 @@
 function visit_short($r){
-$asf=["link1snet","link1s","cbshort","try2link","Goo","petafly","nonofly","shrinkearn","shrinkme","shortnow","clk-sh","cuty","usalink","Megaurl","web1s"];
+$asf=["link1snet","link1s","cbshort","try2link","goo","petafly","nonofly","shrinkearn","shrinkme","shortnow","clk-sh","cuty","usalink","megaurl","web1s"];
 for($i=0;$i<50;$i++){for($s=0;$s<50;$s++){
 $open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-]/","",$r["name"][$s]))));
 if($open==$asf[$i]){
