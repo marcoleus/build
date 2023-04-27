@@ -74,7 +74,7 @@ function ket($a,$aa,$b=0,$bb=0,$c=0,$cc=0,$d=0,$dd=0){if($a or $aa){print h.$a.c
 
 function ket_line($a,$aa,$b=0,$bb=0,$c=0,$cc=0){if($a or $aa){print h.$a.c." > ".p.$aa;}if($b or $bb){print " | ".h.$b.c." > ".p.$bb;}if($c or $cc){print " | ".h.$c.c." > ".p.$cc;}print n;}
 
-function curl($url,$httpheader=0,$post=0){
+function curl($url,$head=0,$post=0){
 global $cookiejar,$proxy;
 while(true){$ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
@@ -86,7 +86,7 @@ curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,10);
 curl_setopt($ch,CURLOPT_TIMEOUT,15);
 if($post){curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS,$post);}
-if($httpheader){curl_setopt($ch,CURLOPT_HTTPHEADER,$httpheader);}
+if($head){curl_setopt($ch,CURLOPT_HTTPHEADER,$head);}
 curl_setopt($ch,CURLOPT_HEADER,true);
 if($cookiejar){
 curl_setopt($ch,CURLOPT_COOKIEFILE,$cookiejar);
@@ -96,12 +96,12 @@ curl_setopt($ch,CURLOPT_PROXY,$proxy);
 curl_setopt($ch,CURLOPT_PROXYTYPE,0);}
 $response=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-$respHeaders=substr($result,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$respHeaders=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 $info=curl_getinfo($ch);
-$body=substr($result,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
 if($i===0){$headers['http_code']=$line;}else{
-list($key,$value)=explode(': ',$line);
+list($key, $value)=explode(': ',$line);
 $header[$key]=$value;}}
 curl_close($ch);
 $movePage=movePage()[$info["http_code"]];
