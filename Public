@@ -2,7 +2,7 @@
 
 function movePage(){
 return [
- 0 => "ERROR Connecting",
+ 0 => "ERROR CONNECTION",
  100 => "Response 100 Continue",
  101 => "Response 101 Switching Protocols",
  200 => "Response 200 OK",
