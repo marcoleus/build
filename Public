@@ -1,5 +1,50 @@
 //*//c().die(print("\033[1;31mmaintenance tolol\n"));
 
+function movePage(){
+return [
+ 0 => "ERROR Connecting",
+ 100 => "Response 100 Continue",
+ 101 => "Response 101 Switching Protocols",
+ 200 => "Response 200 OK",
+ 201 => "Response 201 Created",
+ 202 => "Response 202 Accepted",
+ 203 => "Response 203 Non-Authoritative Information",
+ 204 => "Response 204 No Content",
+ 205 => "Response 205 Reset Content",
+ 206 => "Response 206 Partial Content",
+ 300 => "Response 300 Multiple Choices",
+ 301 => "Response 301 Moved Permanently",
+ 302 => "Response 302 Found",
+ 303 => "Response 303 See Other",
+ 304 => "Response 304 Not Modified",
+ 305 => "Response 305 Use Proxy",
+ 307 => "Response 307 Temporary Redirect",
+ 400 => "Response 400 Bad Request",
+ 401 => "Response 401 Unauthorized",
+ 402 => "Response 402 Payment Required",
+ 403 => "Response 403 Forbidden",
+ 404 => "Response 404 Not Found",
+ 405 => "Response 405 Method Not Allowed",
+ 406 => "Response 406 Not Acceptable",
+ 407 => "Response 407 Proxy Authentication Required",
+ 408 => "Response 408 Request Time-out",
+ 409 => "Response 409 Conflict",
+ 410 => "Response 410 Gone",
+ 411 => "Response 411 Length Required",
+ 412 => "Response 412 Precondition Failed",
+ 413 => "Response 413 Request Entity Too Large",
+ 414 => "Response 414 Request-URI Too Large",
+ 415 => "Response 415 Unsupported Media Type",
+ 416 => "Response 416 Requested range not satisfiable",
+ 417 => "Response 417 Expectation Failed",
+ 500 => "Response 500 Internal Server Error",
+ 501 => "Response 501 Not Implemented",
+ 502 => "Response 502 Bad Gateway",
+ 503 => "Response 503 Service Unavailable",
+ 504 => "Response 504 Gateway Time-out"
+ ];
+}
+
 function t24(){tmr(1,60*60*24+120);}
 
 function c(){system("clear");print("\033[2J\033[;H");}
@@ -29,30 +74,35 @@ function ket($a,$aa,$b=0,$bb=0,$c=0,$cc=0,$d=0,$dd=0){if($a or $aa){print h.$a.c
 
 function ket_line($a,$aa,$b=0,$bb=0,$c=0,$cc=0){if($a or $aa){print h.$a.c." > ".p.$aa;}if($b or $bb){print " | ".h.$b.c." > ".p.$bb;}if($c or $cc){print " | ".h.$c.c." > ".p.$cc;}print n;}
 
-function curl($url,$httpheader=0,$post=0){
+function curl($url,$head=0,$post=0){
+global $cookiejar,$proxy;
 while(true){$ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
-curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
-curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,10);
-curl_setopt($ch,CURLOPT_TIMEOUT,15);
-if($post){curl_setopt($ch,CURLOPT_POST,true);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+if($post){curl_setopt($ch,CURLOPT_POST,1);
 curl_setopt($ch,CURLOPT_POSTFIELDS,$post);}
-if($httpheader){curl_setopt($ch,CURLOPT_HTTPHEADER,$httpheader);}
+curl_setopt($ch,CURLOPT_ENCODING,'gzip,deflate');
+if($head){
+curl_setopt($ch,CURLOPT_HTTPHEADER,$head);}
 curl_setopt($ch,CURLOPT_HEADER,true);
-$response=curl_exec($ch);
+if($cookiejar){
+curl_setopt($ch,CURLOPT_COOKIEFILE,$cookiejar);
+curl_setopt($ch,CURLOPT_COOKIEJAR,$cookiejar);}
+if($proxy){
+curl_setopt($ch,CURLOPT_PROXY,$proxy);
+curl_setopt($ch,CURLOPT_PROXYTYPE,0);}
+$result=curl_exec($ch);
 if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-$respHeaders=substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$respHeaders=substr($result,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 $info=curl_getinfo($ch);
-$body=substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$body=substr($result,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
 if($i===0){$headers['http_code']=$line;}else{
-list($key, $value)=explode(': ',$line);
+list($key,$value)=explode(': ',$line);
 $header[$key]=$value;}}
 curl_close($ch);
-if(!$body){print m."error network!";r();continue;}
+$movePage=movePage()[$info["http_code"]];
+if($info["local_ip"]==null){print m.$movePage;r();continue;}else{print p.$movePage;r();}
 return [[$header,$info],$body];}}}
 
 function curlc($url,$httpheader=0,$post=0){global $asu;
@@ -273,59 +323,6 @@ $data="------WebKitFormBoundary".$code."\n".'Content-Disposition: form-data; nam
 $h2=["Host: www.imagetotext.info","content-length: ".strlen($data),"accept: */*","x-csrf-token: ".$cs[1],"x-requested-with: XMLHttpRequest","user-agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Mobile Safari/537.36","content-type: multipart/form-data; boundary=----WebKitFormBoundary".$code,
 "origin: https://www.imagetotext.info","referer: https://www.imagetotext.info/","accept-language: id,id-ID;q=0.9,en-US;q=0.8,en;q=0.7"];
 return strip_tags(json_decode(curlb("https://www.imagetotext.info/image-to-text",$h2,$data)[1])->text);}
-
-
-
-function valid($inp,$ar=0){$h1=["fis","buz","ezz","lin","web","url","up","wef","sho","cli"];
-$h2=["fishfly","buzzfly","ezzfly","linksfly","webfly","urlsfly","upperfly","wefly","shortsfly","clicksfly"];
-preg_match("#(https?:\/\/[a-zA-Z0-9\/-\/.]*)(bid\/w\/?[a-zA-Z0-9\/-\/.]*)(.*)#is",$inp,$g);
-$link=$g[1].str_replace("bid/w","me",$g[2]);
-if($link==null){print m."invalid generator link";r();return 0;}
-for($s=0;$s<10;$s++){
-preg_match("#".$h1[$s]."#is",$link,$gen);
-preg_match("#([a-zA-Z]*)(.me)#is",$link,$fix);
-if($gen[0]){$u=str_replace($fix[1],$h2[$s],$link);
-$h=get_headers($u,1)['Location'];
-if($h[1]=="t"){$u=$h;}elseif($ar){$u=$h[$ar];}else{$u=$h[0];}L(15);return str_replace("back","verify",$u);}}}
-
-
-function find($host,$go,$left){global $disable;
-$aldi=["fishfly","fishflyme","fishfly.me","linkfly","linksfly","linksflyme","linksfly.me"];
-$asf=[
-"fishfly",
-"buzfly",
-"buzzfly",
-"ezfly",
-"ezzfly",
-"ezzyfly",
-"lksfly",
-"linkfly",
-"linksfly",
-"webfly",
-"urlfly",
-"urlsfy",
-"urlsfly",
-"upper",
-"upperfly",
-"wefly",
-"s-fly",
-"shortfly",
-"shortsfl,y",
-"shortsfly",
-"clkfly",
-"click2fly",
-"clicks2fly",
-"clicksfly",
-
-"flyx","fly9","fly8","fly7","fly6","fly5","fly4","fly3","fly2","fly1","fishflyme","buzzflyme","ezzflyme","linksflyme","webflyme","urlsflyme","upperflyme","weflyme","shortsflyme","clicksflyme","fishfly.me","buzzfly.me","ezzfly.me","linksfly.me","webfly.me","urlsfly.me","upperfly.me","wefly.me","shortsfly.me","clicksfly.me"];
-for($i=0;$i<500;$i++){for($s=0;$s<500;$s++){
-$open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-]/","",$host[$s]))));
-if($open==$asf[$i]){for($o=0;$o<50;$o++){if($disable[$o]==$open){goto up;}if($aldi[$o]==$open){goto up;}}
-if(trim($left[$s])==0 or explode("/",trim($left[$s]))[0]==0){goto up;}if(preg_replace("/[^0-9]/","",$go[$s])){return ["data"=>preg_replace("/[^0-9]/","",$go[$s]),"go"=>$go[$s],"no"=>$s];}}}up:}}
-
-
-
-
 
 
 
