@@ -244,6 +244,7 @@ if($r2->status=="success"){print h.$r2->status;r(); return $r2->url;}}
 
 
 function base_short($url,$xml=0,$data=0){
+$cookiejar='short.txt';
 $r=curl($url,h_short($xml),$data);
 preg_match('#(reCAPTCHA_site_key":"|data-sitekey=")(.*?)(")#is',$r[1],$recaptchav2);
 preg_match('#(hcaptcha_checkbox_site_key":")(.*?)(")#is',$r[1],$hcaptcha);
@@ -290,29 +291,3 @@ $r1=curl("http://azcaptcha.com/res.php?".http_build_query(["key"=>$apikey,"actio
 if($r1=="ERROR_CAPTCHA_UNSOLVABLE"){print str_replace("_"," ",$r1);sleep(5);r();goto refresh;}elseif($r1=="ERROR_INVALID_SITEKEY"){str_replace("_"," ",$r1);r();goto refresh;}elseif($r1=="CAPCHA_NOT_READY"){r();print str_replace("_"," ",$r1);sleep(5);r();continue;}r();return explode('|', $r1)[1];}}}
 
 
-
-function short_curl($url,$head=0,$data=0){while(true){
-$ch=curl_init();
-curl_setopt($ch,CURLOPT_URL,$url);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-if($data){curl_setopt($ch,CURLOPT_POST,1);
-curl_setopt($ch,CURLOPT_POSTFIELDS,$data);}
-curl_setopt($ch,CURLOPT_ENCODING,'gzip,deflate');
-if($head){
-curl_setopt($ch,CURLOPT_HTTPHEADER,$head);}
-curl_setopt($ch,CURLOPT_HEADER,true);
-curl_setopt($ch,CURLOPT_COOKIEFILE,'short.txt');
-curl_setopt($ch,CURLOPT_COOKIEJAR,'short.txt');
-$result=curl_exec($ch);
-if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-$respHeaders=substr($result,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
-$info=curl_getinfo($ch);
-$body=substr($result,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
-foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line){
-if($i===0){$headers['http_code']=$line;}else{
-list($key,$value)=explode(': ',$line);
-$header[$key]=$value;}}
-curl_close($ch);
-$movePage=movePage()[$info["http_code"]];
-if($info["local_ip"]==null){print m.$movePage;r();continue;}else{print p.$movePage;r();}
-return [[$header,$info],$body];}}}
