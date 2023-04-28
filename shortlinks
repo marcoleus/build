@@ -23,7 +23,7 @@ return [
 ];}}}up:}}
 
 function bypass_shortlinks($url){
-if(file("short.txt")){unlink("short.txt");}
+if(file("session.txt")){unlink("session.txt");}
 $host=parse_url($url)["host"];
 if($host=="link1s.net" or $host=="link1s.com"){
 $run=build($url);
