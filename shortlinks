@@ -245,7 +245,7 @@ if($r2->status=="success"){print h.$r2->status;r(); return $r2->url;}}
 
 function base_short($url,$xml=0,$data=0){
 $cookiejar='short.txt';
-$r=curl($url,h_short($xml),$data);
+$r=curl($url,h_short($xml),$data,false,"session.txt");
 preg_match('#(reCAPTCHA_site_key":"|data-sitekey=")(.*?)(")#is',$r[1],$recaptchav2);
 preg_match('#(hcaptcha_checkbox_site_key":")(.*?)(")#is',$r[1],$hcaptcha);
 preg_match_all('#(submit_data" action="|<a href="|action="|href = ")(.*?)(")#is',$r[1],$url1);
