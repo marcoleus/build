@@ -1,6 +1,6 @@
-function visit_short($r){$exp=0;
+function visit_short($r){global $config;$exp=0;
 if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
-$asf=config();
+$asf=$config;
 
 for($i=0;$i<50;$i++){for($s=0;$s<50;$s++){
 $open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-]/","",$r["name"][$s]))));
