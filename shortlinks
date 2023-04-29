@@ -171,10 +171,9 @@ start:
 if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
 $res=base_short($url);
 if(!$res["url1"][0]){sleep(2);goto start;}
-$n=0;web1s:$n++;if($n==5){goto start;}
+$n=0;web1s:$n++;if($n==6){goto start;}
 $r1=base_short($res["url1"][0]);
 if(!$r1["code_data_ajax"][0]){goto web1s;}
-file_put_contents("xxnx.htlml",$r1["res"]);
 $n=0;while(true){$n++;
 if($n==3){goto web1s;}
 $client_id=build()["client_id"];
@@ -190,7 +189,6 @@ if($step->step==$step->total_steps){
 if(!$r->url){continue;}goto web1s_f;}else{goto web1s;}}
 
 web1s_f:while(true){
-goto start;
 $method="recaptchav2";
 $res=base_short($r->url);
 if($res[$method]){
