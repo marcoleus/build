@@ -167,40 +167,41 @@ if($r3["url"]){print h."success";r();return $r3["url"];}}}
 
 }elseif($host=="web1s.co" or $host=="web1s.info"){
 
-one:
+start:
 if(file(mode.".txt")){unlink(mode.".txt");}
 $res=base_short($url);
+if(!$res["url1"][0]){goto start;}
 $r1=base_short($res["url1"][0]);
-if(!parse_url($res["url1"][0])["path"]){goto one;}else{
+if(!$r1["code_data_ajax"][0]){goto start;}
+while(true){
 $client_id=build()["client_id"];
 $par=parse_url($res["url1"][0]);
-$data=http_build_query(["screen"=>"393 x 873","browser"=>"Chrome","browserVersion"=>"107.0.0.0","browserMajorVersion"=>107,"mobile"=>true,"os"=>"Android","osVersion"=>11,"cookies"=>"true","flashVersion"=>"no check","code"=>$r1["code_data_ajax"][0],"client_id"=>$client_id,"pathname"=>$par["path"],"href"=>$res["url1"][0],"hostname"=>$par["host"]]);print p."1/3";r();
+$data=http_build_query(["screen"=>"393 x 873","browser"=>"Chrome","browserVersion"=>"107.0.0.0","browserMajorVersion"=>107,"mobile"=>true,"os"=>"Android","osVersion"=>11,"cookies"=>"true","flashVersion"=>"no check","code"=>$r1["code_data_ajax"][0],"client_id"=>$client_id,"pathname"=>$par["path"],"href"=>$res["url1"][0],"hostname"=>$par["host"]]);
 $r=base_short("https://web1s.com/countdown",1,$data)["json"];
-if(!$r->timer){goto one;}}
-if($r->success==true){L($r->timer);
-base_short($r1["code_data_ajax"][2],1,http_build_query(["action"=>"ai_ajax","ai_check"=>$r1["code_data_ajax"][1],"views[]"=>1,"versions[]"=>0]));
+if(!$r->timer){continue;}L($r->timer);
 $r=base_short("https://web1s.com/continue",1,$data)["json"];
-if(!parse_url($r->url)["path"]){goto one;}}
-if($r->success==true){two:
+if($r->url){goto web1s_2;}}
+web1s_2:while(true){
 $client_id=build()["client_id"];
 $par=parse_url($r->url);
-$data=http_build_query(["screen"=>"393 x 873","browser"=>"Chrome","browserVersion"=>"107.0.0.0","browserMajorVersion"=>107,"mobile"=>true,"os"=>"Android","osVersion"=>11,"cookies"=>"true","flashVersion"=>"no check","code"=>$r1["code_data_ajax"][0],"client_id"=>$client_id,"pathname"=>$par["path"],"href"=>$res["url1"][0],"hostname"=>$par["host"]]);print p."2/3";r();
-$r=base_short("https://web1s.com/countdown",1,$data)["json"];if(!$r->timer){goto two;}}
-if($r->success==true){L($r->timer);
+$data=http_build_query(["screen"=>"393 x 873","browser"=>"Chrome","browserVersion"=>"107.0.0.0","browserMajorVersion"=>107,"mobile"=>true,"os"=>"Android","osVersion"=>11,"cookies"=>"true","flashVersion"=>"no check","code"=>$r1["code_data_ajax"][0],"client_id"=>$client_id,"pathname"=>$par["path"],"href"=>$res["url1"][0],"hostname"=>$par["host"]]);
+$r=base_short("https://web1s.com/countdown",1,$data)["json"];
+if(!$r->timer){continue;}L($r->timer);
 $r=base_short("https://web1s.com/continue",1,$data)["json"];
-if(!parse_url($r->url)["path"]){goto two;}}
-if($r->success==true){three:
+if($r->url){goto web1s_3;}}
+web1s_3:while(true){
 $client_id=build()["client_id"];
 $par=parse_url($r->url);
-$data=http_build_query(["screen"=>"393 x 873","browser"=>"Chrome","browserVersion"=>"107.0.0.0","browserMajorVersion"=>107,"mobile"=>true,"os"=>"Android","osVersion"=>11,"cookies"=>"true","flashVersion"=>"no check","code"=>$r1["code_data_ajax"][0],"client_id"=>$client_id,"pathname"=>$par["path"],"href"=>$res["url1"][0],"hostname"=>$par["host"]]);print p."3/3";r();
-$r=base_short("https://web1s.com/countdown",1,$data)["json"];if(!$r->timer){goto three;}}
-if($r->success==true){L($r->timer);
+$data=http_build_query(["screen"=>"393 x 873","browser"=>"Chrome","browserVersion"=>"107.0.0.0","browserMajorVersion"=>107,"mobile"=>true,"os"=>"Android","osVersion"=>11,"cookies"=>"true","flashVersion"=>"no check","code"=>$r1["code_data_ajax"][0],"client_id"=>$client_id,"pathname"=>$par["path"],"href"=>$res["url1"][0],"hostname"=>$par["host"]]);
+$r=base_short("https://web1s.com/countdown",1,$data)["json"];
+if(!$r->timer){continue;}L($r->timer);
 $r=base_short("https://web1s.com/continue",1,$data)["json"];
-if(!parse_url($r->url)["path"]){goto three;}}
-if($r->success==true){while(true){
+if($r->url){goto web1s_f;}}
+web1s_f:while(true){
 $method="recaptchav2";
 $res=base_short($r->url);
-if($res[$method]){$t=$res["token_csrf"];
+if($res[$method]){
+$t=$res["token_csrf"];
 $cap=azcaptcha($method,$res[$method],$r->url);
 $data=http_build_query([$t[1][0]=>$t[2][0],"g-recaptcha-response"=>$cap]);
 $res=base_short($r->url,1,$data);
@@ -209,8 +210,7 @@ $res=base_short($r->url,1,$data);
 $data=http_build_query([$t[1][0]=>$t[2][0]]);
 $respon=base_short($r->url,1,$data);
 if(!$respon["url1"][0]){continue;}
-print h."success";r();return $respon["url1"][0];}}}
-
+print h."success";r(); return $respon["url1"][0];}}
 
 }elseif($host=="link.usalink.io"){
 $run=build("https://cdn1.theconomy.me/".parse_url($url)["path"]);
