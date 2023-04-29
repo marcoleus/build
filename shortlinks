@@ -1,3 +1,24 @@
+function visit_short($r){$exp=0;
+if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
+$asf=config();
+
+for($i=0;$i<50;$i++){for($s=0;$s<50;$s++){
+$open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-]/","",$r["name"][$s]))));
+if($open==$asf[$i]){
+if(explode("/",trim($r["left"][$s]))[0]==0){goto up;}
+if(preg_replace("/[^0-9]/","",$r["visit"][$s])){
+print p.$r["name"][$s]." left > ".trim($r["left"][$s]);sleep(1);r();
+if(mode=="3in1"){$r1=base_run(host.$r["visit"][$s],http_build_query([$r["token"][1][$s]=>$r["token"][2][$s]]));
+}elseif(mode=="coming1"){
+}elseif(mode=="coming2"){
+}elseif(mode=="coming3"){
+}else{die(m."mode bypass not found".n);}
+if(!parse_url($r1["url"])["scheme"]){print m."visit invalid ".p.$r["name"][$s];r();return "refresh";}
+print k."bypass url: ".p.$r1["url"].n;
+refresh:$exp++;if($exp==4){goto up;}
+$r2=bypass_shortlinks($r1["url"]);
+if(!$r2){goto refresh;}return $r2;}}}up:}}
+
 function bypass_shortlinks($url){
 if(file(mode.".txt")){unlink(mode.".txt");}
 $host=parse_url($url)["host"];
