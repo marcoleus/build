@@ -252,13 +252,14 @@ preg_match('#(hcaptcha_checkbox_site_key":")(.*?)(")#is',$r[1],$hcaptcha);
 preg_match_all('#(submit_data" action="|<a href="|action="|href = ")(.*?)(")#is',$r[1],$url1);
 preg_match_all("#(url='|location.href ='|<a href='|var api =".n."  ')(.*?)(')#is",$r[1],$url2);
 preg_match_all("#window.open(.*?)'(.*?)'#is",$r[1],$url3);
+preg_match('#share(.*?)url=(.*?)"#is',$r[1],$url4);
 preg_match_all('#hidden" name="(.*?)" value="(.*?)"#is',$r[1],$token_csrf);
 preg_match('#(Please Wait |class="timer" value="|class="timer">)(.*?)("|<|s)#is',$r[1],$timer);
 preg_match_all('#(dirrectSiteCode = |ai_data_id=|ai_ajax_url=)"(.*?)(")#is',$r[1],$code_data_ajax);
 
 //print_r($amn);
 //die(print_r($tmr));
-return ["res"=>$r[1],"hcaptcha"=>$hcaptcha[2],"recaptchav2"=>$recaptchav2[2],"token_csrf"=>$token_csrf,"timer"=>$timer[2],"json"=>json_decode($r[1]),"url"=>$r[0][1]["redirect_url"],"url1"=>$url1[2],"url2"=>$url2[2],"url3"=>$url3[2],"code_data_ajax"=>$code_data_ajax[2]];}
+return ["res"=>$r[1],"hcaptcha"=>$hcaptcha[2],"recaptchav2"=>$recaptchav2[2],"token_csrf"=>$token_csrf,"timer"=>$timer[2],"json"=>json_decode($r[1]),"url"=>$r[0][1]["redirect_url"],"url1"=>$url1[2],"url2"=>$url2[2],"url3"=>$url3[2],"url4"=>$url4[2],"code_data_ajax"=>$code_data_ajax[2]];}
 
 
 function build($url=0){$r=parse_url($url);
