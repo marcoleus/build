@@ -179,7 +179,7 @@ $client_id=build()["client_id"];
 $par=parse_url($r1["url4"]);
 $data=http_build_query(["screen"=>"393 x 873","browser"=>"Chrome","browserVersion"=>"107.0.0.0","browserMajorVersion"=>107,"mobile"=>true,"os"=>"Android","osVersion"=>11,"cookies"=>"true","flashVersion"=>"no check","code"=>$r1["code_data_ajax"][0],"client_id"=>$client_id,"pathname"=>$par["path"],"href"=>$r1["url4"],"hostname"=>$par["host"]]);
 $step=base_short("https://web1s.com/step",1,$data)["json"];
-if(!$step->step){continue;}
+if(!$step->step){goto start;}
 print p."step ".$step->step."/".$step->total_steps;r();
 $time=base_short("https://web1s.com/countdown",1,$data)["json"];
 if(!$time->timer){continue;}L($time->timer);
