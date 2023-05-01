@@ -233,7 +233,7 @@ $data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][
 $r2=base_short($run["go"][0],1,$data1)["json"];
 if($r2->status=="success"){print h.$r2->status;r(); return $r2->url;}}
 
-}elseif($host=="go.megaurl.in" or $host=="get.megaurl.in" or "go.megafly.in" or $host=="get.megafly.in"){
+}elseif($host=="go.megaurl.in" or $host=="get.megaurl.in" or $host=="go.megafly.in" or $host=="get.megafly.in"){
 $url=str_replace("go","get",$url);
 $run=build($url);
 $r=base_short($run["links"]);
