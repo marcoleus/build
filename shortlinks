@@ -1,10 +1,8 @@
 function visit_short($r){global $config;$exp=0;
 if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
-$asf=$config;
-
 for($i=0;$i<50;$i++){for($s=0;$s<50;$s++){
 $open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-]/","",$r["name"][$s]))));
-if($open==$asf[$i]){
+if($open==$config[$open]){
 if(explode("/",trim($r["left"][$s]))[0]==0){goto up;}
 if(preg_replace("/[^0-9]/","",$r["visit"][$s])){
 print p.$r["name"][$s]." left > ".trim($r["left"][$s]);sleep(1);r();
@@ -102,6 +100,25 @@ $t3=$r3["token_csrf"];$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',
 $r4=base_short($run["go"][2],1,$data3)["json"];
 if($r4->status=="success"){print h.$r4->status;r(); return $r4->url;}}
 
+}elseif($host=="mitly.us"){
+$run=build($url);
+$r=base_short($run["links"]);$t=$r["token_csrf"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],$t[1][3]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4],explode('"',$t[1][5])[0]=>$t[2][5]]);
+$r1=base_short($run["links"],1,$data);
+$t1=$r1["token_csrf"];
+$data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][1],$t1[1][2]=>$t1[2][2],$t1[1][3]=>$t1[2][3],explode('"',$t1[1][4])[0]=>$t1[2][4],explode('"',$t1[1][5])[0]=>$t1[2][5]]);
+$r2=base_short($run["links"],1,$data1);
+$method="hcaptcha";
+if($r2[$method]){$t2=$r2["token_csrf"];
+$cap=azcaptcha($method,$r2[$method],$run["links"]);
+$data2=http_build_query([$t2[1][0]=>$t2[2][0],explode('"',$t2[1][1])[0]=>$t2[2][1],$t2[1][2]=>$t2[2][2],$t2[1][3]=>$t2[2][3],"g-recaptcha-response"=>$cap,"h-captcha-response"=>$cap,explode('"',$t2[1][4])[0]=>$t2[2][4],explode('"',$t2[1][5])[0]=>$t2[2][5]]);
+$r3=base_short($run["links"],"",$data2);
+if($r3["timer"]){L($r3["timer"]);$t3=$r3["token_csrf"];
+$data3=http_build_query([$t3[1][0]=>$t3[2][0],explode('"',$t3[1][1])[0]=>$t3[2][1],$t3[1][2]=>$t3[2][2],explode('"',$t3[1][3])[0]=>$t3[2][3],explode('"',$t3[1][4])[0]=>$t3[2][4]]);
+$r4=base_short($run["go"][0],1,$data3)["json"];
+if($r4->status=="success"){print h.$r4->status;r(); return $r4->url;}}}
+
+
 }elseif($host=="shrinke.me"){
 $run=build($url);
 $r=base_short($run["links"]);
@@ -167,10 +184,10 @@ if($r3["url"]){print h."success";r();return $r3["url"];}}}
 }elseif($host=="web1s.co" or $host=="web1s.info"){
 
 start:
-if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
+if(file(mode.".txt")){unlink(mode.".txt");sleep(2);}
 $res=base_short($url);
 if(!$res["url1"][0]){sleep(2);goto start;}
-$n=0;web1s:$n++;if($n==6){goto start;}
+$n=0;web1s:$n++;if($n==4){goto start;}
 $r1=base_short($res["url1"][0]);
 if(!$r1["code_data_ajax"][0]){goto web1s;}
 $n=0;while(true){$n++;
@@ -239,6 +256,20 @@ $data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][
 $r2=base_short($run["go"][0],1,$data1)["json"];
 if($r2->status=="success"){print h.$r2->status;r(); return $r2->url;}}
 
+}elseif($host=="ex-foary.com"){
+$run=build($url);
+$r=base_short($run["links"]);$t=$r["token_csrf"];
+$data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],$t[1][3]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4],explode('"',$t[1][5])[0]=>$t[2][5]]);
+$r1=base_short($run["links"],1,$data);
+$method="recaptchav2";
+if($r1[$method]){$t1=$r1["token_csrf"];
+$cap=azcaptcha($method,$r1[$method],$run["links"]);
+$data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][1],$t1[1][2]=>$t1[2][2],$t1[1][3]=>$t1[2][3],"g-recaptcha-response"=>$cap,explode('"',$t1[1][4])[0]=>$t1[2][4],explode('"',$t1[1][5])[0]=>$t1[2][5]]);
+$r2=base_short($run["links"],"",$data1);
+if($r2["timer"]){L($r2["timer"]);$t2=$r2["token_csrf"];
+$data2=http_build_query([$t2[1][0]=>$t2[2][0],explode('"',$t2[1][1])[0]=>$t2[2][1],$t2[1][2]=>$t2[2][2],explode('"',$t2[1][3])[0]=>$t2[2][3],explode('"',$t2[1][4])[0]=>$t2[2][4]]);
+$r3=base_short($run["go"][0],1,$data2)["json"];
+if($r3->status=="success"){print h.$r3->status;r(); return $r3->url;}}}
 
 }}
 
@@ -288,5 +319,4 @@ if($r=="ERROR_USER_BALANCE_ZERO"){unlink("apikey");goto refresh;}elseif($r=="ERR
 $id=explode('|',$r)[1];if(!$id){sleep(15);continue;}sleep(5);while(true){
 $r1=curl("http://azcaptcha.com/res.php?".http_build_query(["key"=>$apikey,"action"=>"get","id"=>$id]),$ua)[1];
 if($r1=="ERROR_CAPTCHA_UNSOLVABLE"){print str_replace("_"," ",$r1);sleep(5);r();goto refresh;}elseif($r1=="ERROR_INVALID_SITEKEY"){str_replace("_"," ",$r1);r();goto refresh;}elseif($r1=="CAPCHA_NOT_READY"){r();print str_replace("_"," ",$r1);sleep(5);r();continue;}r();return explode('|', $r1)[1];}}}
-
 
