@@ -218,6 +218,8 @@ $data=http_build_query([$t[1][0]=>$t[2][0]]);
 $respon=base_short($r->url,1,$data);
 if(!$respon["url1"][0]){continue;}
 print h."success";r(); return $respon["url1"][0];}}
+
+
 }elseif($host=="link.usalink.io"){
 $run=build("https://cdn1.theconomy.me/".parse_url($url)["path"]);
 $r=base_short($run["links"]);
@@ -231,7 +233,7 @@ $data1=http_build_query([$t1[1][0]=>$t1[2][0],explode('"',$t1[1][1])[0]=>$t1[2][
 $r2=base_short($run["go"][0],1,$data1)["json"];
 if($r2->status=="success"){print h.$r2->status;r(); return $r2->url;}}
 
-}elseif($host=="go.megaurl.in" or$host=="get.megaurl.in"){
+}elseif($host=="go.megaurl.in" or $host=="get.megaurl.in" or "go.megafly.in" or $host=="get.megafly.in"){
 $url=str_replace("go","get",$url);
 $run=build($url);
 $r=base_short($run["links"]);
