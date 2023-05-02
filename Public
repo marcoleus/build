@@ -74,7 +74,40 @@ function ket($a,$aa,$b=0,$bb=0,$c=0,$cc=0,$d=0,$dd=0){if($a or $aa){print h.$a.c
 
 function ket_line($a,$aa,$b=0,$bb=0,$c=0,$cc=0){if($a or $aa){print h.$a.c." > ".p.$aa;}if($b or $bb){print " | ".h.$b.c." > ".p.$bb;}if($c or $cc){print " | ".h.$c.c." > ".p.$cc;}print n;}
 
-function curl($url,$head=0,$post=0,$follow=0,$cookiejar=0){while(true){$ch=curl_init();
+function curl($u,$h=0,$p=0,$f=0,$j=0){
+while(true){$ch=curl_init();
+curl_setopt($ch,CURLOPT_URL,$u);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+if($f){curl_setopt($ch,CURLOPT_FOLLOWLOCATION,$f);}
+curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
+curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,30);
+curl_setopt($ch,CURLOPT_COOKIE,TRUE);
+if($j){curl_setopt($ch,CURLOPT_COOKIEFILE,$j);
+curl_setopt($ch,CURLOPT_COOKIEJAR,$j);}
+if($p){curl_setopt($ch,CURLOPT_POST,true);
+curl_setopt($ch,CURLOPT_POSTFIELDS,$p);}
+if($h){curl_setopt($ch,CURLOPT_HTTPHEADER,$h);}
+curl_setopt($ch,CURLOPT_HEADER,true);
+$r=curl_exec($ch);
+$c=curl_getinfo($ch);
+if(!$c)return"Curl Error:".curl_error($ch); else{
+$hd=substr($r,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+$bd=substr($r,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+foreach(explode("\r\n",substr($hd,0,strpos($hd,"\r\n\r\n"))) as $i=>$line){
+if($i===0){$headers['http_code']=$line;}else{
+list($key, $value)=explode(': ',$line);
+$header[$key]=$value;}}
+curl_close($ch);
+$movePage=movePage()[$c["http_code"]];
+if($c["local_ip"]==null){print m.$movePage;r();continue;}else{print p.$movePage;r();}
+return [[$header,$c],$bd];}}}
+
+
+
+
+
+function r_curl($url,$head=0,$post=0,$follow=0,$cookiejar=0){while(true){$ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 if($follow){curl_setopt($ch,CURLOPT_FOLLOWLOCATION,$follow);}
