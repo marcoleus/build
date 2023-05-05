@@ -309,7 +309,7 @@ return ["client_id"=>substr(str_shuffle($az),0,8)."-".substr(str_shuffle($az),0,
 "https://go/".$r["host"].$r["path"]]];}
 
 
-function h_short($xml=0){
+function h_short($xml=0){global $u_a;
 if($xml){$headers[] = 'Accept: */*';}else{
 $headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9';}
 if($xml){$headers[] = 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8';}
