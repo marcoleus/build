@@ -295,7 +295,7 @@ preg_match_all("#(url='|location.href ='|<a href='|var api =".n."  ')(.*?)(')#is
 preg_match_all("#window.open(.*?)'(.*?)'#is",$r[1],$url3);
 preg_match('#share(.*?)url=(.*?)"#is',$r[1],$url4);
 preg_match_all('#hidden" name="(.*?)" value="(.*?)"#is',$r[1],$token_csrf);
-preg_match('#(var countdownValue = |Please Wait |class="timer" value="|class="timer">)([0-9]{1}|[0-9]{2})(;|"|<|s)#is',$r[1],$timer);
+preg_match('#(varcountdownValue=|PleaseWait|class="timer"value="|class="timer">)([0-9]{1}|[0-9]{2})(;|"|<|s)#is',str_replace([n," "],"",$r[1]),$timer);
 preg_match_all('#(dirrectSiteCode = |ai_data_id=|ai_ajax_url=)"(.*?)(")#is',$r[1],$code_data_ajax);
 //die(print_r($tmr));
 return ["res"=>$r[1],"hcaptcha"=>$hcaptcha[2],"recaptchav2"=>$recaptchav2[2],"token_csrf"=>$token_csrf,"timer"=>$timer[2],"json"=>json_decode($r[1]),"url"=>$r[0][1]["redirect_url"],"url1"=>$url1[2],"url2"=>$url2[2],"url3"=>$url3[2],"url4"=>$url4[2],"code_data_ajax"=>$code_data_ajax[2]];}
