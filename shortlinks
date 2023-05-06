@@ -3,7 +3,7 @@ if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
 for($i=0;$i<100;$i++){for($s=0;$s<100;$s++){
 $open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-]/","",$r["name"][$s]))));
 if($asf[$i]==$open){
-if(explode("/",trim($r["left"][$s]))[0]==0){goto up;}
+if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0]==0){goto up;}
 if(preg_replace("/[^0-9]/","",$r["visit"][$s])){
 print p.$r["name"][$s]." left > ".trim($r["left"][$s]);sleep(1);r();
 if(mode=="3in1"){$r1=base_run(host.$r["visit"][$s],http_build_query([$r["token"][1][$s]=>$r["token"][2][$s]]));
