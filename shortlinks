@@ -26,9 +26,9 @@ if(!$r2){goto refresh;}return $r2;}}}up:}}
 
 function bypass_shortlinks($url){$coundown=15;
 $host=parse_url($url)["host"];
-if($host=="link1s.net" or $host=="link1s.com" or $host=="ex-foary.com" or $host=="shortzu.icu" or $host=="clickzu.icu" or $host=="ser2.crazyblog.in" or $host=="ser3.crazyblog.in" or $host=="link.adshorti.xyz" or $host=="shrinke.me" or $host=="go.softindex.website"){
+if($host=="link1s.net" or $host=="link1s.com" or $host=="ex-foary.com" or $host=="shortzu.icu" or $host=="clickzu.icu" or $host=="ser2.crazyblog.in" or $host=="ser3.crazyblog.in" or $host=="link.adshorti.xyz" or $host=="shrinke.me" or $host=="go.softindex.website" or $host=="link.shorti.io"){
 if(file(mode.".txt")){unlink(mode.".txt");}
-$url=str_replace(["link.","go."],"",str_replace("ser2","ser3",$url));
+$url=str_replace(["link.","go."],"",str_replace("link.shorti.io","blog.medipost.org",str_replace("ser2","ser3",$url)));
 $run=build($url);
 $r=base_short($run["links"]);$t=$r["token_csrf"];
 if($t[2][5]){$method="recaptchav2";
