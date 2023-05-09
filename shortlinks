@@ -1,4 +1,3 @@
-
 function visit_short($r,$icon=0){global $config;$exp=0;$asf=$config;
 if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
 for($i=0;$i<100;$i++){for($s=0;$s<100;$s++){
@@ -66,9 +65,16 @@ if($r2->status=="success"){print h.$r2->status;r(); return $r2->url;}}
 
 }elseif($host=="petafly.me" or $host=="nonofly.me"){if(file(mode.".txt")){unlink(mode.".txt");}
 $run=build($url);
+pet:
 $r=base_short($run["links"]);
+if(!$r["url"]){goto pet;}
+peta:
 $r1=base_short($r["url"]);
+if(!$r1["url"]){goto peta;}
+petafly:
 $r2=base_short($r1["url"]);
+if(!$r2["url2"][0]){goto petafly;}
+
 $run=build($r2["url2"][0]);
 $r3=base_short($run["links"]);
 $t3=$r3["token_csrf"];if($t3[2][3]==2){
@@ -349,5 +355,4 @@ if($Create->errorId>0){exit(m.$Create->errorCode.n);}else{while(true){
 $base=json_encode(["clientKey"=>$apikey,"taskId"=>$Create->taskId]);
 $Result=json_decode(curl('https://api.anycaptcha.com/getTaskResult',$h,$base)[1]);
 if($Result->status=='processing'){print p.$Result->status;sleep(5);r();continue;}r();return $Result->solution->gRecaptchaResponse;}}}
-
 
