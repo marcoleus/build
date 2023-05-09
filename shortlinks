@@ -1,4 +1,4 @@
-<?php
+
 function visit_short($r,$icon=0){global $config;$exp=0;$asf=$config;
 if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
 for($i=0;$i<100;$i++){for($s=0;$s<100;$s++){
@@ -350,4 +350,4 @@ $base=json_encode(["clientKey"=>$apikey,"taskId"=>$Create->taskId]);
 $Result=json_decode(curl('https://api.anycaptcha.com/getTaskResult',$h,$base)[1]);
 if($Result->status=='processing'){print p.$Result->status;sleep(5);r();continue;}r();return $Result->solution->gRecaptchaResponse;}}}
 
-?>
+
