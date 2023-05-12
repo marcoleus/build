@@ -1,4 +1,4 @@
-//die(bypass_shortlinks("http://link.adshorti.xyz/CBah1e6pyg5"));
+///die(bypass_shortlinks("https://cbshort.com/st?api=406af259d31c828d9eb96f3c1623e6f247477d2e&amp;url=sclick.crazyblog.in/CBt6m0km8yr"));
 
 function visit_short($r,$icon=0){global $config;$exp=0;$asf=$config;
 if(file(mode.".txt")){unlink(mode.".txt");sleep(1);}
@@ -28,9 +28,21 @@ if(!$r2){goto refresh;}return $r2;}}}up:}}
 
 function bypass_shortlinks($url){$coundown=15;
 $host=parse_url($url)["host"];
-if($host=="link1s.net" or $host=="link1s.com" or $host=="ex-foary.com" or $host=="shortzu.icu" or $host=="clickzu.icu" or $host=="ser2.crazyblog.in" or $host=="ser3.crazyblog.in" or $host=="link.adshorti.xyz" or $host=="go.softindex.website" or $host=="link.shorti.io"){
+$query=parse_url($url);
+if(explode("=",$query["query"])[0]=="api"){
+$url="https://".explode("=",$query["query"])[2];
+$host=parse_url($url)["host"];
+
+
+
+}
+
+
+//die($host);
+if($host=="link1s.net" or $host=="link1s.com" or $host=="ex-foary.com" or $host=="shortzu.icu" or $host=="clickzu.icu" or $host=="ser2.crazyblog.in" or $host=="ser3.crazyblog.in" or $host=="link.adshorti.xyz" or $host=="go.softindex.website" or $host=="link.shorti.io" or $host=="cbshort.comj" or $host=="sclick.crazyblog.in"){
 if(file(mode.".txt")){unlink(mode.".txt");}
-$url=str_replace(["link.","go."],"",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)));$run=build($url);
+$url=str_replace(["link.","go."],"",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)));
+$run=build($url);
 $r=base_short($run["links"]);$t=$r["token_csrf"];
 if($t[2][5]){$method="recaptchav2";
 $cap=request_captcha($method,$r[$method],$run["links"]);
@@ -43,12 +55,11 @@ $r1=base_short($run["go"][0],1,$data)["json"];
 if($r1->status=="success"){print h.$r1->status;r(); return $r1->url;}}
 
 
-
-
-}elseif($host=="shrinke.me"){
+}elseif($host=="shrinke.me" or $host=="urlcashh.click" or $host=="ser7.crazyblog.in"){
 if(file(mode.".txt")){unlink(mode.".txt");}
 $run=build($url);
 $r=base_short($run["links"]);$t=$r["token_csrf"];
+//die(print_r($r));
 $method="recaptchav2";
 if($r[$method]){
 $cap=request_captcha($method,$r[$method],$run["links"]);
@@ -61,10 +72,6 @@ if($r["timer"] or $r["timer"]==0){L($coundown);
 $data=http_build_query([$t[1][0]=>$t[2][0],explode('"',$t[1][1])[0]=>$t[2][1],$t[1][2]=>$t[2][2],explode('"',$t[1][3])[0]=>$t[2][3],explode('"',$t[1][4])[0]=>$t[2][4]]);
 $r1=base_short($run["go"][0],1,$data)["json"];
 if($r1->status=="success"){print h.$r1->status;r(); return $r1->url;}}
-
-
-
-
 
 
 
