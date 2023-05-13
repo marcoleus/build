@@ -46,6 +46,8 @@ return [
 }
 function methode_captcha(){return [1=>"captchaai",2=>"azcaptcha",3=>"anycaptcha"];}
 
+function trimed($txt){return preg_replace('/\s+/', '',$txt);}
+
 function t24(){tmr(1,60*60*24+120);}
 
 function c(){system("clear").system("cls");print "\033[2J\033[;H"."\r\x1b[K"."\033[1A\033[K";}
