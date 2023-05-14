@@ -50,7 +50,7 @@ function trimed($txt){return preg_replace('/\s+/', '',$txt);}
 
 function t24(){tmr(1,60*60*24+120);}
 
-function c(){if(strtoupper(substr(PHP_OS,0,3))==='WIN'){system('cls');}else{system('clear');}}
+function c(){if(strtoupper(substr(PHP_OS,0,3))=='WIN'){$clear='cls';}else{$clear='clear';}pclose(popen($clear,'w'));}
 
 function lah($x=0){if($x==1){ket(k.explode("/",host)[2],m."sorry no energy").line();}elseif($x==2){ket(k.explode("/",host)[2],m."no ptc can be bypassed").line();}elseif($x==3){ket(k.explode("/",host)[2],m."no faucet can be bypassed").line();}else{ket(k.explode("/",host)[2],m."no shortlinks can be bypassed").line();}}
 
