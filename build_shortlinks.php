@@ -1,4 +1,4 @@
-<?php
+
 
 //die(bypass_shortlinks("https://try2link.com/CBblcjpzfsl"));
 if(!file("config.php")) {
