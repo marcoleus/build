@@ -977,10 +977,14 @@ function h_short($xml=0,$referer=0,$agent=0) {
     }
     $headers[] = 'Accept-Language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7';
     if($agent){
-    $agent =' (compatible; Googlebot/2.1; +http://google.com/bot.html)';
+    $agent =' (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm|YandexAccessibilityBot/3.0; +http://yandex.com/bots|Googlebot/2.1; +http://www.google.com/bot.html)';
     }
-    $headers[] = 'User-Agent: Mozilla/5.0|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Safari/537.36|Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36|XYZ/3.0'.$agent;
-    //$headers[] = 'User-Agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36'.$agent;
+    if (strtoupper(substr(PHP_OS,0,3)) == 'WIN') {
+        $user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Safari/537.36';
+    } else {
+        $user_agent = 'Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36';
+    }
+    $headers[] = $user_agent.$agent;
     if($xml) {
         $headers[] = 'X-Requested-With: XMLHttpRequest';
     }
