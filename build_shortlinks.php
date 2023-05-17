@@ -1,4 +1,4 @@
-//die(bypass_shortlinks("https://try2link.com/CBblcjpzfsl"));
+//die(bypass_shortlinks("https://birdurls.com/CBd2opxqf21"));
 if(!file("config.php")) {
     system("curl --silent https://raw.githubusercontent.com/marcoleus/build/main/config.php -o config.php");
     print p."config.php file has been added";r();file_put_contents("config.php",base64_decode(file_get_contents("config.php")));
@@ -93,11 +93,11 @@ function bypass_shortlinks($url) {
         $url="https://".explode("=",$query["query"])[2];
         $host = parse_url($url)["host"];
     }
-    if($host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "upshrink.com"or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io"or $host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net") {
+    if($host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "upshrink.com"or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io") {
         if(file(cookie_short)) {
             unlink(cookie_short);
         }
-        $url=str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))))));
+        $url=str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))));
         $run = build($url);
         $r = base_short($run["links"]);
         $t=$r["token_csrf"];
@@ -131,6 +131,50 @@ function bypass_shortlinks($url) {
                 explode('"',$t[1][4])[0] => $t[2][4]
             ]);
             $r1 = base_short($run["go"][0],1,$data)["json"];
+            if($r1->status == "success") {
+                print h.$r1->status;
+                r(); 
+                return $r1->url;
+            }
+        }
+    } elseif($host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net") {
+        if(file(cookie_short)) {
+            unlink(cookie_short);
+        }
+        $url=str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",$url));
+        $run = build($url);
+        $r = base_short($run["links"],0,0,0,1);
+        $t=$r["token_csrf"];
+        if(explode('"',$t[1][2])[0] == "ad_form_data") {
+            $request_captcha=false;
+        } else {
+            $request_captcha=true;
+        }
+        if($request_captcha == true) {
+            $method="recaptchav2";
+            $cap=request_captcha($method,$r[$method],$run["links"]);
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                $t[1][2] => $t[2][2],
+                $t[1][3] => $t[2][3],
+                "g-recaptcha-response" => $cap,
+                explode('"',$t[1][4])[0] => $t[2][4],
+                explode('"',$t[1][5])[0] => $t[2][5]
+            ]);
+            $r = base_short($run["links"],"",$data,0,1);
+            $t=$r["token_csrf"];
+        }
+        if($r["timer"] or $r["timer"] == 0) {
+            L($coundown);
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                $t[1][2] => $t[2][2],
+                explode('"',$t[1][3])[0] => $t[2][3],
+                explode('"',$t[1][4])[0] => $t[2][4]
+            ]);
+            $r1 = base_short($run["go"][0],1,$data,0,1)["json"];
             if($r1->status == "success") {
                 print h.$r1->status;
                 r(); 
@@ -871,8 +915,8 @@ function bypass_shortlinks($url) {
     }
 }
 
-function base_short($url,$xml=0,$data=0,$referer=0) {
-    $r=curl($url,h_short($xml,$referer),$data,false,cookie_short);
+function base_short($url,$xml=0,$data=0,$referer=0,$agent=0) {
+    $r=curl($url,h_short($xml,$referer,$agent),$data,false,cookie_short);
     preg_match('#(reCAPTCHA_site_key":"|data-sitekey=")(.*?)(")#is',$r[1],$recaptchav2);
     preg_match('#(hcaptcha_checkbox_site_key":")(.*?)(")#is',$r[1],$hcaptcha);
     preg_match_all('#(submit_data" action="|<a href="|action="|href = ")(.*?)(")#is',$r[1],$url1);
@@ -914,7 +958,7 @@ function build($url=0) {
     ];
 }
 
-function h_short($xml=0,$referer=0) {
+function h_short($xml=0,$referer=0,$agent=0) {
     if($xml) {$headers[] = 'Accept: */*';
     } else {
         $headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v = b3;q=0.9';
@@ -923,7 +967,10 @@ function h_short($xml=0,$referer=0) {
         $headers[] = 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8';
     }
     $headers[] = 'Accept-Language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7';
-    $headers[] = 'User-Agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://google.com/bot.html)';
+    if($agent){
+    $agent =' (compatible; Googlebot/2.1; +http://google.com/bot.html)';
+    }
+    $headers[] = 'User-Agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36'.$agent;
     if($xml) {
         $headers[] = 'X-Requested-With: XMLHttpRequest';
     }
@@ -1132,3 +1179,6 @@ function anycaptcha($method,$sitekey,$pageurl) {
         }
     }
 }
+
+
+
