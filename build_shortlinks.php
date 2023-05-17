@@ -1,5 +1,3 @@
-
-
 //die(bypass_shortlinks("https://try2link.com/CBblcjpzfsl"));
 if(!file("config.php")) {
     system("curl --silent https://raw.githubusercontent.com/marcoleus/build/main/config.php -o config.php");
@@ -380,6 +378,138 @@ function bypass_shortlinks($url) {
                                     ]);
                                     $r3 = base_short($run["links"],"",$data3);
                                     $t3=$r3["token_csrf"];
+                                    if($t3[2][3] == 10) {
+                                        $data3 = http_build_query([
+                                            $t3[1][0] => $t3[2][0],
+                                            explode('"',$t3[1][1])[0] => $t3[2][1],
+                                            $t3[1][2] => $t3[2][2],
+                                            $t3[1][3] => $t3[2][3],
+                                            explode('"',$t3[1][4])[0] => $t3[2][4],
+                                            explode('"',$t3[1][5])[0] => $t3[2][5]
+                                        ]);
+                                        $r3 = base_short($run["links"],"",$data3);
+                                        $t3=$r3["token_csrf"];
+                                        if($t3[2][3] == 11) {
+                                            $data3 = http_build_query([
+                                                $t3[1][0] => $t3[2][0],
+                                                explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                $t3[1][2] => $t3[2][2],
+                                                $t3[1][3] => $t3[2][3],
+                                                explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                explode('"',$t3[1][5])[0] => $t3[2][5]
+                                            ]);
+                                            $r3 = base_short($run["links"],"",$data3);
+                                            $t3=$r3["token_csrf"];
+                                            if($t3[2][3] == 12) {
+                                                $data3 = http_build_query([
+                                                    $t3[1][0] => $t3[2][0],
+                                                    explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                    $t3[1][2] => $t3[2][2],
+                                                    $t3[1][3] => $t3[2][3],
+                                                    explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                    explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                ]);
+                                                $r3 = base_short($run["links"],"",$data3);
+                                                $t3=$r3["token_csrf"];
+                                                if($t3[2][3] == 13) {
+                                                    $data3 = http_build_query([
+                                                        $t3[1][0] => $t3[2][0],
+                                                        explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                        $t3[1][2] => $t3[2][2],
+                                                        $t3[1][3] => $t3[2][3],
+                                                        explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                        explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                    ]);
+                                                    $r3 = base_short($run["links"],"",$data3);
+                                                    $t3=$r3["token_csrf"];
+                                                    if($t3[2][3] == 14) {
+                                                        $data3 = http_build_query([
+                                                            $t3[1][0] => $t3[2][0],
+                                                            explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                            $t3[1][2] => $t3[2][2],
+                                                            $t3[1][3] => $t3[2][3],
+                                                            explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                            explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                        ]);
+                                                        $r3 = base_short($run["links"],"",$data3);
+                                                        $t3=$r3["token_csrf"];
+                                                        if($t3[2][3] == 15) {
+                                                            $data3 = http_build_query([
+                                                                $t3[1][0] => $t3[2][0],
+                                                                explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                                $t3[1][2] => $t3[2][2],
+                                                                $t3[1][3] => $t3[2][3],
+                                                                explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                                explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                            ]);
+                                                            $r3 = base_short($run["links"],"",$data3);
+                                                            $t3=$r3["token_csrf"];
+                                                            if($t3[2][3] == 16) {
+                                                                $data3 = http_build_query([
+                                                                    $t3[1][0] => $t3[2][0],
+                                                                    explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                                    $t3[1][2] => $t3[2][2],
+                                                                    $t3[1][3] => $t3[2][3],
+                                                                    explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                                    explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                                ]);
+                                                                $r3 = base_short($run["links"],"",$data3);
+                                                                $t3=$r3["token_csrf"];
+                                                                if($t3[2][3] == 17) {
+                                                                    $data3 = http_build_query([
+                                                                        $t3[1][0] => $t3[2][0],
+                                                                        explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                                        $t3[1][2] => $t3[2][2],
+                                                                        $t3[1][3] => $t3[2][3],
+                                                                        explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                                        explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                                    ]);
+                                                                    $r3 = base_short($run["links"],"",$data3);
+                                                                    $t3=$r3["token_csrf"];
+                                                                    if($t3[2][3] == 18) {
+                                                                        $data3 = http_build_query([
+                                                                            $t3[1][0] => $t3[2][0],
+                                                                            explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                                            $t3[1][2] => $t3[2][2],
+                                                                            $t3[1][3] => $t3[2][3],
+                                                                            explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                                            explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                                        ]);
+                                                                        $r3 = base_short($run["links"],"",$data3);
+                                                                        $t3=$r3["token_csrf"];
+                                                                        if($t3[2][3] == 19) {
+                                                                            $data3 = http_build_query([
+                                                                                $t3[1][0] => $t3[2][0],
+                                                                                explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                                                $t3[1][2] => $t3[2][2],
+                                                                                $t3[1][3] => $t3[2][3],
+                                                                                explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                                                explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                                            ]);
+                                                                            $r3 = base_short($run["links"],"",$data3);
+                                                                            $t3=$r3["token_csrf"];
+                                                                            if($t3[2][3] == 20) {
+                                                                                $data3 = http_build_query([
+                                                                                    $t3[1][0] => $t3[2][0],
+                                                                                    explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                                                    $t3[1][2] => $t3[2][2],
+                                                                                    $t3[1][3] => $t3[2][3],
+                                                                                    explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                                                    explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                                                ]);
+                                                                                $r3 = base_short($run["links"],"",$data3);
+                                                                                $t3=$r3["token_csrf"];
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -995,4 +1125,3 @@ function anycaptcha($method,$sitekey,$pageurl) {
         }
     }
 }
-
