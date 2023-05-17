@@ -300,7 +300,7 @@ function hmc($xml=0) {
     $h[] = "x-requested-with: XMLHttpRequest";}
     $h[] = "cache-control: max-age=0";
     $h[] = "cookie: ".$u_c;
-    $h[] = "user-agent: ".$u_a;
+    $h[] = "user-agent: ".$u_a." (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
     return $h;
 }
         
@@ -310,7 +310,7 @@ function hac($xml=0) {
     if($xml) {
     $h[] = "accept: application/json, text/javascript, */*; q=0.01";
     $h[] = "x-requested-with: XMLHttpRequest";}
-    $h[] = "user-agent:Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36";
+    $h[] = "user-agent:Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
     return $h;
 }
         
