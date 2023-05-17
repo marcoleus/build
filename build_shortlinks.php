@@ -93,6 +93,10 @@ function bypass_shortlinks($url) {
         $url="https://".explode("=",$query["query"])[2];
         $host = parse_url($url)["host"];
     }
+    if(explode("p=",$url)[1]) {
+        $url="https://ser7.crazyblog.in".explode("p=",$url)[1];
+        $host = parse_url($url)["host"];
+    }
     if($host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "upshrink.com"or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io") {
         if(file(cookie_short)) {
             unlink(cookie_short);
