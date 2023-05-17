@@ -979,7 +979,8 @@ function h_short($xml=0,$referer=0,$agent=0) {
     if($agent){
     $agent =' (compatible; Googlebot/2.1; +http://google.com/bot.html)';
     }
-    $headers[] = 'User-Agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36'.$agent;
+    $headers[] = 'User-Agent: Mozilla/5.0|Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Safari/537.36|Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36|XYZ/3.0'.$agent;
+    //$headers[] = 'User-Agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36'.$agent;
     if($xml) {
         $headers[] = 'X-Requested-With: XMLHttpRequest';
     }
