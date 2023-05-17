@@ -194,8 +194,13 @@ function bypass_shortlinks($url) {
         $run = build($url);
         $r = base_short($run["links"]);
         $t=$r["token_csrf"];
-        $method="recaptchav2";
-        if($r[$method]) {
+        if(explode('"',$t[1][2])[0] == "ad_form_data") {
+            $request_captcha=false;
+        } else {
+            $request_captcha=true;
+        }
+        if($request_captcha == true) {
+            $method="recaptchav2";
             $cap=request_captcha($method,$r[$method],$run["links"]);
             $data = http_build_query([
                 $t[1][0] => $t[2][0],
