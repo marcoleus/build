@@ -865,11 +865,15 @@ function bypass_shortlinks($url) {
             return $r2->url;
            }
         }
-   }
+   } elseif($host == "shortsfly.me" or $host == "linksfly.me") {
+    $run = build($url);
+    $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
+    if($r["url"]){L($coundown);print h."success";r(); return $r["url"];
+    }
 }
 
-function base_short($url,$xml=0,$data=0) {
-    $r=curl($url,h_short($xml),$data,false,cookie_short);
+function base_short($url,$xml=0,$data=0,$referer=0) {
+    $r=curl($url,h_short($xml,$referer),$data,false,cookie_short);
     preg_match('#(reCAPTCHA_site_key":"|data-sitekey=")(.*?)(")#is',$r[1],$recaptchav2);
     preg_match('#(hcaptcha_checkbox_site_key":")(.*?)(")#is',$r[1],$hcaptcha);
     preg_match_all('#(submit_data" action="|<a href="|action="|href = ")(.*?)(")#is',$r[1],$url1);
@@ -901,6 +905,7 @@ function build($url=0) {
         "client_id" => substr(str_shuffle($az),0,8)."-".substr(str_shuffle($az),0,4)."-".substr(str_shuffle($az),0,4)."-".substr(str_shuffle($az),0,4)."-".substr(str_shuffle($az),0,16),
         "decode" => base64_decode(explode("=",$url)[2]),
         "links" => "https://".$r["host"].$r["path"],
+        "inc" => "https://".$r["host"]."/flyinc.".$r["path"],
         "go" => [
             "https://".$r["host"]."/links/go",
             "https://".$r["host"]."/go".$r["path"],
@@ -910,7 +915,7 @@ function build($url=0) {
     ];
 }
 
-function h_short($xml=0) {
+function h_short($xml=0,$referer=0) {
     if($xml) {$headers[] = 'Accept: */*';
     } else {
         $headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v = b3;q=0.9';
@@ -922,6 +927,9 @@ function h_short($xml=0) {
     $headers[] = 'User-Agent: Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36';
     if($xml) {
         $headers[] = 'X-Requested-With: XMLHttpRequest';
+    }
+    if($referer) {
+        $headers[] = 'referer: '.$referer;
     }
     return $headers;
 }
