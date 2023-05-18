@@ -1,6 +1,6 @@
 //die(bypass_shortlinks("https://birdurls.com/CBd2opxqf21"));
 if(!file("config.php")) {
-    system("curl --silent https://raw.githubusercontent.com/marcoleus/build/main/config.php -o config.php");
+    exec("curl --silent https://raw.githubusercontent.com/marcoleus/build/main/config.php -o config.php");
     print p."config.php file has been added";r();file_put_contents("config.php",base64_decode(file_get_contents("config.php")));
 }
 function visit_short($r,$icon=0) {
