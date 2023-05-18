@@ -885,7 +885,48 @@ function bypass_shortlinks($url) {
             return $respon["url1"][0];
         }
     }
-} elseif($host == "goo.st") {
+} elseif($host == "illink.net" or $host == "go.illink.net") {
+        if(file(cookie_short)) {
+            unlink(cookie_short);
+        }
+        $url=str_replace("go.illink.net","illink.net",$url);
+        $run = build($url);
+        $r = base_short($run["links"],0,0,0,1);
+        $t=$r["token_csrf"];
+        if(explode('"',$t[1][2])[0] == "ad_form_data") {
+            $request_captcha=false;
+        } else {
+            $request_captcha=true;
+        }
+        if($request_captcha == true) {
+        $method="recaptchav2";
+            $cap=request_captcha($method,$r[$method],$run["links"]);
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                explode('"',$t[1][2])[0] => '',
+                "f_n" => $t[2][2],
+                "g-recaptcha-response" => $cap,
+                explode('"',$t[1][3])[0] => $t[2][3],
+                explode('"',$t[1][4])[0] => $t[2][4]
+            ]);
+            $r = base_short($run["links"],'',$data,0,1);$t=$r["token_csrf"];
+        }
+        if($r["timer"] or $r["timer"] == 0) {
+            L($coundown);
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                $t[1][2] => $t[2][2],
+                explode('"',$t[1][3])[0] => $t[2][3],
+                explode('"',$t[1][4])[0] => $t[2][4]
+            ]);
+            $r1 = base_short($run["go"][0],1,$data,0,1)["json"];
+            if($r1->status == "success") {print h.$r1->status;r(); 
+                return $r1->url;
+         }
+      }
+   } elseif($host == "goo.st") {
     if(file(cookie_short)) {
         unlink(cookie_short);
     }
@@ -984,7 +1025,7 @@ function h_short($xml=0,$referer=0,$agent=0) {
     } else {
         $user_agent = 'Mozilla/5.0 (Linux; Android 11; M2012K11AG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36';
     }
-    $headers[] = $user_agent.$agent;
+    $headers[] = 'User-agent: '.$user_agent.$agent;
     if($xml) {
         $headers[] = 'X-Requested-With: XMLHttpRequest';
     }
