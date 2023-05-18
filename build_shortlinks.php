@@ -16,7 +16,7 @@ function visit_short($r,$icon=0) {
             $open = str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-_-]/","",$r["name"][$s]))));
             if($asf[$i] == $open) {
                 if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
-                    goto up;
+                    gotoup;
                 }
                 if(preg_replace("/[^0-9]/","",$r["visit"][$s])) {
                     print p.$r["name"][$s]." left > ".trim($r["left"][$s]);
@@ -29,7 +29,7 @@ function visit_short($r,$icon=0) {
                         libs:
                         $x=-1;
                         while(true) {$x++;
-                            if(!$r2[$x]) {goto libs;}
+                            if(!$r2[$x]) {gotolibs;}
                             $data1 = http_build_query([
                                 "cID" => 0,
                                 "pC" => $r2[$x],
@@ -44,7 +44,7 @@ function visit_short($r,$icon=0) {
                                 "captcha-hf" => $r2[$x]
                             ]);
                             $res = base_run(host."system/ajax.php",$data2)["json"];
-                            if($res->shortlink) {$r1["url"]=$res->shortlink;goto run;
+                            if($res->shortlink) {$r1["url"]=$res->shortlink;gotorun;
                             }
                         }
                     } elseif(mode == "no_icon") {
@@ -55,7 +55,7 @@ function visit_short($r,$icon=0) {
                         ]);
                         $res = base_run(host."system/ajax.php",$data)["json"];
                         if($res->shortlink) {
-                            $r1["url"]=$res->shortlink;goto run;
+                            $r1["url"]=$res->shortlink;gotorun;
                         }
                     } elseif(mode == "coming3") {
 
@@ -72,10 +72,10 @@ function visit_short($r,$icon=0) {
                     refresh:
                     $exp++;
                     if($exp == 4) {
-                        goto up;
+                        gotoup;
                     }
                     $r2 = bypass_shortlinks($r1["url"]);
-                    if(!$r2) {goto refresh;
+                    if(!$r2) {gotorefresh;
                     }
                     return $r2;
                 }
@@ -783,7 +783,7 @@ function bypass_shortlinks($url) {
             $res = base_short($url);
             if(!$res["url1"][0]) {
                 sleep(2);
-                gotostart;
+                goto start;
             }
             $n = 0;
             web1s:
@@ -1017,11 +1017,11 @@ function azcaptcha($method,$sitekey,$pageurl) {
         $r=curl("https://azcaptcha.com/in.php?".$type[$method],$ua)[1];
         if($r == "ERROR_USER_BALANCE_ZERO") {
             unlink($name_api);
-            goto refresh;
+            gotorefresh;
         } elseif($r == "ERROR_WRONG_USER_KEY") {
             if($s == 3) {
                 unlink($name_api);
-                goto refresh;
+                gotorefresh;
             }
         }
         $id=explode('|',$r)[1];
@@ -1038,11 +1038,11 @@ function azcaptcha($method,$sitekey,$pageurl) {
                 print str_replace("_"," ",$r1);
                 sleep(5);
                 r();
-                goto refresh;
+                gotorefresh;
             } elseif($r1 == "ERROR_INVALID_SITEKEY") {
                 str_replace("_"," ",$r1);
                 r();
-                goto refresh;
+                gotorefresh;
             } elseif($r1 == "CAPCHA_NOT_READY") {
                 r();print str_replace("_"," ",$r1);
                 sleep(5);
@@ -1086,11 +1086,11 @@ function captchaai($method,$sitekey,$pageurl) {
         $r=curl("http://ocr.captchaai.com/in.php?".$type[$method],$ua)[1];
         if($r == "ERROR_USER_BALANCE_ZERO") {
             unlink($name_api);
-            goto refresh;
+            gotorefresh;
         } elseif($r == "ERROR_WRONG_USER_KEY") {
             if($s == 3) {
                 unlink($name_api);
-                goto refresh;
+                gotorefresh;
             }
         }
         $id=explode('|',$r)[1];
@@ -1109,11 +1109,11 @@ function captchaai($method,$sitekey,$pageurl) {
                 print str_replace("_"," ",$r1);
                 sleep(5);
                 r();
-                goto refresh;
+                gotorefresh;
             } elseif($r1 == "ERROR_INVALID_SITEKEY") {
                 str_replace("_"," ",$r1);
                 r();
-                goto refresh;
+                gotorefresh;
             } elseif($r1 == "CAPCHA_NOT_READY") {
                 r();
                 print str_replace("_"," ",$r1);
@@ -1141,7 +1141,7 @@ function anycaptcha($method,$sitekey,$pageurl) {
     $r=json_decode(curl("https://api.anycaptcha.com/getBalance",$h,$data)[1],1);
     if($r["balance"] <= 0) {
         unlink($name_api);
-        goto refresh;
+        gotorefresh;
     }
     $recaptchav2=json_encode([
         "clientKey" => $apikey,
