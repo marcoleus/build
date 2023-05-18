@@ -926,6 +926,49 @@ function bypass_shortlinks($url) {
                 return $r1->url;
          }
       }
+   } elseif($host == "adbull.me") {
+        if(file(cookie_short)) {
+            unlink(cookie_short);
+        }
+        $run = build($url);
+        $r = base_short($run["links"],0,0,"https://deportealdia.live/");
+        $t=$r["token_csrf"];
+        if(explode('"',$t[1][2])[0] == "ad_form_data") {
+            $request_captcha=false;
+        } else {
+            $request_captcha=true;
+        }
+        if($request_captcha == true) {
+            $method="recaptchav2";
+            $cap=request_captcha($method,$r[$method],$run["links"]);
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                $t[1][2] => $t[2][2],
+                $t[1][3] => $t[2][3],
+                "g-recaptcha-response" => $cap,
+                explode('"',$t[1][4])[0] => $t[2][4],
+                explode('"',$t[1][5])[0] => $t[2][5]
+            ]);
+            $r = base_short($run["links"],"",$data,0,1);
+            $t=$r["token_csrf"];
+        }
+        if($r["timer"] or $r["timer"] == 0) {
+            L($coundown);
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                $t[1][2] => $t[2][2],
+                explode('"',$t[1][3])[0] => $t[2][3],
+                explode('"',$t[1][4])[0] => $t[2][4]
+            ]);
+            $r1 = base_short($run["go"][0],1,$data,0,1)["json"];
+            if($r1->status == "success") {
+                print h.$r1->status;
+                r(); 
+                return $r1->url;
+            }
+        }
    } elseif($host == "goo.st") {
     if(file(cookie_short)) {
         unlink(cookie_short);
