@@ -13,7 +13,7 @@ function visit_short($r,$icon=0) {
     }
     for($i=0;$i<100;$i++) {
         for($s=0;$s<100;$s++) {
-            $open=str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-_-]/","",$r["name"][$s]))));
+            $open = str_replace(" ","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-_-]/","",$r["name"][$s]))));
             if($asf[$i] == $open) {
                 if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
                     goto up;
@@ -86,306 +86,276 @@ function visit_short($r,$icon=0) {
 }
 
 function bypass_shortlinks($url) {
-    $coundown=15;
-    $host = parse_url($url)["host"];
-    $query = parse_url($url);
-    if(explode("=",$query["query"])[0] == "api") {
-        $url="https://".explode("=",$query["query"])[2];
-        $host = parse_url($url)["host"];
-    }
-    if(explode("p=",$url)[1]) {
-        $url="https://ser7.crazyblog.in".explode("p=",$url)[1];
-        $host = parse_url($url)["host"];
-    }
-    if($host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "upshrink.com"or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
+    $coundown = 15;
+    $host = parse_url(
+        $url)["host"];
+        $query = parse_url($url);
+        if(explode("=",$query["query"])[0] == "api") {
+            $url = "https://".explode("=",$query["query"])[2];
+            $host = parse_url($url)["host"];
         }
-        $url=str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))));
-        $run = build($url);
-        $r = base_short($run["links"]);
-        $t=$r["token_csrf"];
-        if(explode('"',$t[1][2])[0] == "ad_form_data") {
-            $request_captcha=false;
-        } else {
-            $request_captcha=true;
+        if(explode("p=",$url)[1]) {
+            $url = "https://ser7.crazyblog.in".explode("p=",$url)[1];
+            $host = parse_url($url)["host"];
         }
-        if($request_captcha == true) {
-            $method="recaptchav2";
-            $cap=request_captcha($method,$r[$method],$run["links"]);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                $t[1][3] => $t[2][3],
-                "g-recaptcha-response" => $cap,
-                explode('"',$t[1][4])[0] => $t[2][4],
-                explode('"',$t[1][5])[0] => $t[2][5]
-            ]);
-            $r = base_short($run["links"],"",$data);
-            $t=$r["token_csrf"];
-        }
-        if($r["timer"] or $r["timer"] == 0) {
-            L($coundown);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r1 = base_short($run["go"][0],1,$data)["json"];
-            if($r1->status == "success") {
-                print h.$r1->status;
-                r(); 
-                return $r1->url;
+        if($host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net" or $host == "adbull.me" or $host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "upshrink.com" or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
             }
-        }
-    } elseif($host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $url=str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",$url));
-        $run = build($url);
-        $r = base_short($run["links"],0,0,0,1);
-        $t=$r["token_csrf"];
-        if(explode('"',$t[1][2])[0] == "ad_form_data") {
-            $request_captcha=false;
-        } else {
-            $request_captcha=true;
-        }
-        if($request_captcha == true) {
-            $method="recaptchav2";
-            $cap=request_captcha($method,$r[$method],$run["links"]);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                $t[1][3] => $t[2][3],
-                "g-recaptcha-response" => $cap,
-                explode('"',$t[1][4])[0] => $t[2][4],
-                explode('"',$t[1][5])[0] => $t[2][5]
-            ]);
-            $r = base_short($run["links"],"",$data,0,1);
-            $t=$r["token_csrf"];
-        }
-        if($r["timer"] or $r["timer"] == 0) {
-            L($coundown);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r1 = base_short($run["go"][0],1,$data,0,1)["json"];
-            if($r1->status == "success") {
-                print h.$r1->status;
-                r(); 
-                return $r1->url;
+            if($host == "adbull.me") {
+                $referer = "https://deportealdia.live/";
+            } else {
+                $referer = 0;
             }
-        }
-    } elseif($host == "shrinke.me" or $host == "go1.urlcash.click" or $host == "urlcashh.click" or $host == "ser7.crazyblog.in" or $host == "short.pe" or $host == "shurt.pw" or $host == "urlcashh.quest" or $host == "softindex.site" or $host == "go.urlcash.site" or $host == "goes1.softindex.website") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $url=str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",$url))));
-        
-        $run = build($url);
-        $r = base_short($run["links"]);
-        $t=$r["token_csrf"];
-        if(explode('"',$t[1][2])[0] == "ad_form_data") {
-            $request_captcha=false;
-        } else {
-            $request_captcha=true;
-        }
-        if($request_captcha == true) {
-            $method="recaptchav2";
-            $cap=request_captcha($method,$r[$method],$run["links"]);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                explode('"',$t[1][2])[0] => "",
-                "f_n" => $t[2][2],
-                "g-recaptcha-response" => $cap,
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r = base_short($run["links"],"",$data);$t=$r["token_csrf"];
-        }
-        if($r["timer"] or $r["timer"] == 0) {
-            L($coundown);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r1 = base_short($run["go"][0],1,$data)["json"];
-            if($r1->status == "success") {print h.$r1->status;r(); 
-                return $r1->url;}
+            if($host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net") {
+                $cloud = 1;
+            } else {
+                $cloud = 0;
             }
-    } elseif($host == "clik.pw") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build($url);
-        $r = base_short($run["links"]);
-        $t=$r["token_csrf"];
-        $method="hcaptcha";
-        if($r[$method]) {
-            $cap=request_captcha($method,$r[$method],$run["links"]);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                explode('"',$t[1][2])[0] => "",
-                "f_n" => $t[2][2],
-                "g-recaptcha-response" => $cap,
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r = base_short($run["links"],"",$data);
-            $t=$r["token_csrf"];
-        }
-        if($r["timer"] or $r["timer"] == 0) {
-            L($coundown);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r1 = base_short($run["go"][0],1,$data)["json"];
-            if($r1->status == "success") {
-                print h.$r1->status;
-                r(); 
-                return $r1->url;
+            $url = str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))))));
+            $run = build($url);
+            $r = base_short($run["links"],0,0,$referer,$cloud);
+            $t = $r["token_csrf"];
+            if(explode('"',$t[1][2])[0] == "ad_form_data") {
+                $request_captcha = false;
+            } else {
+                $request_captcha = true;
             }
-        }
-    } elseif($host == "try2link.com") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build($url);
-        $r = base_short($url);
-        $url_dec = build(build(build(build($r["url"])["decode"])["decode"])["decode"])["decode"];
-        if(!$url_dec) {
-            $url_dec = build(build(build($r["url"])["decode"])["decode"])["decode"];
-        }
-        $dec = base_short($url_dec);
-        $r1 = base_short($dec["url"]);
-        if($r1["timer"] or $r1["timer"] == 0) {
-            L($coundown);
-            $t=$r1["token_csrf"];
+            if($request_captcha == true) {$method = "recaptchav2";
+                $cap = request_captcha($method,$r[$method],$run["links"]);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    explode('"',$t[1][1])[0] => $t[2][1],
+                    $t[1][2] => $t[2][2],
+                    $t[1][3] => $t[2][3],
+                    "g-recaptcha-response" => $cap,
+                    explode('"',$t[1][4])[0] => $t[2][4],
+                    explode('"',$t[1][5])[0] => $t[2][5]
+                ]);
+                $r = base_short($run["links"],"",$data,0,$cloud);
+                $t = $r["token_csrf"];
+            }
+            if($r["timer"] or $r["timer"] == 0) {
+                L($coundown);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    explode('"',$t[1][1])[0] => $t[2][1],
+                    $t[1][2] => $t[2][2],
+                    explode('"',$t[1][3])[0] => $t[2][3],
+                    explode('"',$t[1][4])[0] => $t[2][4]
+                ]);
+                $r1 = base_short($run["go"][0],1,$data,0,$cloud)["json"];
+                if($r1->status == "success") {
+                    print h.$r1->status;
+                    r();
+                    return $r1->url;
+                }
+            }
+        } elseif($host == "illink.net" or $host == "go.illink.net" or $host == "shrinke.me" or $host == "go1.urlcash.click" or $host == "urlcashh.click" or $host == "ser7.crazyblog.in" or $host == "short.pe" or $host == "shurt.pw" or $host == "urlcashh.quest" or $host == "softindex.site" or $host == "go.urlcash.site" or $host == "goes1.softindex.website") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            if($host == "xxnx.com") {
+                $referer = "xxnx.com";
+            } else {
+                $referer = 0;
+            }
+            if($host == "illink.net" or $host == "go.illink.net") {
+                $cloud = 1;
+            } else {
+                $cloud = 0;
+            }
+            $url = str_replace("go.illink.net","illink.net",str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",$url)))));
+            $run = build($url);
+            $r = base_short($run["links"],0,0,$referer,$cloud);
+            $t = $r["token_csrf"];
+            if(explode('"',$t[1][2])[0] == "ad_form_data") {
+                $request_captcha = false;
+            } else {
+                $request_captcha = true;
+            }
+            if($request_captcha == true) {
+                $method = "recaptchav2";
+                $cap = request_captcha($method,$r[$method],$run["links"]);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    explode('"',$t[1][1])[0] => $t[2][1],
+                    explode('"',$t[1][2])[0] => "",
+                    "f_n" => $t[2][2],
+                    "g-recaptcha-response" => $cap,
+                    explode('"',$t[1][3])[0] => $t[2][3],
+                    explode('"',$t[1][4])[0] => $t[2][4]
+                ]);
+                $r = base_short($run["links"],"",$data,0,$cloud);
+                $t = $r["token_csrf"];
+            }
+            if($r["timer"] or $r["timer"] == 0) {
+                L($coundown);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    explode('"',$t[1][1])[0] => $t[2][1],
+                    $t[1][2] => $t[2][2],
+                    explode('"',$t[1][3])[0] => $t[2][3],
+                    explode('"',$t[1][4])[0] => $t[2][4]
+                ]);
+                $r1 = base_short($run["go"][0],1,$data,0,$cloud)["json"];
+                if($r1->status == "success") {
+                    print h.$r1->status;
+                    r();
+                    return $r1->url;
+                }
+            }
+        } elseif($host == "clik.pw") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build($url);$r = base_short($run["links"]);
+            $t = $r["token_csrf"];
+            $method = "hcaptcha";
+            if($r[$method]) {
+                $cap = request_captcha($method,$r[$method],$run["links"]);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    explode('"',$t[1][1])[0] => $t[2][1],
+                    explode('"',$t[1][2])[0] => "",
+                    "f_n" => $t[2][2],
+                    "g-recaptcha-response" => $cap,
+                    explode('"',$t[1][3])[0] => $t[2][3],
+                    explode('"',$t[1][4])[0] => $t[2][4]
+                ]);
+                $r = base_short($run["links"],"",$data);
+                $t = $r["token_csrf"];
+            }
+            if($r["timer"] or $r["timer"] == 0) {
+                L($coundown);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    explode('"',$t[1][1])[0] => $t[2][1],
+                    $t[1][2] => $t[2][2],
+                    explode('"',$t[1][3])[0] => $t[2][3],
+                    explode('"',$t[1][4])[0] => $t[2][4]
+                ]);
+                $r1 = base_short($run["go"][0],1,$data)["json"];
+                if($r1->status == "success") {
+                    print h.$r1->status;
+                    r();
+                    return $r1->url;
+                }
+            }
+        } elseif($host == "try2link.com") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build($url);
+            $r = base_short($url);
+            $url_dec = build(build(build(build($r["url"])["decode"])["decode"])["decode"])["decode"];
+            if(!$url_dec) {
+                $url_dec = build(build(build($r["url"])["decode"])["decode"])["decode"];
+            }
+            $dec = base_short($url_dec);
+            $r1 = base_short($dec["url"]);
+            if($r1["timer"] or $r1["timer"] == 0) {
+                L($coundown);
+                $t = $r1["token_csrf"];
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    explode('"',$t[1][1])[0] => $t[2][1],
+                    $t[1][2] => $t[2][2],
+                    explode('"',$t[1][3])[0] => $t[2][3],
+                    explode('"',$t[1][4])[0] => $t[2][4]
+                ]);
+                $r2 = base_short($run["go"][0],1,$data)["json"];
+                if($r2->status == "success") {
+                    print h.$r2->status;
+                    r();
+                    return $r2->url;
+                }
+            }
+        } elseif($host == "tii.la") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build($url);
+            $r = base_short($run["links"]);
+            $t = $r["token_csrf"];
             $data = http_build_query([
                 $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
+                $t[1][1] => $t[2][1],$t[1][2] => $t[2][2],
+                $t[1][3] => $t[2][3]
             ]);
-            $r2 = base_short($run["go"][0],1,$data)["json"];
-            if($r2->status == "success") {
-                print h.$r2->status;
-                r(); 
-                return $r2->url;
+            $r1 = base_short($run["links"],"",$data);
+            if($r1["timer"] or $r1["timer"] == 0) {
+                L($coundown);
+                $t = $r1["token_csrf"];
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    $t[1][1] => $t[2][1],
+                    $t[1][2] => $t[2][2]
+                ]);
+                $r2 = base_short($run["go"][0],1,$data)["json"];
+                if($r2->status == "success") {
+                    print h.$r2->status;
+                    r();
+                    return $r2->url;
+                }
             }
-        }
-    } elseif($host == "tii.la") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build($url);
-        $r = base_short($run["links"]);
-        $t=$r["token_csrf"];
-        $data = http_build_query([
-            $t[1][0] => $t[2][0],
-            $t[1][1] => $t[2][1],
-            $t[1][2] => $t[2][2],
-            $t[1][3] => $t[2][3]
-        ]);
-        $r1 = base_short($run["links"],"",$data);
-        if($r1["timer"] or $r1["timer"] == 0) {
-            L($coundown);
-            $t=$r1["token_csrf"];
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                $t[1][1] => $t[2][1],
-                $t[1][2] => $t[2][2]
-            ]);
-            $r2 = base_short($run["go"][0],1,$data)["json"];
-            if($r2->status == "success") {
-                print h.$r2->status;
-                r(); 
-                return $r2->url;
+        } elseif($host == "petafly.me" or $host == "nonofly.me") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
             }
-        }
-    } elseif($host == "petafly.me" or $host == "nonofly.me") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build($url);
-        pet:
-        $r = base_short($run["links"]);
-        if(!$r["url"]) {
-            goto pet;
-        }
-        peta:
-        $r1 = base_short($r["url"]);
-        if(!$r1["url"]) {
-            goto peta;
-        }
-        petafly:
-        $r2 = base_short($r1["url"]);
-        if(!$r2["url2"][0]) {
-            goto petafly;
-        }
-        $run = build($r2["url2"][0]);
-        $r3 = base_short($run["links"]);
-        $t3=$r3["token_csrf"];if($t3[2][3] == 2) {
-            $data3 = http_build_query([
-                $t3[1][0] => $t3[2][0],
-                explode('"',$t3[1][1])[0] => $t3[2][1],
-                $t3[1][2] => $t3[2][2],$t3[1][3] => $t3[2][3],
-                explode('"',$t3[1][4])[0] => $t3[2][4],
-                explode('"',$t3[1][5])[0] => $t3[2][5]
-            ]);
-            $r3 = base_short($run["links"],"",$data3);
-        }
-        $t3=$r3["token_csrf"];
-        if($t3[2][3] == 3) {
-            $data3 = http_build_query([
-                $t3[1][0] => $t3[2][0],
-                explode('"',$t3[1][1])[0] => $t3[2][1],
-                $t3[1][2] => $t3[2][2],$t3[1][3] => $t3[2][3],
-                explode('"',$t3[1][4])[0] => $t3[2][4],
-                explode('"',$t3[1][5])[0] => $t3[2][5]
-            ]);
-            $r3 = base_short($run["links"],"",$data3);
-            $t3=$r3["token_csrf"];
-            if($t3[2][3] == 4) {
+            $run = build($url);
+            pet:
+            $r = base_short($run["links"]);
+            if(!$r["url"]) {
+                gotopet;
+            }
+            peta:
+            $r1 = base_short($r["url"]);
+            if(!$r1["url"]) {
+                gotopeta;
+            }
+            petafly:
+            $r2 = base_short($r1["url"]);
+            if(!$r2["url2"][0]) {
+                gotopetafly;
+            }$run = build($r2["url2"][0]);
+            $r3 = base_short($run["links"]);
+            $t3 = $r3["token_csrf"];
+            if($t3[2][3] == 2) {
                 $data3 = http_build_query([
                     $t3[1][0] => $t3[2][0],
                     explode('"',$t3[1][1])[0] => $t3[2][1],
                     $t3[1][2] => $t3[2][2],
                     $t3[1][3] => $t3[2][3],
-                    explode('"',$t3[1][4])[0] => $t3[2][4]
-                    ,explode('"',$t3[1][5])[0] => $t3[2][5]
+                    explode('"',$t3[1][4])[0] => $t3[2][4],
+                    explode('"',$t3[1][5])[0] => $t3[2][5]
                 ]);
-                $r3 = base_short($run["links"],"",$data3);$t3=$r3["token_csrf"];
-                if($t3[2][3] == 5) {
+                $r3 = base_short($run["links"],"",$data3);
+            }
+            $t3 = $r3["token_csrf"];
+            if($t3[2][3] == 3) {
+                $data3 = http_build_query([
+                    $t3[1][0] => $t3[2][0],
+                    explode('"',$t3[1][1])[0] => $t3[2][1],
+                    $t3[1][2] => $t3[2][2],
+                    $t3[1][3] => $t3[2][3],
+                    explode('"',$t3[1][4])[0] => $t3[2][4],
+                    explode('"',$t3[1][5])[0] => $t3[2][5]
+                ]);
+                $r3 = base_short($run["links"],"",$data3);
+                $t3 = $r3["token_csrf"];
+                if($t3[2][3] == 4) {
                     $data3 = http_build_query([
                         $t3[1][0] => $t3[2][0],
                         explode('"',$t3[1][1])[0] => $t3[2][1],
-                        $t3[1][2] => $t3[2][2],$t3[1][3] => $t3[2][3],
+                        $t3[1][2] => $t3[2][2],
+                        $t3[1][3] => $t3[2][3],
                         explode('"',$t3[1][4])[0] => $t3[2][4],
                         explode('"',$t3[1][5])[0] => $t3[2][5]
                     ]);
                     $r3 = base_short($run["links"],"",$data3);
-                    $t3=$r3["token_csrf"];
-                    if($t3[2][3] == 6) {
+                    $t3 = $r3["token_csrf"];
+                    if($t3[2][3] == 5) {
                         $data3 = http_build_query([
                             $t3[1][0] => $t3[2][0],
                             explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -395,8 +365,8 @@ function bypass_shortlinks($url) {
                             explode('"',$t3[1][5])[0] => $t3[2][5]
                         ]);
                         $r3 = base_short($run["links"],"",$data3);
-                        $t3=$r3["token_csrf"];
-                        if($t3[2][3] == 7) {
+                        $t3 = $r3["token_csrf"];
+                        if($t3[2][3] == 6) {
                             $data3 = http_build_query([
                                 $t3[1][0] => $t3[2][0],
                                 explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -406,8 +376,8 @@ function bypass_shortlinks($url) {
                                 explode('"',$t3[1][5])[0] => $t3[2][5]
                             ]);
                             $r3 = base_short($run["links"],"",$data3);
-                            $t3=$r3["token_csrf"];
-                            if($t3[2][3] == 8) {
+                            $t3 = $r3["token_csrf"];
+                            if($t3[2][3] == 7) {
                                 $data3 = http_build_query([
                                     $t3[1][0] => $t3[2][0],
                                     explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -417,8 +387,8 @@ function bypass_shortlinks($url) {
                                     explode('"',$t3[1][5])[0] => $t3[2][5]
                                 ]);
                                 $r3 = base_short($run["links"],"",$data3);
-                                $t3=$r3["token_csrf"];
-                                if($t3[2][3] == 9) {
+                                $t3 = $r3["token_csrf"];
+                                if($t3[2][3] == 8) {
                                     $data3 = http_build_query([
                                         $t3[1][0] => $t3[2][0],
                                         explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -428,8 +398,8 @@ function bypass_shortlinks($url) {
                                         explode('"',$t3[1][5])[0] => $t3[2][5]
                                     ]);
                                     $r3 = base_short($run["links"],"",$data3);
-                                    $t3=$r3["token_csrf"];
-                                    if($t3[2][3] == 10) {
+                                    $t3 = $r3["token_csrf"];
+                                    if($t3[2][3] == 9) {
                                         $data3 = http_build_query([
                                             $t3[1][0] => $t3[2][0],
                                             explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -439,8 +409,8 @@ function bypass_shortlinks($url) {
                                             explode('"',$t3[1][5])[0] => $t3[2][5]
                                         ]);
                                         $r3 = base_short($run["links"],"",$data3);
-                                        $t3=$r3["token_csrf"];
-                                        if($t3[2][3] == 11) {
+                                        $t3 = $r3["token_csrf"];
+                                        if($t3[2][3] == 10) {
                                             $data3 = http_build_query([
                                                 $t3[1][0] => $t3[2][0],
                                                 explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -450,8 +420,8 @@ function bypass_shortlinks($url) {
                                                 explode('"',$t3[1][5])[0] => $t3[2][5]
                                             ]);
                                             $r3 = base_short($run["links"],"",$data3);
-                                            $t3=$r3["token_csrf"];
-                                            if($t3[2][3] == 12) {
+                                            $t3 = $r3["token_csrf"];
+                                            if($t3[2][3] == 11) {
                                                 $data3 = http_build_query([
                                                     $t3[1][0] => $t3[2][0],
                                                     explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -461,8 +431,8 @@ function bypass_shortlinks($url) {
                                                     explode('"',$t3[1][5])[0] => $t3[2][5]
                                                 ]);
                                                 $r3 = base_short($run["links"],"",$data3);
-                                                $t3=$r3["token_csrf"];
-                                                if($t3[2][3] == 13) {
+                                                $t3 = $r3["token_csrf"];
+                                                if($t3[2][3] == 12) {
                                                     $data3 = http_build_query([
                                                         $t3[1][0] => $t3[2][0],
                                                         explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -472,8 +442,8 @@ function bypass_shortlinks($url) {
                                                         explode('"',$t3[1][5])[0] => $t3[2][5]
                                                     ]);
                                                     $r3 = base_short($run["links"],"",$data3);
-                                                    $t3=$r3["token_csrf"];
-                                                    if($t3[2][3] == 14) {
+                                                    $t3 = $r3["token_csrf"];
+                                                    if($t3[2][3] == 13) {
                                                         $data3 = http_build_query([
                                                             $t3[1][0] => $t3[2][0],
                                                             explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -483,8 +453,8 @@ function bypass_shortlinks($url) {
                                                             explode('"',$t3[1][5])[0] => $t3[2][5]
                                                         ]);
                                                         $r3 = base_short($run["links"],"",$data3);
-                                                        $t3=$r3["token_csrf"];
-                                                        if($t3[2][3] == 15) {
+                                                        $t3 = $r3["token_csrf"];
+                                                        if($t3[2][3] == 14) {
                                                             $data3 = http_build_query([
                                                                 $t3[1][0] => $t3[2][0],
                                                                 explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -494,8 +464,8 @@ function bypass_shortlinks($url) {
                                                                 explode('"',$t3[1][5])[0] => $t3[2][5]
                                                             ]);
                                                             $r3 = base_short($run["links"],"",$data3);
-                                                            $t3=$r3["token_csrf"];
-                                                            if($t3[2][3] == 16) {
+                                                            $t3 = $r3["token_csrf"];
+                                                            if($t3[2][3] == 15) {
                                                                 $data3 = http_build_query([
                                                                     $t3[1][0] => $t3[2][0],
                                                                     explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -505,8 +475,8 @@ function bypass_shortlinks($url) {
                                                                     explode('"',$t3[1][5])[0] => $t3[2][5]
                                                                 ]);
                                                                 $r3 = base_short($run["links"],"",$data3);
-                                                                $t3=$r3["token_csrf"];
-                                                                if($t3[2][3] == 17) {
+                                                                $t3 = $r3["token_csrf"];
+                                                                if($t3[2][3] == 16) {
                                                                     $data3 = http_build_query([
                                                                         $t3[1][0] => $t3[2][0],
                                                                         explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -516,8 +486,8 @@ function bypass_shortlinks($url) {
                                                                         explode('"',$t3[1][5])[0] => $t3[2][5]
                                                                     ]);
                                                                     $r3 = base_short($run["links"],"",$data3);
-                                                                    $t3=$r3["token_csrf"];
-                                                                    if($t3[2][3] == 18) {
+                                                                    $t3 = $r3["token_csrf"];
+                                                                    if($t3[2][3] == 17) {
                                                                         $data3 = http_build_query([
                                                                             $t3[1][0] => $t3[2][0],
                                                                             explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -527,8 +497,8 @@ function bypass_shortlinks($url) {
                                                                             explode('"',$t3[1][5])[0] => $t3[2][5]
                                                                         ]);
                                                                         $r3 = base_short($run["links"],"",$data3);
-                                                                        $t3=$r3["token_csrf"];
-                                                                        if($t3[2][3] == 19) {
+                                                                        $t3 = $r3["token_csrf"];
+                                                                        if($t3[2][3] == 18) {
                                                                             $data3 = http_build_query([
                                                                                 $t3[1][0] => $t3[2][0],
                                                                                 explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -538,8 +508,8 @@ function bypass_shortlinks($url) {
                                                                                 explode('"',$t3[1][5])[0] => $t3[2][5]
                                                                             ]);
                                                                             $r3 = base_short($run["links"],"",$data3);
-                                                                            $t3=$r3["token_csrf"];
-                                                                            if($t3[2][3] == 20) {
+                                                                            $t3 = $r3["token_csrf"];
+                                                                            if($t3[2][3] == 19) {
                                                                                 $data3 = http_build_query([
                                                                                     $t3[1][0] => $t3[2][0],
                                                                                     explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -549,7 +519,19 @@ function bypass_shortlinks($url) {
                                                                                     explode('"',$t3[1][5])[0] => $t3[2][5]
                                                                                 ]);
                                                                                 $r3 = base_short($run["links"],"",$data3);
-                                                                                $t3=$r3["token_csrf"];
+                                                                                $t3 = $r3["token_csrf"];
+                                                                                if($t3[2][3] == 20) {
+                                                                                    $data3 = http_build_query([
+                                                                                        $t3[1][0] => $t3[2][0],
+                                                                                        explode('"',$t3[1][1])[0] => $t3[2][1],
+                                                                                        $t3[1][2] => $t3[2][2],
+                                                                                        $t3[1][3] => $t3[2][3],
+                                                                                        explode('"',$t3[1][4])[0] => $t3[2][4],
+                                                                                        explode('"',$t3[1][5])[0] => $t3[2][5]
+                                                                                    ]);
+                                                                                    $r3 = base_short($run["links"],"",$data3);
+                                                                                    $t3 = $r3["token_csrf"];
+                                                                                }
                                                                             }
                                                                         }
                                                                     }
@@ -567,84 +549,25 @@ function bypass_shortlinks($url) {
                     }
                 }
             }
-        }
-        if($t3[2][2] == "captcha") {
-            $method="recaptchav2";
-            if($r3[$method]) {
-                $cap=request_captcha($method,$r3[$method],$run["links"]);
-                $data3 = http_build_query([
-                    $t3[1][0] => $t3[2][0],
-                    explode('"',$t3[1][1])[0] => $t3[2][1],
-                    $t3[1][2] => $t3[2][2],
-                    $t3[1][3] => $t3[2][3],
-                    "g-recaptcha-response" => $cap,
-                    explode('"',$t3[1][4])[0] => $t3[2][4],
-                    explode('"',$t3[1][5])[0] => $t3[2][5]
-                ]);
-                $r3 = base_short($run["links"],"",$data3);
-                $t3=$r3["token_csrf"];
+            if($t3[2][2] == "captcha") {
+                $method = "recaptchav2";
+                if($r3[$method]) {
+                    $cap = request_captcha($method,$r3[$method],$run["links"]);
+                    $data3 = http_build_query([
+                        $t3[1][0] => $t3[2][0],
+                        explode('"',$t3[1][1])[0] => $t3[2][1],
+                        $t3[1][2] => $t3[2][2],
+                        $t3[1][3] => $t3[2][3],
+                        "g-recaptcha-response" => $cap,
+                        explode('"',$t3[1][4])[0] => $t3[2][4],
+                        explode('"',$t3[1][5])[0] => $t3[2][5]
+                    ]);
+                    $r3 = base_short($run["links"],"",$data3);
+                    $t3 = $r3["token_csrf"];
+                }
             }
-        }
-        if($r3["timer"] or $r3["timer"] == 0) {
-            L($coundown);
-            $data3 = http_build_query([
-                $t3[1][0] => $t3[2][0],
-                explode('"',$t3[1][1])[0] => $t3[2][1],
-                $t3[1][2] => $t3[2][2],
-                explode('"',$t3[1][3])[0] => $t3[2][3],
-                explode('"',$t3[1][4])[0] => $t3[2][4]
-            ]);
-            $r4 = base_short($run["go"][2],1,$data3)["json"];
-            if($r4->status == "success") {
-                print h.$r4->status;
-                r(); 
-                return $r4->url;
-            }
-        }
-    } elseif($host == "mitly.us") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build($url);
-        $r = base_short($run["links"]);
-        $t=$r["token_csrf"];
-        $data = http_build_query([
-            $t[1][0] => $t[2][0],
-            explode('"',$t[1][1])[0] => $t[2][1],
-            $t[1][2] => $t[2][2],
-            $t[1][3] => $t[2][3],
-            explode('"',$t[1][4])[0] => $t[2][4],
-            explode('"',$t[1][5])[0] => $t[2][5]
-        ]);
-        $r1 = base_short($run["links"],1,$data);
-        $t1=$r1["token_csrf"];
-        $data1 = http_build_query([
-            $t1[1][0] => $t1[2][0],
-            explode('"',$t1[1][1])[0] => $t1[2][1],
-            $t1[1][2] => $t1[2][2],
-            $t1[1][3] => $t1[2][3],
-            explode('"',$t1[1][4])[0] => $t1[2][4],
-            explode('"',$t1[1][5])[0] => $t1[2][5]
-        ]);
-        $r2 = base_short($run["links"],1,$data1);
-        $method="hcaptcha";
-        if($r2[$method]) {
-            $t2=$r2["token_csrf"];
-            $cap=request_captcha($method,$r2[$method],$run["links"]);
-            $data2 = http_build_query([
-                $t2[1][0] => $t2[2][0],
-                explode('"',$t2[1][1])[0] => $t2[2][1],
-                $t2[1][2] => $t2[2][2],
-                $t2[1][3] => $t2[2][3],
-                "g-recaptcha-response" => $cap,
-                "h-captcha-response" => $cap,
-                explode('"',$t2[1][4])[0] => $t2[2][4],
-                explode('"',$t2[1][5])[0] => $t2[2][5]
-            ]);
-            $r3 = base_short($run["links"],"",$data2);
             if($r3["timer"] or $r3["timer"] == 0) {
                 L($coundown);
-                $t3=$r3["token_csrf"];
                 $data3 = http_build_query([
                     $t3[1][0] => $t3[2][0],
                     explode('"',$t3[1][1])[0] => $t3[2][1],
@@ -652,358 +575,343 @@ function bypass_shortlinks($url) {
                     explode('"',$t3[1][3])[0] => $t3[2][3],
                     explode('"',$t3[1][4])[0] => $t3[2][4]
                 ]);
-                $r4 = base_short($run["go"][0],1,$data3)["json"];
-                if($r4->status == "success") {print h.$r4->status;
-                    r(); 
-                    return $r4->url;
-                }
-            }
-        }
-    } elseif($host == "oko.sh" or $host == "adshort.co" or $host == "m.pkr.pw") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build(str_replace("m.pkr.pw","jameeltips.us/blog",str_replace("adshort.co","go.techgeek.digital",$url)));
-        $r = base_short($run["links"]);
-        $t=$r["token_csrf"];
-        $data = http_build_query([
-            $t[1][0] => $t[2][0],
-            explode('"',$t[1][1])[0] => $t[2][1],
-            $t[1][2] => $t[2][2],
-            $t[1][3] => $t[2][3],
-            explode('"',$t[1][4])[0] => $t[2][4],
-            explode('"',$t[1][5])[0] => $t[2][5]
-        ]);
-        $r1 = base_short($run["links"],1,$data);
-        $method="recaptchav2";if($r1[$method]) {
-            $t1=$r1["token_csrf"];
-            $cap=request_captcha($method,$r1[$method],$run["links"]);
-            $data1 = http_build_query([
-                $t1[1][0] => $t1[2][0],
-                explode('"',$t1[1][1])[0] => $t1[2][1],
-                $t1[1][2] => $t1[2][2],$t1[1][3] => $t1[2][3],
-                "g-recaptcha-response" => $cap,
-                explode('"',$t1[1][4])[0] => $t1[2][4],
-                explode('"',$t1[1][5])[0] => $t1[2][5]
-            ]);
-            $r2 = base_short($run["links"],"",$data1);
-            if($r2["timer"] or $r2["timer"] == 0) {
-                L($coundown);
-                $t2=$r2["token_csrf"];
-                $data2 = http_build_query([
-                    $t2[1][0] => $t2[2][0],
-                    explode('"',$t2[1][1])[0] => $t2[2][1],
-                    $t2[1][2] => $t2[2][2],
-                    explode('"',$t2[1][3])[0] => $t2[2][3],
-                    explode('"',$t2[1][4])[0] => $t2[2][4]
-                ]);
-                $r3 = base_short(str_replace("jameeltips.us","jameeltips.us/blog",$run["go"][0]),1,$data2)["json"];
-                if($r3->status == "success") {
-                    print h.$r3->status;
-                    r(); 
-                    return $r3->url;
-                }
-            }
-        } 
-    } elseif($host == "shortnow.xyz") {
-        if(file(cookie_short)) {unlink(cookie_short);
-        }$run = build($url);
-        $r = base_short($run["links"]);
-        $t=$r["token_csrf"];
-        $data = http_build_query([
-            $t[1][0] => $t[2][0],
-            explode('"',$t[1][1])[0] => $t[2][1],
-            $t[1][2] => $t[2][2],$t[1][3] => $t[2][3],
-            explode('"',$t[1][4])[0] => $t[2][4],
-            explode('"',$t[1][5])[0] => $t[2][5]
-        ]);
-        $r1 = base_short($run["links"],1,$data);
-        $t1=$r1["token_csrf"];
-        $data1 = http_build_query([
-            $t1[1][0] => $t1[2][0],
-            explode('"',$t1[1][1])[0] => $t1[2][1],
-            $t1[1][2] => $t1[2][2],
-            $t1[1][3] => $t1[2][3],
-            explode('"',$t1[1][4])[0] => $t1[2][4],
-            explode('"',$t1[1][5])[0] => $t1[2][5]
-        ]);
-        $r2 = base_short($run["links"],1,$data1);
-        $method="recaptchav2";
-        if($r2[$method]) {$t2=$r2["token_csrf"];
-            $cap=request_captcha($method,$r2[$method],$run["links"]);
-            $data2 = http_build_query([
-                $t2[1][0] => $t2[2][0],
-                explode('"',$t2[1][1])[0] => $t2[2][1],
-                $t2[1][2] => $t2[2][2],
-                $t2[1][3] => $t2[2][3],
-                "g-recaptcha-response" => $cap,
-                explode('"',$t2[1][4])[0] => $t2[2][4],
-                explode('"',$t2[1][5])[0] => $t2[2][5]
-            ]);
-            $r3 = base_short($run["links"],"",$data2);
-            if($r3["timer"] or $r3["timer"] == 0) {
-                L($coundown);
-                $t3=$r3["token_csrf"];
-                $data3 = http_build_query([
-                    $t3[1][0] => $t3[2][0],
-                    explode('"',$t3[1][1])[0] => $t3[2][1],
-                    $t3[1][2] => $t3[2][2],
-                    explode('"',$t3[1][3])[0] => $t3[2][3],
-                    explode('"',$t3[1][4])[0] => $t3[2][4]
-                ]);
-                $r4 = base_short($run["go"][0],1,$data3)["json"];
+                $r4 = base_short($run["go"][2],1,$data3)["json"];
                 if($r4->status == "success") {
                     print h.$r4->status;
-                    r(); 
+                    r();
                     return $r4->url;
                 }
             }
-        }
-    } elseif($host == "cuty.io") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build(str_replace("cuty.io","cutty.app",$url));
-        $r = base_short($run["links"]);$t=$r["token_csrf"];
-        $data = http_build_query([$t[1][0] => $t[2][0]]);
-        $r1 = base_short($run["links"],"",$data);
-        $method="recaptchav2";
-        if($r1[$method]) {
-            $t1=$r1["token_csrf"];
-            $cap=request_captcha($method,$r1[$method],$run["links"]);
-            $data1 = http_build_query([
-                $t1[1][0] => $t1[2][0],
-                "g-recaptcha-response" => $cap
-            ]);
-            $r2 = base_short($run["links"],"",$data1);
-            if($r2["timer"] or $r2["timer"] == 0) {
-                L($coundown);
-                $t2=$r2["token_csrf"];
-                $data2 = http_build_query([
-                    $t2[1][0] => $t2[2][0],
-                    $t2[1][1] => $t2[2][1],
-                    explode('"',$t2[1][2])[0] => rand(11111111,99999999)
-                ]);
-                $r3 = base_short($run["go"][1],1,$data2);
-                if($r3["url"]) {print h."success";
-                    r();
-                    return $r3["url"];
-                }
+        } elseif($host == "mitly.us") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
             }
-        }
-    } elseif($host == "web1s.co" or $host == "web1s.info") {
-        start:
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-            sleep(2);
-        }
-        $res = base_short($url);
-        if(!$res["url1"][0]) {
-            sleep(2);
-            goto start;
-        }
-        $n=0;
-        web1s:
-        $n++;
-        if($n == 4) {
-            goto start;
-        }
-        $r1 = base_short($res["url1"][0]);
-        if(!$r1["code_data_ajax"][0]) {
-            goto web1s;
-        }
-        $n=0;
-        while(true) {
-            $n++;
-            if($n == 3) {
-                goto web1s;
-            }
-            $client_id = build()["client_id"];
-            $par = parse_url($r1["url4"]);
-            $data = http_build_query(
-                ["screen" => "393 x 873",
-                "browser" => "Chrome",
-                "browserVersion" => "107.0.0.0",
-                "browserMajorVersion" => 107,
-                "mobile" => true,
-                "os" => "Android",
-                "osVersion" => 11,
-                "cookies" => "true",
-                "flashVersion" => "no check",
-                "code" => $r1["code_data_ajax"][0],
-                "client_id" => $client_id,
-                "pathname" => $par["path"],
-                "href" => $r1["url4"],
-                "hostname" => $par["host"]
-            ]);
-            $step = base_short("https://web1s.com/step",1,$data)["json"];
-            if($n == 1) {if(!$step->step) {
-                goto start;
-            }
-        }
-        print p."step ".$step->step."/".$step->total_steps;
-        r();
-        $time = base_short("https://web1s.com/countdown",1,$data)["json"];
-        if(!$time->timer) {
-            continue;
-        }
-        L($time->timer);
-        $r = base_short("https://web1s.com/continue",1,$data)["json"];
-        if($step->step == $step->total_steps) {
-            if(!$r->url) {
-                continue;
-            }
-            goto web1s_f;
-        } else {
-            goto web1s;
-        }
-    }
-    web1s_f:
-    while(true) {
-        $method="recaptchav2";
-        $res = base_short($r->url);
-        if($res[$method]) {
-            $t=$res["token_csrf"];
-            $cap=request_captcha($method,$res[$method],$r->url);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                "g-recaptcha-response" => $cap
-            ]);
-            $res = base_short($r->url,1,$data);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                "countdown" => 1
-            ]);
-            $res = base_short($r->url,1,$data);
-            $data = http_build_query([$t[1][0] => $t[2][0]]);
-            $respon = base_short($r->url,1,$data);
-            if(!$respon["url1"][0]) {
-                continue;
-            }
-            print h."success";
-            r(); 
-            return $respon["url1"][0];
-        }
-    }
-} elseif($host == "illink.net" or $host == "go.illink.net") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $url=str_replace("go.illink.net","illink.net",$url);
-        $run = build($url);
-        $r = base_short($run["links"],0,0,0,1);
-        $t=$r["token_csrf"];
-        if(explode('"',$t[1][2])[0] == "ad_form_data") {
-            $request_captcha=false;
-        } else {
-            $request_captcha=true;
-        }
-        if($request_captcha == true) {
-        $method="recaptchav2";
-            $cap=request_captcha($method,$r[$method],$run["links"]);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                explode('"',$t[1][2])[0] => '',
-                "f_n" => $t[2][2],
-                "g-recaptcha-response" => $cap,
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r = base_short($run["links"],'',$data,0,1);$t=$r["token_csrf"];
-        }
-        if($r["timer"] or $r["timer"] == 0) {
-            L($coundown);
-            $data = http_build_query([
-                $t[1][0] => $t[2][0],
-                explode('"',$t[1][1])[0] => $t[2][1],
-                $t[1][2] => $t[2][2],
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
-            ]);
-            $r1 = base_short($run["go"][0],1,$data,0,1)["json"];
-            if($r1->status == "success") {print h.$r1->status;r(); 
-                return $r1->url;
-         }
-      }
-   } elseif($host == "adbull.me") {
-        if(file(cookie_short)) {
-            unlink(cookie_short);
-        }
-        $run = build($url);
-        $r = base_short($run["links"],0,0,"https://deportealdia.live/");
-        $t=$r["token_csrf"];
-        if(explode('"',$t[1][2])[0] == "ad_form_data") {
-            $request_captcha=false;
-        } else {
-            $request_captcha=true;
-        }
-        if($request_captcha == true) {
-            $method="recaptchav2";
-            $cap=request_captcha($method,$r[$method],$run["links"]);
+            $run = build($url);
+            $r = base_short($run["links"]);
+            $t = $r["token_csrf"];
             $data = http_build_query([
                 $t[1][0] => $t[2][0],
                 explode('"',$t[1][1])[0] => $t[2][1],
                 $t[1][2] => $t[2][2],
                 $t[1][3] => $t[2][3],
-                "g-recaptcha-response" => $cap,
                 explode('"',$t[1][4])[0] => $t[2][4],
                 explode('"',$t[1][5])[0] => $t[2][5]
             ]);
-            $r = base_short($run["links"],"",$data,0,1);
-            $t=$r["token_csrf"];
-        }
-        if($r["timer"] or $r["timer"] == 0) {
-            L($coundown);
+            $r1 = base_short($run["links"],1,$data);
+            $t1 = $r1["token_csrf"];
+            $data1 = http_build_query([
+                $t1[1][0] => $t1[2][0],
+                explode('"',$t1[1][1])[0] => $t1[2][1],
+                $t1[1][2] => $t1[2][2],
+                $t1[1][3] => $t1[2][3],
+                explode('"',$t1[1][4])[0] => $t1[2][4],
+                explode('"',$t1[1][5])[0] => $t1[2][5]
+            ]);
+            $r2 = base_short($run["links"],1,$data1);
+            $method = "hcaptcha";
+            if($r2[$method]) {
+                $t2 = $r2["token_csrf"];
+                $cap = request_captcha($method,$r2[$method],$run["links"]);
+                $data2 = http_build_query([
+                    $t2[1][0] => $t2[2][0],
+                    explode('"',$t2[1][1])[0] => $t2[2][1],
+                    $t2[1][2] => $t2[2][2],
+                    $t2[1][3] => $t2[2][3],
+                    "g-recaptcha-response" => $cap,
+                    "h-captcha-response" => $cap,
+                    explode('"',$t2[1][4])[0] => $t2[2][4],
+                    explode('"',$t2[1][5])[0] => $t2[2][5]
+                ]);
+                $r3 = base_short($run["links"],"",$data2);
+                if($r3["timer"] or $r3["timer"] == 0) {
+                    L($coundown);
+                    $t3 = $r3["token_csrf"];
+                    $data3 = http_build_query([
+                        $t3[1][0] => $t3[2][0],
+                        explode('"',$t3[1][1])[0] => $t3[2][1],
+                        $t3[1][2] => $t3[2][2],
+                        explode('"',$t3[1][3])[0] => $t3[2][3],
+                        explode('"',$t3[1][4])[0] => $t3[2][4]
+                    ]);
+                    $r4 = base_short($run["go"][0],1,$data3)["json"];
+                    if($r4->status == "success") {
+                        print h.$r4->status;
+                        r();
+                        return $r4->url;
+                    }
+                }
+            }
+        } elseif($host == "oko.sh" or $host == "adshort.co" or $host == "m.pkr.pw") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build(str_replace("m.pkr.pw","jameeltips.us/blog",str_replace("adshort.co","go.techgeek.digital",$url)));
+            $r = base_short($run["links"]);
+            $t = $r["token_csrf"];
             $data = http_build_query([
                 $t[1][0] => $t[2][0],
                 explode('"',$t[1][1])[0] => $t[2][1],
                 $t[1][2] => $t[2][2],
-                explode('"',$t[1][3])[0] => $t[2][3],
-                explode('"',$t[1][4])[0] => $t[2][4]
+                $t[1][3] => $t[2][3],
+                explode('"',$t[1][4])[0] => $t[2][4],
+                explode('"',$t[1][5])[0] => $t[2][5]
             ]);
-            $r1 = base_short($run["go"][0],1,$data,0,1)["json"];
-            if($r1->status == "success") {
-                print h.$r1->status;
-                r(); 
-                return $r1->url;
+            $r1 = base_short($run["links"],1,$data);
+            $method = "recaptchav2";
+            if($r1[$method]) {
+                $t1 = $r1["token_csrf"];
+                $cap = request_captcha($method,$r1[$method],$run["links"]);
+                $data1 = http_build_query([
+                    $t1[1][0] => $t1[2][0],
+                    explode('"',$t1[1][1])[0] => $t1[2][1],
+                    $t1[1][2] => $t1[2][2],
+                    $t1[1][3] => $t1[2][3],
+                    "g-recaptcha-response" => $cap,
+                    explode('"',$t1[1][4])[0] => $t1[2][4],
+                    explode('"',$t1[1][5])[0] => $t1[2][5]
+                ]);
+                $r2 = base_short($run["links"],"",$data1);
+                if($r2["timer"] or $r2["timer"] == 0) {
+                    L($coundown);
+                    $t2 = $r2["token_csrf"];
+                    $data2 = http_build_query([
+                        $t2[1][0] => $t2[2][0],
+                        explode('"',$t2[1][1])[0] => $t2[2][1],
+                        $t2[1][2] => $t2[2][2],
+                        explode('"',$t2[1][3])[0] => $t2[2][3],
+                        explode('"',$t2[1][4])[0] => $t2[2][4]
+                    ]);
+                    $r3 = base_short(str_replace("jameeltips.us","jameeltips.us/blog",$run["go"][0]),1,$data2)["json"];
+                    if($r3->status == "success") {
+                        print h.$r3->status;
+                        r();
+                        return $r3->url;
+                    }
+                }
             }
-        }
-   } elseif($host == "goo.st") {
-    if(file(cookie_short)) {
-        unlink(cookie_short);
-    }
-    $run = build($url);
-    $r = base_short($run["links"]);
-    $t=$r["token_csrf"];
-    $data = http_build_query([
-        $t[1][0] => $t[2][0],
-        explode('"',$t[1][1])[0] => $t[2][1],
-        $t[1][2] => $t[2][2],$t[1][3] => $t[2][3],
-        explode('"',$t[1][4])[0] => $t[2][4],
-        explode('"',$t[1][5])[0] => $t[2][5]
-    ]);
-    $r1 = base_short($run["links"],"",$data);
-    if($r1["timer"] or $r1["timer"] == 0) {
-        L($coundown);
-        $t1=$r1["token_csrf"];
-        $data1 = http_build_query([
-            $t1[1][0] => $t1[2][0],
-            explode('"',$t1[1][1])[0] => $t1[2][1],
-            $t1[1][2] => $t1[2][2],
-            explode('"',$t1[1][3])[0] => $t1[2][3],
-            explode('"',$t1[1][4])[0] => $t1[2][4]
-        ]);
-        $r2 = base_short($run["go"][0],1,$data1)["json"];
-        if($r2->status == "success") {print h.$r2->status;
-            r(); 
-            return $r2->url;
-           }
-        }
-   } elseif($host == "shortsfly.me" or $host == "linksfly.me") {
-    $run = build($url);
-    $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
-    if($r["url"]){L($coundown);print h."success";r(); return $r["url"];
+        } elseif($host == "shortnow.xyz") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build($url);
+            $r = base_short($run["links"]);
+            $t = $r["token_csrf"];
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                $t[1][2] => $t[2][2],
+                $t[1][3] => $t[2][3],
+                explode('"',$t[1][4])[0] => $t[2][4],
+                explode('"',$t[1][5])[0] => $t[2][5]
+            ]);
+            $r1 = base_short($run["links"],1,$data);
+            $t1 = $r1["token_csrf"];
+            $data1 = http_build_query([
+                $t1[1][0] => $t1[2][0],
+                explode('"',$t1[1][1])[0] => $t1[2][1],
+                $t1[1][2] => $t1[2][2],
+                $t1[1][3] => $t1[2][3],
+                explode('"',$t1[1][4])[0] => $t1[2][4],
+                explode('"',$t1[1][5])[0] => $t1[2][5]
+            ]);
+            $r2 = base_short($run["links"],1,$data1);
+            $method = "recaptchav2";
+            if($r2[$method]) {
+                $t2 = $r2["token_csrf"];
+                $cap = request_captcha($method,$r2[$method],$run["links"]);
+                $data2 = http_build_query([
+                    $t2[1][0] => $t2[2][0],
+                    explode('"',$t2[1][1])[0] => $t2[2][1],
+                    $t2[1][2] => $t2[2][2],
+                    $t2[1][3] => $t2[2][3],
+                    "g-recaptcha-response" => $cap,
+                    explode('"',$t2[1][4])[0] => $t2[2][4],
+                    explode('"',$t2[1][5])[0] => $t2[2][5]
+                ]);
+                $r3 = base_short($run["links"],"",$data2);
+                if($r3["timer"] or $r3["timer"] == 0) {
+                    L($coundown);
+                    $t3 = $r3["token_csrf"];
+                    $data3 = http_build_query([
+                        $t3[1][0] => $t3[2][0],
+                        explode('"',$t3[1][1])[0] => $t3[2][1],
+                        $t3[1][2] => $t3[2][2],
+                        explode('"',$t3[1][3])[0] => $t3[2][3],
+                        explode('"',$t3[1][4])[0] => $t3[2][4]
+                    ]);
+                    $r4 = base_short($run["go"][0],1,$data3)["json"];
+                    if($r4->status == "success") {
+                        print h.$r4->status;
+                        r();
+                        return $r4->url;
+                    }
+                }
+            }
+        } elseif($host == "cuty.io") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build(str_replace("cuty.io","cutty.app",$url));
+            $r = base_short($run["links"]);
+            $t = $r["token_csrf"];
+            $data = http_build_query([
+                $t[1][0] => $t[2][0]
+            ]);
+            $r1 = base_short($run["links"],"",$data);
+            $method = "recaptchav2";
+            if($r1[$method]) {
+                $t1 = $r1["token_csrf"];
+                $cap = request_captcha($method,$r1[$method],$run["links"]);
+                $data1 = http_build_query([
+                    $t1[1][0] => $t1[2][0],
+                    "g-recaptcha-response" => $cap
+                ]);
+                $r2 = base_short($run["links"],"",$data1);if($r2["timer"] or $r2["timer"] == 0) {L($coundown);$t2 = $r2["token_csrf"];$data2 = http_build_query([$t2[1][0] => $t2[2][0],$t2[1][1] => $t2[2][1],explode('"',$t2[1][2])[0] => rand(11111111,99999999)]);$r3 = base_short($run["go"][1],1,$data2);
+                    if($r3["url"]) {
+                        print h."success";
+                        r();
+                        return $r3["url"];
+                    }
+                }
+            }
+        } elseif($host == "web1s.co" or $host == "web1s.info") {
+            start:
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+                sleep(2);
+            }
+            $res = base_short($url);
+            if(!$res["url1"][0]) {
+                sleep(2);
+                gotostart;
+            }
+            $n = 0;
+            web1s:
+            $n++;
+            if($n == 4) {
+                gotostart;
+            }
+            $r1 = base_short($res["url1"][0]);
+            if(!$r1["code_data_ajax"][0]) {
+                gotoweb1s;
+            }
+            $n = 0;
+            while(true) {
+                $n++;
+                if($n == 3) {
+                    gotoweb1s;
+                }
+                $client_id = build()["client_id"];
+                $par = parse_url($r1["url4"]);
+                $data = http_build_query([
+                    "screen" => "393x873",
+                    "browser" => "Chrome",
+                    "browserVersion" => "107.0.0.0",
+                    "browserMajorVersion" => 107,
+                    "mobile" => true,
+                    "os" => "Android",
+                    "osVersion" => 11,
+                    "cookies" => true,
+                    "flashVersion" => "nocheck",
+                    "code" => $r1["code_data_ajax"][0],
+                    "client_id" => $client_id,
+                    "pathname" => $par["path"],
+                    "href" => $r1["url4"],
+                    "hostname" => $par["host"]
+                ]);
+                $step = base_short("https://web1s.com/step",1,$data)["json"];
+                if($n == 1) {
+                    if(!$step->step) {
+                        gotostart;
+                    }
+                }
+                print p."step".$step->step."/".$step->total_steps;
+                r();
+                $time = base_short("https://web1s.com/countdown",1,$data)["json"];
+                if(!$time->timer) {
+                    continue;
+                }
+                L($time->timer);
+                $r = base_short("https://web1s.com/continue",1,$data)["json"];
+                if($step->step == $step->total_steps) {
+                    if(!$r->url) {
+                        continue;
+                    }
+                    gotoweb1s_f;
+                } else {
+                    gotoweb1s;
+                }
+            }
+            web1s_f:
+            while(true) {
+                $method = "recaptchav2";
+                $res = base_short($r->url);
+                if($res[$method]) {
+                    $t = $res["token_csrf"];
+                    $cap = request_captcha($method,$res[$method],$r->url);
+                    $data = http_build_query([
+                        $t[1][0] => $t[2][0],
+                        "g-recaptcha-response" => $cap
+                    ]);
+                    $res = base_short($r->url,1,$data);
+                    $data = http_build_query([
+                        $t[1][0] => $t[2][0],
+                        "countdown" => 1
+                    ]);
+                    $res = base_short($r->url,1,$data);
+                    $data = http_build_query([
+                        $t[1][0] => $t[2][0]
+                    ]);
+                    $respon = base_short($r->url,1,$data);
+                    if(!$respon["url1"][0]) {
+                        continue;
+                    }
+                    print h."success";
+                    r();
+                    return $respon["url1"][0];
+                }
+            }
+        } elseif($host == "goo.st") {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build($url);
+            $r = base_short($run["links"]);
+            $t = $r["token_csrf"];
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                explode('"',$t[1][1])[0] => $t[2][1],
+                $t[1][2] => $t[2][2],
+                $t[1][3] => $t[2][3],
+                explode('"',$t[1][4])[0] => $t[2][4],
+                explode('"',$t[1][5])[0] => $t[2][5]
+            ]);
+            $r1 = base_short($run["links"],"",$data);
+            if($r1["timer"] or $r1["timer"] == 0) {
+                L($coundown);
+                $t1 = $r1["token_csrf"];
+                $data1 = http_build_query([
+                    $t1[1][0] => $t1[2][0],
+                    explode('"',$t1[1][1])[0] => $t1[2][1],
+                    $t1[1][2] => $t1[2][2],
+                    explode('"',$t1[1][3])[0] => $t1[2][3],
+                    explode('"',$t1[1][4])[0] => $t1[2][4]
+                ]);
+                $r2 = base_short($run["go"][0],1,$data1)["json"];
+                if($r2->status == "success") {
+                    print h.$r2->status;
+                    r();
+                    return $r2->url;
+                }
+            }
+        } elseif($host == "shortsfly.me" or $host == "linksfly.me") {
+            $run = build($url);
+            $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
+            if($r["url"]) 
+            {L($coundown);
+                print h."success";
+                r();
+                return $r["url"];
         }
     }
 }
@@ -1060,7 +968,7 @@ function h_short($xml=0,$referer=0,$agent=0) {
         $headers[] = 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8';
     }
     $headers[] = 'Accept-Language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7';
-    if($agent){
+    if($agent) {
     $agent =' (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm|YandexAccessibilityBot/3.0; +http://yandex.com/bots|Googlebot/2.1; +http://www.google.com/bot.html)';
     }
     if (strtoupper(substr(PHP_OS,0,3)) == 'WIN') {
@@ -1081,8 +989,8 @@ function h_short($xml=0,$referer=0,$agent=0) {
 function azcaptcha($method,$sitekey,$pageurl) {
     refresh: 
     print p;
-    $name_api="apikey_azcaptcha";
-    $apikey=save($name_api);
+    $name_api = "apikey_azcaptcha";
+    $apikey = save($name_api);
     $recaptchav2 = http_build_query([
         "key" => $apikey,
         "method" => "userrecaptcha",
@@ -1150,8 +1058,8 @@ function azcaptcha($method,$sitekey,$pageurl) {
 function captchaai($method,$sitekey,$pageurl) {
     refresh: 
     print p;
-    $name_api="apikey_captchaai";
-    $apikey=save($name_api);
+    $name_api = "apikey_captchaai";
+    $apikey = save($name_api);
     $recaptchav2 = http_build_query([
         "key" => $apikey,
         "method" => "userrecaptcha",
@@ -1221,8 +1129,8 @@ function captchaai($method,$sitekey,$pageurl) {
 
 function anycaptcha($method,$sitekey,$pageurl) {
     refresh:
-    $name_api="apikey_anycaptcha";
-    $apikey=save($name_api);
+    $name_api = "apikey_anycaptcha";
+    $apikey = save($name_api);
     $h=[
         "Host: api.anycaptcha.com",
         "Content-Type: application/json"
@@ -1231,7 +1139,7 @@ function anycaptcha($method,$sitekey,$pageurl) {
         "clientKey" => $apikey
     ]);
     $r=json_decode(curl("https://api.anycaptcha.com/getBalance",$h,$data)[1],1);
-    if($r["balance"]<=0) {
+    if($r["balance"] <= 0) {
         unlink($name_api);
         goto refresh;
     }
@@ -1277,6 +1185,5 @@ function anycaptcha($method,$sitekey,$pageurl) {
         }
     }
 }
-
 
 
