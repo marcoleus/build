@@ -98,12 +98,20 @@ function bypass_shortlinks($url) {
             $url = "https://ser7.crazyblog.in".explode("p=",$url)[1];
             $host = parse_url($url)["host"];
         }
-        if($host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net" or $host == "adbull.me" or $host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "upshrink.com" or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io") {
+        if($host == "zuba.link" or $host == "nx.chainfo.xyz" or $host == "go.bitcosite.com" or $host == "flyzu.icu" or $host == "go.flyzu.icu" or $host == "linkjust.com" or $host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net" or $host == "adbull.me" or $host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io") {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
             if($host == "adbull.me") {
                 $referer = "https://deportealdia.live/";
+            } elseif($host == "linkjust.com") {
+                $referer = "https://forexrw7.com/";
+            } elseif($host == "flyzu.icu" or $host == "go.flyzu.icu") {
+                $referer = "https://zubatecno.com/";
+            } elseif($host == "nx.chainfo.xyz" or $host == "go.bitcosite.com") {
+                $referer = "https://bitzite.com/";
+            } elseif($host == "zuba.link") {
+                $referer = "https://blog.battleroyal.online/";
             } else {
                 $referer = 0;
             }
@@ -112,7 +120,7 @@ function bypass_shortlinks($url) {
             } else {
                 $cloud = 0;
             }
-            $url = str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))))));
+            $url = str_replace("nx.chainfo.xyz","go.bitcosite.com",str_replace("flyzu.icu","go.flyzu.icu",str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))))))));
             $run = build($url);
             $r = base_short($run["links"],0,0,$referer,$cloud);
             $t = $r["token_csrf"];
@@ -151,12 +159,12 @@ function bypass_shortlinks($url) {
                     return $r1->url;
                 }
             }
-        } elseif($host == "illink.net" or $host == "go.illink.net" or $host == "shrinke.me" or $host == "go1.urlcash.click" or $host == "urlcashh.click" or $host == "ser7.crazyblog.in" or $host == "short.pe" or $host == "shurt.pw" or $host == "urlcashh.quest" or $host == "softindex.site" or $host == "go.urlcash.site" or $host == "goes1.softindex.website") {
+        } elseif($host == "linksly.co" or $host == "go.linksly.co" or $host == "illink.net" or $host == "go.illink.net" or $host == "shrinke.me" or $host == "go1.urlcash.click" or $host == "urlcashh.click" or $host == "ser7.crazyblog.in" or $host == "short.pe" or $host == "shurt.pw" or $host == "urlcashh.quest" or $host == "softindex.site" or $host == "go.urlcash.site" or $host == "goes1.softindex.website") {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
-            if($host == "xxnx.com") {
-                $referer = "xxnx.com";
+            if($host == "linksly.co" or $host == "go.linksly.co") {
+                $referer = "https://themezon.net/";
             } else {
                 $referer = 0;
             }
@@ -165,7 +173,7 @@ function bypass_shortlinks($url) {
             } else {
                 $cloud = 0;
             }
-            $url = str_replace("go.illink.net","illink.net",str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",$url)))));
+            $url = str_replace("linksly.co","go.linksly.co",str_replace("go.illink.net","illink.net",str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",$url))))));
             $run = build($url);
             $r = base_short($run["links"],0,0,$referer,$cloud);
             $t = $r["token_csrf"];
@@ -641,7 +649,7 @@ function bypass_shortlinks($url) {
                     }
                 }
             }
-        } elseif($host == "oko.sh" or $host == "adshort.co" or $host == "m.pkr.pw") {
+        } elseif($host == "jameeltips.us" or $host == "oko.sh" or $host == "adshort.co" or $host == "m.pkr.pw") {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
