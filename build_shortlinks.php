@@ -20,9 +20,7 @@ function visit_short($r,$icon=0) {
                 if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
                     goto up;
                 }
-                if(preg_replace("/[^0-9]/","",$r["visit"][$s])) {print p.$r["name"][$s]."left>".trim($r["left"][$s]);
-                    sleep(1);
-                    r();
+                if(preg_replace("/[^0-9]/","",$r["visit"][$s])) {
                     if(mode == "af") {
                         $r1 = base_run(host.$r["visit"][$s],http_build_query([
                             $r["token"][1][$s] => $r["token"][2][$s]
@@ -81,7 +79,8 @@ function visit_short($r,$icon=0) {
                         r();
                         return "refresh";
                     }
-                    print k."bypass url:".p.$r1["url"].n;
+                    ket_line("",$r["name"][$s],"left",trim(explode("<",$r["left"][$s])[0]));
+                    ket("",k.$r1["url"]).line();
                     refresh:
                     $exp++;
                     if($exp == 4) {
