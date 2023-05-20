@@ -1,8 +1,8 @@
-//die(bypass_shortlinks("https://birdurls.com/CBd2opxqf21"));
+//die(bypass_shortlinks("https://ez4short.com/PqevhJw"));
 if(!file("config.php")) {
     print p."config.php file has been added";
     r();
-    file_put_contents("config.php",base64_decode(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/config.php")));
+    file_put_contents("config.php",file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/config.php"));
 }
 
 function visit_short($r,$icon=0) {
@@ -16,7 +16,7 @@ function visit_short($r,$icon=0) {
     for($i=0;$i<100;$i++) {
         for($s=0;$s<100;$s++) {
             $open = str_replace("","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-_-]/","",$r["name"][$s]))));
-            if($asf[$i] == $open) {
+            if($asf[$i] == explode("[",$open)[0] or $asf[$i] == $open) {
                 if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
                     goto up;
                 }
@@ -68,14 +68,14 @@ function visit_short($r,$icon=0) {
                             $r1["url"] = $res->shortlink;
                             goto run;
                         }
-                    } elseif(mode == "coming3") {
-
+                    } elseif(mode == "vie_free") {
+                        $r1 = base_run($r["visit"][$s]);
                     } else {
                         die(m."mode bypass not found".n);
                     }
                     run:
                     if(!parse_url($r1["url"])["scheme"]) {
-                        print m."visit invalid".p.$r["name"][$s];
+                        print m."Failed to generate this link ".p.$r["name"][$s];
                         r();
                         return "refresh";
                     }
@@ -111,24 +111,26 @@ function bypass_shortlinks($url) {
             $url = "https://ser7.crazyblog.in".explode("p=",$url)[1];
             $host = parse_url($url)["host"];
         }
-        if($host == "zuba.link" or $host == "nx.chainfo.xyz" or $host == "go.bitcosite.com" or $host == "flyzu.icu" or $host == "go.flyzu.icu" or $host == "linkjust.com" or $host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net" or $host == "adbull.me" or $host == "link1s.net" or $host == "link1s.com" or $host == "ex-foary.com" or $host == "shortzu.icu" or $host == "clickzu.icu" or $host == "ser2.crazyblog.in" or $host == "ser3.crazyblog.in" or $host == "link.adshorti.xyz" or $host == "go.softindex.website" or $host == "link.shorti.io" or $host == "cbshort.com" or $host == "sclick.crazyblog.in" or $host == "adrev.link" or $host == "go.cuturl.in" or $host == "linkfly.me" or $host == "alwrificlick.site" or $host == "go.alwrificlick.site" or $host == "url.mozlink.net" or $host == "go.cuturl.in" or $host == "go.megafly.in" or $host == "go.megaurl.in" or $host == "link.usalink.io") {
+        if(preg_match("#(ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
-            if($host == "adbull.me") {
+            if(preg_match("#(adbull.me)#is",$host)) {
                 $referer = "https://deportealdia.live/";
-            } elseif($host == "linkjust.com") {
-                $referer = "https://forexrw7.com/";
-            } elseif($host == "flyzu.icu" or $host == "go.flyzu.icu") {
+            } elseif(preg_match("#(linkjust.com)#is",$host)) {
+                $referer = "https://forexrw7.com/";     } elseif(preg_match("#(flyzu.icu|go.flyzu.icu)#is",$host)) {
                 $referer = "https://zubatecno.com/";
-            } elseif($host == "nx.chainfo.xyz" or $host == "go.bitcosite.com") {
+            } elseif(preg_match("#(nx.chainfo.xyz|go.bitcosite.com)#is",$host)) {
                 $referer = "https://bitzite.com/";
-            } elseif($host == "zuba.link") {
+            } elseif(preg_match("#(zuba.link)#is",$host)) {
                 $referer = "https://blog.battleroyal.online/";
+            } elseif(preg_match("#(droplink.co)#is",$host)) {
+                $referer = "https://yoshare.net/";          } elseif(preg_match("#(ez4short.com)#is",$host)) {
+                $referer = "https://techmody.io/";
             } else {
                 $referer = 0;
             }
-            if($host == "birdurls.com" or $host == "owllink.net" or $host == "go.birdurls.com" or $host == "go.owllink.net") {
+            if(preg_match("#(birdurls.com|owllink.net|go.birdurls.com|go.owllink.net)#is",$host)) {
                 $cloud = 1;
             } else {
                 $cloud = 0;
@@ -173,16 +175,16 @@ function bypass_shortlinks($url) {
                     return $r1->url;
                 }
             }
-        } elseif($host == "linksly.co" or $host == "go.linksly.co" or $host == "illink.net" or $host == "go.illink.net" or $host == "shrinke.me" or $host == "go1.urlcash.click" or $host == "urlcashh.click" or $host == "ser7.crazyblog.in" or $host == "short.pe" or $host == "shurt.pw" or $host == "urlcashh.quest" or $host == "softindex.site" or $host == "go.urlcash.site" or $host == "goes1.softindex.website") {
+        } elseif(preg_match("#(linksly.co|go.linksly.co|illink.net|go.illink.net|shrinke.me|go1.urlcash.click|urlcashh.click|ser7.crazyblog.in|short.pe|shurt.pw|urlcashh.quest|softindex.site|go.urlcash.site|goes1.softindex.website)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
-            if($host == "linksly.co" or $host == "go.linksly.co") {
+            if(preg_match("#(linksly.co|go.linksly.co)#is",$host)) {
                 $referer = "https://themezon.net/";
             } else {
                 $referer = 0;
             }
-            if($host == "illink.net" or $host == "go.illink.net") {
+            if(preg_match("#(illink.net|go.illink.net)#is",$host)) {
                 $cloud = 1;
             } else {
                 $cloud = 0;
@@ -227,7 +229,7 @@ function bypass_shortlinks($url) {
                     return $r1->url;
                 }
             }
-        } elseif($host == "clik.pw") {
+        } elseif(preg_match("#(clik.pw)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -264,7 +266,7 @@ function bypass_shortlinks($url) {
                     return $r1->url;
                 }
             }
-        } elseif($host == "try2link.com") {
+        } elseif(preg_match("#(try2link.com)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -293,7 +295,7 @@ function bypass_shortlinks($url) {
                     return $r2->url;
                 }
             }
-        } elseif($host == "tii.la") {
+        } elseif(preg_match("#(tii.la)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -321,7 +323,7 @@ function bypass_shortlinks($url) {
                     return $r2->url;
                 }
             }
-        } elseif($host == "petafly.me" or $host == "nonofly.me") {
+        } elseif(preg_match("#(petafly.me|nonofly.me)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -605,7 +607,7 @@ function bypass_shortlinks($url) {
                     return $r4->url;
                 }
             }
-        } elseif($host == "jameeltips.us" or $host == "oko.sh" or $host == "adshort.co" or $host == "m.pkr.pw") {
+        } elseif(preg_match("#(jameeltips.us|oko.sh|adshort.co|m.pkr.pw)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -653,7 +655,7 @@ function bypass_shortlinks($url) {
                     }
                 }
             }
-        } elseif($host == "mitly.us" or $host == "shortnow.xyz") {
+        } elseif(preg_match("#(mitly.us|shortnow.xyz)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -711,7 +713,7 @@ function bypass_shortlinks($url) {
                     }
                 }
             }
-        } elseif($host == "cuty.io") {
+        } elseif(preg_match("#(cuty.io)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -738,7 +740,7 @@ function bypass_shortlinks($url) {
                     }
                 }
             }
-        } elseif($host == "web1s.co" or $host == "web1s.info") {
+        } elseif(preg_match("#(web1s.co|web1s.info)#is",$host)) {
             start:
             if(file(cookie_short)) {
                 unlink(cookie_short);
@@ -835,7 +837,7 @@ function bypass_shortlinks($url) {
                     return $respon["url1"][0];
                 }
             }
-        } elseif($host == "goo.st") {
+        } elseif(preg_match("#(goo.st)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -868,7 +870,7 @@ function bypass_shortlinks($url) {
                     return $r2->url;
                 }
             }
-        } elseif($host == "shortsfly.me" or $host == "linksfly.me") {
+        } elseif(preg_match("#(shortsfly.me|linksfly.me)#is",$host)) {
             $run = build($url);
             $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
             if($r["url"]) 
@@ -879,7 +881,6 @@ function bypass_shortlinks($url) {
         }
     }
 }
-
 
 
 
@@ -1154,7 +1155,6 @@ function anycaptcha($method,$sitekey,$pageurl) {
         }
     }
 }
-
 
 
 
