@@ -72,15 +72,13 @@ function t24() {
     tmr(1,60*60*24+120);
 }
         
-function lah($x=0) {
+function lah($x=0,$inp=0) {
     if($x == 1) {
-        ket(k.explode("/",host)[2],m."sorry no energy").line();
+        ket(k.explode("/",host)[2],m."no ".$inp." can be bypassed").line();
     } elseif($x == 2) {
-        ket(k.explode("/",host)[2],m."no ptc can be bypassed").line();
-    } elseif($x == 3) {
-        ket(k.explode("/",host)[2],m."no faucet can be bypassed").line();
+        ket(k.explode("/",host)[2],m."sorry there is no method for ".$inp).line();
     } else {
-        ket(k.explode("/",host)[2],m."no shortlinks can be bypassed").line();
+        ket(k.explode("/",host)[2],m."sorry no energy").line();
     }
 }
 
@@ -199,6 +197,7 @@ function curl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
         curl_setopt($ch,CURLOPT_HTTPHEADER,$head);
     }
     curl_setopt($ch,CURLOPT_HEADER,true);
+    curl_setopt($ch,CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
     $response = curl_exec($ch);
     if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
         $respHeaders = substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
