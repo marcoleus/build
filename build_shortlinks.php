@@ -1,9 +1,15 @@
 //die(bypass_shortlinks("https://ez4short.com/PqevhJw"));
+
 if(!file("config.php")) {
     print p."config.php file has been added";
     r();
     file_put_contents("config.php",file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/config.php"));
 }
+function multiexplode($delimiters,$string) {
+    $ready = str_replace($delimiters, $delimiters[0],$string);
+    return explode($delimiters[0],$ready);
+}
+
 
 function visit_short($r,$icon=0) {
     global $config;
@@ -15,88 +21,100 @@ function visit_short($r,$icon=0) {
     }
     for($i=0;$i<100;$i++) {
         for($s=0;$s<100;$s++) {
-            $open = str_replace("","",strtolower(trim(preg_replace("/[^a-zA-Z0-9.-_-]/","",$r["name"][$s]))));
-            if($asf[$i] == explode("[",$open)[0] or $asf[$i] == $open) {
-                if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
-                    goto up;
-                }
-                if(preg_replace("/[^0-9]/","",$r["visit"][$s])) {
-                    if(mode == "af") {
-                        $r1 = base_run(host.$r["visit"][$s],http_build_query([
-                            $r["token"][1][$s] => $r["token"][2][$s]
-                        ]));
-                    } elseif(mode == "icon") {
-                        $data = http_build_query([
-                            "cID" => 0,
-                            "rT" => 1,
-                            "tM" => "light"
-                        ]);
-                        $r2 = base_run(host."system/libs/captcha/request.php",$data)["json"];
-                        libs:
-                        $x = -1;
-                        while(true) {
-                            $x++;if(!$r2[$x]) {
-                                goto libs;
-                            }
-                            $data1 = http_build_query([
+            $open = str_replace(str_split('({['),'',strtolower(str_replace(" ","",$r["name"][$s])));
+                if($asf[$i] == $open) {
+                    if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
+                        goto up;
+                    }
+                    if(preg_replace("/[^0-9]/","",$r["visit"][$s])) {
+                        if(mode == "af") {
+                            $r1 = base_run(host.$r["visit"][$s],http_build_query([$r["token"][1][$s] => $r["token"][2][$s]]));
+                        } elseif(mode == "icon") {
+                            $data = http_build_query([
                                 "cID" => 0,
-                                "pC" => $r2[$x],
-                                "rT" => 2
+                                "rT" => 1,
+                                "tM" => "light"
                             ]);
-                            base_run(host."system/libs/captcha/request.php",$data1);
-                            $data2 = http_build_query([
+                            $r2 = base_run(host."system/libs/captcha/request.php",$data)["json"];
+                            libs:
+                            $x = -1;
+                            while(true) {
+                                $x++;
+                                if(!$r2[$x]) {
+                                    goto libs;
+                                }
+                                $data1 = http_build_query([
+                                    "cID" => 0,
+                                    "pC" => $r2[$x],
+                                    "rT" => 2
+                                ]);
+                                base_run(host."system/libs/captcha/request.php",$data1);
+                                $data2 = http_build_query([
+                                    "a" => "getShortlink",
+                                    "data" => preg_replace("/[^0-9]/","",$r["visit"][$s]),
+                                    "token" => $r["token"],
+                                    "captcha-idhf" => 0,
+                                    "captcha-hf" => $r2[$x]
+                                ]);
+                                $res = base_run(host."system/ajax.php",$data2)["json"];
+                                if($res->shortlink) {
+                                    $r1["url"] = $res->shortlink;
+                                    goto run;
+                                }
+                            }
+                        } elseif(mode == "no_icon") {
+                            $data = http_build_query([
                                 "a" => "getShortlink",
                                 "data" => preg_replace("/[^0-9]/",
                                 "",$r["visit"][$s]),
-                                "token" => $r["token"],
-                                "captcha-idhf" => 0,
-                                "captcha-hf" => $r2[$x]
+                                "token" => $r["token"]
                             ]);
-                            $res = base_run(host."system/ajax.php",$data2)["json"];
+                            $res = base_run(host."system/ajax.php",$data)["json"];
                             if($res->shortlink) {
                                 $r1["url"] = $res->shortlink;
                                 goto run;
                             }
+                        } elseif(mode == "vie_free") {
+                            if($r["token_csrf"][1][0]) {
+                                $data = http_build_query([
+                                    explode('"',$r["token_csrf"][1][0])[0] => $r["token_csrf"][2][0],
+                                    $r["token_csrf"][1][1] => $r["token_csrf"][2][1]
+                                ]);
+                            }
+                            $r1 = base_run($r["visit"][$s],$data);
+                            if($r1["url1"]) {
+                                $r1["url"] = $r1["url1"];
+                            }
+                        } else {
+                            die(m."mode bypass not found".n);
                         }
-                    } elseif(mode == "no_icon") {
-                        $data = http_build_query([
-                            "a" => "getShortlink",
-                            "data" => preg_replace("/[^0-9]/","",$r["visit"][$s]),
-                            "token" => $r["token"]
-                        ]);$res = base_run(host."system/ajax.php",$data)["json"];
-                        if($res->shortlink) {
-                            $r1["url"] = $res->shortlink;
-                            goto run;
+                        run:
+                        if(!parse_url($r1["url"])["scheme"]) {
+                            print m."Failed to generate this link ".p.$r["name"][$s];
+                            r();
+                            return "refresh";
                         }
-                    } elseif(mode == "vie_free") {
-                        $r1 = base_run($r["visit"][$s]);
-                    } else {
-                        die(m."mode bypass not found".n);
+                        ket_line("",$r["name"][$s],"left",trim(explode("<",$r["left"][$s])[0]));
+                        ket("",k.$r1["url"]).line();
+                        refresh:
+                        $exp++;
+                        if($exp == 4) {
+                            goto up;
+                        }
+                        $r2 = bypass_shortlinks($r1["url"]);
+                        if(!$r2) {
+                            goto refresh;
+                        }
+                        return $r2;
                     }
-                    run:
-                    if(!parse_url($r1["url"])["scheme"]) {
-                        print m."Failed to generate this link ".p.$r["name"][$s];
-                        r();
-                        return "refresh";
-                    }
-                    ket_line("",$r["name"][$s],"left",trim(explode("<",$r["left"][$s])[0]));
-                    ket("",k.$r1["url"]).line();
-                    refresh:
-                    $exp++;
-                    if($exp == 4) {
-                        goto up;
-                    }
-                    $r2 = bypass_shortlinks($r1["url"]);
-                    if(!$r2) {
-                        goto refresh;
-                    }
-                    return $r2;
                 }
             }
+            up:
         }
-        up:
     }
-}
+
+
+
 
 function bypass_shortlinks($url) {
     $coundown = 15;
