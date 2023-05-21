@@ -1,4 +1,6 @@
 <?php
+
+
 //--------------------------------------------------------//
 //https://linksfly.me/CBa0ydu31nb
 //http://shortsfly.me/roakE1pV
@@ -68,6 +70,7 @@ $config[]="goo.st";
 //--------------------------------------------------------//
 //https://birdurls.com/CBd2opxqf21
 //https://owllink.net/ckjv
+$config[]="birdurl";
 $config[]="birdurls";
 $config[]="birdurls.com";
 $config[]="owlink";
@@ -114,14 +117,15 @@ $config[]="link1s.net";
 
 //--------------------------------------------------------//
 //https://flyzu.icu/CBbf0nm40mw
+$config[]="flzu";
 $config[]="flyzu";
-$config[]="flyzu.icu";
+
 
 
 //--------------------------------------------------------//
 //https://link.shorti.io/CBemtfk2g7f
-$config[]="shorti.io";
-$config[]="shorti";
+#$config[]="shorti.io";
+#$config[]="shorti";
 
 
 //--------------------------------------------------------//
