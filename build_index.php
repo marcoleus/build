@@ -197,7 +197,7 @@ function curl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
         curl_setopt($ch,CURLOPT_HTTPHEADER,$head);
     }
     curl_setopt($ch,CURLOPT_HEADER,true);
-    curl_setopt($ch,CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+    //curl_setopt($ch,CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
     $response = curl_exec($ch);
     if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
         $respHeaders = substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
