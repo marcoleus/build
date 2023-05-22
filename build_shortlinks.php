@@ -3,7 +3,7 @@
 if(!file("config.php")) {
     print p."config.php file has been added";
     r();
-    file_put_contents("config.php",file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/config.php"));
+    file_put_contents("config.php",get_e("https://raw.githubusercontent.com/marcoleus/build/main/config.php"));
 }
 function multiexplode($delimiters,$string) {
     $ready = str_replace($delimiters, $delimiters[0],$string);
