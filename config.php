@@ -43,6 +43,7 @@ $config[]="adshorti.xyz";
 //--------------------------------------------------------//
 //https://shortzu.icu/CBikellupjp
 //https://clickzu.icu/CBxwz99ht0y
+$config[]="shortzu";
 $config[]="shortzu.icu";
 $config[]="clickzu.icu";
 
@@ -124,9 +125,13 @@ $config[]="flyzu";
 
 //--------------------------------------------------------//
 //https://link.shorti.io/CBemtfk2g7f
-#$config[]="shorti.io";
-#$config[]="shorti";
+$config[]="shorti.io";
+$config[]="shorti";
 
+//--------------------------------------------------------//
+//https://link.freeltc.top/jmQRa3F
+$config[]="freeltc";
+$config[]="freeltc.top";
 
 //--------------------------------------------------------//
 //http://petafly.me/Pofn
@@ -228,8 +233,8 @@ $config[]="mitly";
 $config[]="mitly.us";
 
 
-//--------------------------------------------------------//
-/*/http://go.megaurl.in/ET2Ra2JC
+/*/--------------------------------------------------------//
+//http://go.megaurl.in/ET2Ra2JC
 $config[]="megaurl";
 $config[]="megaurl.in";
 $config[]="go.megaurl.in";
