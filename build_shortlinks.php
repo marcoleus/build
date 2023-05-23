@@ -153,7 +153,7 @@ function bypass_shortlinks($url) {
             } else {
                 $cloud = 0;
             }
-            $url = str_replace("nx.chainfo.xyz","go.bitcosite.com",str_replace("flyzu.icu","go.flyzu.icu",str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))))))));
+            $url = str_replace("link.freeltc.top","short.freeltc.top",str_replace("nx.chainfo.xyz","go.bitcosite.com",str_replace("flyzu.icu","go.flyzu.icu",str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","cdn1.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url))))))))))))))));
             $run = build($url);
             $r = base_short($run["links"],0,0,$referer,$cloud);
             $t = $r["token_csrf"];
