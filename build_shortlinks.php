@@ -98,7 +98,7 @@ function visit_short($r,$icon=0) {
                         ket("",k.$r1["url"]).line();
                         refresh:
                         $exp++;
-                        if($exp == 4) {
+                        if($exp == 2) {
                             goto up;
                         }
                         $r2 = bypass_shortlinks($r1["url"]);
