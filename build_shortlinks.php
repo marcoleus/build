@@ -22,7 +22,7 @@ function visit_short($r,$icon=0) {
     for($i=0;$i<100;$i++) {
         for($s=0;$s<100;$s++) {
             //$open = str_replace(str_split('({['),'',strtolower(str_replace(" ","",$r["name"][$s])));
-            $open = multiexplode(["-easy","-mid","-hard"],str_replace(str_split(' ({['),'',strtolower($r["name"][$s])))[0];
+            $open = multiexplode(["{","[","(","-easy","-mid","-hard"],str_replace(" ","",strtolower($r["name"][$s])))[0];
                 if($asf[$i] == $open) {
                     if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
                         goto up;
