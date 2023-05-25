@@ -890,6 +890,9 @@ function bypass_shortlinks($url) {
                 }
             }
         } elseif(preg_match("#(shortsfly.me|linksfly.me)#is",$host)) {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
             $run = build($url);
             $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
             if($r["url"]) 
