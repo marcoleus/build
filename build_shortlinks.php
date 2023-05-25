@@ -975,7 +975,7 @@ function h_short($xml=0,$referer=0,$agent=0) {
     return $headers;
 }
 
-function azcaptcha($method,$sitekey,$pageurl) {
+function azcaptcha($method,$sitekey,$pageurl,$rr=0) {
     refresh: 
     print p;
     $name_api = "apikey_azcaptcha";
@@ -1044,7 +1044,7 @@ function azcaptcha($method,$sitekey,$pageurl) {
     }
 }
 
-function captchaai($method,$sitekey,$pageurl) {
+function captchaai($method,$sitekey,$pageurl,$rr=0) {
     refresh: 
     print p;
     $name_api = "apikey_captchaai";
@@ -1116,7 +1116,7 @@ function captchaai($method,$sitekey,$pageurl) {
     }
 }
 
-function anycaptcha($method,$sitekey,$pageurl) {
+function anycaptcha($method,$sitekey,$pageurl,$rr=0) {
     refresh:
     $name_api = "apikey_anycaptcha";
     $apikey = save($name_api);
@@ -1179,5 +1179,10 @@ function anycaptcha($method,$sitekey,$pageurl) {
 
 
 
-
-
+function icon($method,$sitekey,$pageurl,$rr){
+$a=["622a6ffcaeeacb79bc56443917af9caa","5e32f1a4613053667a3227f2508807d7","d9f89b6a52bbba354b173df8621ac6cd","ba7161f4628fcab9e7417b989dc7779c","d67322b3de1b3ed804933c173e5eb7e4","95038481908ea9bda3504470f03d28b8","e035d3e0ff51e7f3dd8f105cf35b50f0","725057ccbb051378d4d0d683d08f4cdb","c1512a7116ec7a35056cae89f773e339","2e9b312f3bba89adf0f1156567b896ac","0604566890fe2a6eb7bef2bb18347b55","e987905dc94ca0e566f26102c71b0b36","39660e8ce374b155d61052152ec97037","8aa8909044c1a6d2a0e2f11436020833","a612410bdf846901f751b224551ae384","e0493af430a9d1dec913e2f921dd4e4e","1f361f4e51279b0e2fa40d66651ef7dc","81f720b4af6d8308a17544a068ce3680","e28dadc4f30e38e5b78b041027ef5df9","8f4f7fc6e2d993af2a89b85f32022a90","05dc184a81ab12be43dece0b47938501","cd0a210489200cb9024177ff6bca42e0","5f9ad682f98ad933f1c24839c8eb5a09","a9d688d3a320926c1b181b4fd25f892a","3e67c5cbc07f2d554d41f33949c05151","94eba227efb0cc9804998fd57454ceaf","8b21839d7e9b0338681a601cc8ad4979","1c146ca637af84fac3020b4ed9018b41","82cb8d270e954d518e9504741ba3028d","b9751aedc9a6994908c9cf5bd859a77f","25764185e8ee536ac417719bb6b2806b","e5bd0f213163919b1b8ebf2949b77053","1854831c88a0d886429d2f53a94e56cd","e1d73340439b36fa1424a1a4f800c8b6","b0be1d9962309d629314e5e100b10e3c","cf5bb328fe5e2068cd6d5103d066e701","10d4bbc30d936b446b5a328989af50cb","01cceaf6efaf0b57f7c92574006107cd","19f7e075103a00a80e44cd2c67ac5959","6a224fc7bd454f0f5d0a1ecc2b09626e","e69a18ad19a81fdcd44795751303aa2d","a582c5aa4311986cf6afe1e6dc4a9de4","2b9327bf2e8d3fa531b639943e063adc","64962b266e4f6a93988e709dc28e5259","7f2b97ac7bba3debc7183412c9cf50c7","e8680cf6b8a33f2ba0174a9101fea26c","40e6c896e2374b2f6639bb4300fb6d78","87cf7190c2c99baadb4b1bca329583dd","48b6b6516bb66d2cb3fd3f1cbff9c755","92bf126e2d1f2d400acc5b06cabe7946","5e78748c47c4c0902777d72b7abbd6e3","630c1e42e115e208a574dadb681f054f","0e6837e093b981881e9b637bd56ef211","adba08a7b5176202d4b246e1877e8922","d79468b2d6bd2cba72ac29bb839f08f6","8afdbf34bd1459e97288ccb196e4805f","b66be23ed22f5b410327704a3bce6fea","b7f3d177a4178c4964a03715dcf41aef","904f52621849ec2bbafb5f6e1ed1906d","048f62365211dd9be3ab9f3e58bcd6ae","25ad74bc4fcbf9e826e89bf1f3839ca5","89d24982402ad6bec5e712d5c1ce1c38","bb5693d2dced651638fd2f84a3887d47","dfca78d834c950592d59bb8adc9281e8","f43d64180dc7c7533ea731eeb0b6f3f1","6df2e3d1efcf981b1a09bf3ec5fba234","e748c3ee158c953b2b98bcf3746568b6","bf150291d7c5204fa2d87e4afd6577ee","26370f7790ec5e964e1d2e171d04ecad","c9c22757126884deae95d0cc66ede8ac","c5eb45c2638560df17506530bcd99c65","6c799b4bd0fcc07a577a0e5c1fde1062","426bb68a133bd7edf9a6ccc8a3f7e535","134f59f2951fba5d8a99508b6242cb25","3dde9bc8f564f08cb72611c98e9d8ceb","758021ded1af737e167d60afedf32a93","b5e149d7b5024cc56e150212f45136b8","fa03bf8e3eb8bf4d1f986bac8d58fc2e","9f6823dae3d8a1108c855c1c681b20a1","31ec8e3e209567f4d5fac49c03c7fdc4","7e235151ae9c56a6f7bd37978e89bfd1","74283144ff69795ce61a690fab102811","0b4d9a3b6edddda03c8068eed3f5b18d","ec4eb6068abc34ed2f78d645d0640a6b","dbc0c8017c1fc057fadccab2482cc912","67aa29bff108e19690cff8202b3a7b58","bda34197f517974d452750fe911af5fa","991bba1e5908a053e963a9710e69ad3f","91b15509d2de8e93730557e1971d8888","e4bb54f8bb840e9ccb6e26f88989ffc9","29b18d8e47d0267423345c947aa48180","4204082566766a279bc2f3152071454b","8793f7d7cc7a548bd36d789838e11643","c5db28ec22ed9b715176504975690ef6","0444b2c617da4717dad0a82cc89e966c","cc57d4f905ac9cd3777647fb0c9c69f3","b8e82e0f0de4381cf29c86fb8794cbec","3fbb62835eef93de682d20585f2b8b76","d3fb247637c4da13847247c8cbb7f066","aa836f7f7bfcc29b193623dfb0c1f151"];
+preg_match('#unescape(.*?)"(.*?)"#is',$rr,$dec);
+$r=urldecode($dec[2]);
+for($i=0;$i<=4;$i++){
+preg_match_all("#data-value='(.*?)' src='data:image/png;base64,(.*?)'#is",$r,$b);
+for($n=0;$n<500;$n++){if($a[$n]==md5($b[2][$i])){return $b[1][$i];}}}}
