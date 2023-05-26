@@ -14,7 +14,7 @@ $config[]="shortsfly.me";
 //https://ez4short.com/xFTG
 $config[]="ez4short";
 $config[]="ez4short.com";
-
+$config[]="insfly";
 
 //--------------------------------------------------------//
 //https://adrev.link/LR5R
@@ -45,6 +45,7 @@ $config[]="adshorti.xyz";
 //https://clickzu.icu/CBxwz99ht0y
 $config[]="shortzu";
 $config[]="shortzu.icu";
+$config[]="clickzu";
 $config[]="clickzu.icu";
 
 
@@ -96,7 +97,7 @@ $config[]="linkjust.com";
 
 //--------------------------------------------------------//
 //http://nx.chainfo.xyz/CBvdzwhx79a
-$config[]="chainfo";
+//$config[]="chainfo";
 $config[]="chainfo.xyz";
 
 
@@ -152,7 +153,7 @@ $config[]="shrinlearn";
 
 //--------------------------------------------------------//
 //https://shrinke.me/9SJRbamZ
-$config[]="shrinkme";
+//$config[]="shrinkme";
 $config[]="shrink.me";
 
 
@@ -231,7 +232,7 @@ $config[]="adshort.co";
 //https://mitly.us/CBm8pkpuc0j
 $config[]="mitly";
 $config[]="mitly.us";
-
+$config[]="mitlyus";
 
 /*/--------------------------------------------------------//
 //http://go.megaurl.in/ET2Ra2JC
