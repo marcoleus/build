@@ -118,6 +118,11 @@ $config[]="link1snet";
 $config[]="link1s.net";
 
 //--------------------------------------------------------//
+//https://vnshortener.com/XRf8
+$config[]="vns";
+
+
+//--------------------------------------------------------//
 //https://flyzu.icu/CBbf0nm40mw
 $config[]="flzu";
 $config[]="flyzu";
