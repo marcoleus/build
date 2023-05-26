@@ -178,7 +178,7 @@ function curl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
         $ch= curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch,CURLOPT_ENCODING,'');
+        //curl_setopt($ch,CURLOPT_ENCODING,'');
         if($follow) {
             curl_setopt($ch,CURLOPT_FOLLOWLOCATION,$follow);
         }
