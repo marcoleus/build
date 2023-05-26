@@ -173,55 +173,6 @@ function ket_line($a,$aa,$b=0,$bb=0,$c=0,$cc=0) {
     print n;
 }
 
-function ckkkkurl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
-    while(true) {
-        $ch= curl_init();
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch,CURLOPT_ENCODING,'');
-        if($follow) {
-            curl_setopt($ch,CURLOPT_FOLLOWLOCATION,$follow);
-        }
-        if($cookiejar) {
-            curl_setopt($ch,CURLOPT_COOKIEFILE,$cookiejar);
-            curl_setopt($ch,CURLOPT_COOKIEJAR,$cookiejar);
-        }
-        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
-        //curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,5);
-        //curl_setopt($ch,CURLOPT_TIMEOUT,20);
-        if($post) {
-        curl_setopt($ch,CURLOPT_POST,true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
-    }
-    if($head) {
-        curl_setopt($ch,CURLOPT_HTTPHEADER,$head);
-    }
-    curl_setopt($ch,CURLOPT_HEADER,true);
-    curl_setopt($ch,CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-    $response = curl_exec($ch);
-    if(!curl_getinfo($ch)) return "Curl Error : ".curl_error($ch); else {
-        $respHeaders = substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
-        $info = curl_getinfo($ch);
-        $body = substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
-        foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i => $line) {
-            if($i == 0) {$headers['http_code'] = $line;
-            } else {
-                list($key, $value )= explode(': ',$line);
-                $header[$key] = $value;}}
-                curl_close($ch);
-                $movePage=movePage()[$info["http_code"]];
-                if(!$info["primary_ip"]) {
-                    print m.$movePage;r();
-                    continue;
-                } else {
-                print p.$movePage;r();
-                }
-            return [[$header,$info],$body];
-           }
-    }
-}    
-
 function curl($url,$head = 0,$post = 0,$follow = 0,$cookiejar = 0) {
     while(TRUE) {
         $ch = curl_init($url);
@@ -333,16 +284,20 @@ function asci($string) {
     print p."time:".date("H:i").str_repeat(p.' ',7).mp." ▶ ".d.p." Re:Hine".str_repeat(p.' ',7)."date:".date("m/d/Y").n;
     line();
     print " ";
-    foreach($x as $data) {print h.$acssi[$data][0];
+    foreach($x as $data) {
+    print h.$acssi[$data][0];
     }
     print h." country ".c." > ".p.$res["c"].n." ";
-    foreach($x as $data) {print c.$acssi[$data][1];
+    foreach($x as $data) {
+    print c.$acssi[$data][1];
     }
     print h." region".c." > ".p.$res["r"].n." ";
-    foreach($x as $data) {print p.$acssi[$data][2];
+    foreach($x as $data) {
+    print p.$acssi[$data][2];
     }
     print h." ip".c." > ".p.$res["i"].n;
-    foreach($x as $data) {print c.$acssi[$data][3];
+    foreach($x as $data) {
+    print c.$acssi[$data][3];
     }
     line();
 }
@@ -380,7 +335,8 @@ function hac($xml=0) {
 }
         
 function antb($ab) {
-    $a = $ab[1][0];$b=$ab[1][1];
+    $a = $ab[1][0];
+    $b = $ab[1][1];
     $c = $ab[1][2];
     return [
         [" ".$b,$c,$a],
@@ -392,14 +348,15 @@ function antb($ab) {
     ];
 }
 
-rt();c();
-const b="\033[1;34m",
-      c="\033[1;36m",
-      h="\033[1;32m",
-      k="\033[1;33m",
-      m="\033[1;31m",
-      mp="\033[101m\033[1;37m",
-      p="\033[1;37m",
-      u="\033[1;35m",
-      d="\033[0m",
-      n="\n";
+rt();
+c();
+const b = "\033[1;34m",
+      c = "\033[1;36m",
+      h = "\033[1;32m",
+      k = "\033[1;33m",
+      m = "\033[1;31m",
+      mp = "\033[101m\033[1;37m",
+      p = "\033[1;37m",
+      u = "\033[1;35m",
+      d = "\033[0m",
+      n = "\n";
