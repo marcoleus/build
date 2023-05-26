@@ -981,7 +981,7 @@ function h_short($xml=0,$referer=0,$agent=0) {
     return $headers;
 }
 
-function azcaptcha($method,$sitekey,$pageurl,$rr=0) {
+function azcaptcha($method,$sitekey,$pageurl,$rr = 0) {
     refresh: 
     print p;
     $name_api = "apikey_azcaptcha";
@@ -998,18 +998,18 @@ function azcaptcha($method,$sitekey,$pageurl,$rr=0) {
         "sitekey" => $sitekey,
         "pageurl" => $pageurl
     ]);
-    $type=[
+    $type = [
         "hcaptcha" => $hcaptcha,
         "recaptchav2" => $recaptchav2
     ];
-    $ua=[
+    $ua = [
         "host: azcaptcha.com",
         "content-type: application/json/x-www-form-urlencoded"
     ];
-    $s=0;
+    $s = 0;
     while(true) {
         $s++;
-        $r=curl("https://azcaptcha.com/in.php?".$type[$method],$ua)[1];
+        $r = curl("https://azcaptcha.com/in.php?".$type[$method],$ua)[1];
         if($r == "ERROR_USER_BALANCE_ZERO") {
             unlink($name_api);
             goto refresh;
@@ -1019,12 +1019,15 @@ function azcaptcha($method,$sitekey,$pageurl,$rr=0) {
                 goto refresh;
             }
         }
-        $id=explode('|',$r)[1];
-        if(!$id) {sleep(15);continue;
+        $id = explode('|',$r)[1];
+        if(!$id) {
+        print "Get ID Captcha";
+        r();
+        continue;
         }
         sleep(5);
         while(true) {
-            $r1=curl("https://azcaptcha.com/res.php?".http_build_query([
+            $r1 = curl("https://azcaptcha.com/res.php?".http_build_query([
                 "key" => $apikey,
                 "action" => "get",
                 "id" => $id
@@ -1039,7 +1042,8 @@ function azcaptcha($method,$sitekey,$pageurl,$rr=0) {
                 r();
                 goto refresh;
             } elseif($r1 == "CAPCHA_NOT_READY") {
-                r();print str_replace("_"," ",$r1);
+                r();
+                print str_replace("_"," ",$r1);
                 sleep(5);
                 r();
                 continue;
@@ -1050,7 +1054,7 @@ function azcaptcha($method,$sitekey,$pageurl,$rr=0) {
     }
 }
 
-function captchaai($method,$sitekey,$pageurl,$rr=0) {
+function captchaai($method,$sitekey,$pageurl,$rr = 0) {
     refresh: 
     print p;
     $name_api = "apikey_captchaai";
@@ -1067,18 +1071,18 @@ function captchaai($method,$sitekey,$pageurl,$rr=0) {
         "sitekey" => $sitekey,
         "pageurl" => $pageurl
     ]);
-    $type=[
+    $type = [
         "hcaptcha" => $hcaptcha,
         "recaptchav2" => $recaptchav2
     ];
-    $ua=[
+    $ua = [
         "host: ocr.captchaai.com",
         "content-type: application/json/x-www-form-urlencoded"
     ];
-    $s=0;
+    $s = 0;
     while(true) {
         $s++;
-        $r=curl("http://ocr.captchaai.com/in.php?".$type[$method],$ua)[1];
+        $r = curl("http://ocr.captchaai.com/in.php?".$type[$method],$ua)[1];
         if($r == "ERROR_USER_BALANCE_ZERO") {
             unlink($name_api);
             goto refresh;
@@ -1088,14 +1092,15 @@ function captchaai($method,$sitekey,$pageurl,$rr=0) {
                 goto refresh;
             }
         }
-        $id=explode('|',$r)[1];
+        $id = explode('|',$r)[1];
         if(!$id) {
-            //sleep(15);
+            print "Get ID Captcha";
+            r();
             continue;
         }
         sleep(5);
         while(true) {
-            $r1=curl("https://ocr.captchaai.com/res.php?".http_build_query([
+            $r1 = curl("https://ocr.captchaai.com/res.php?".http_build_query([
                 "key" => $apikey,
                 "action" => "get",
                 "id" => $id
@@ -1126,14 +1131,14 @@ function anycaptcha($method,$sitekey,$pageurl,$rr=0) {
     refresh:
     $name_api = "apikey_anycaptcha";
     $apikey = save($name_api);
-    $h=[
+    $h = [
         "Host: api.anycaptcha.com",
         "Content-Type: application/json"
     ];
-    $data=json_encode([
+    $data = json_encode([
         "clientKey" => $apikey
     ]);
-    $r=json_decode(curl("https://api.anycaptcha.com/getBalance",$h,$data)[1],1);
+    $r = json_decode(curl("https://api.anycaptcha.com/getBalance",$h,$data)[1],1);
     if($r["balance"] <= 0) {
         unlink($name_api);
         goto refresh;
@@ -1147,7 +1152,7 @@ function anycaptcha($method,$sitekey,$pageurl,$rr=0) {
             "isInvisible" => false
             ]
         ]);
-    $hcaptcha=json_encode([
+    $hcaptcha = json_encode([
         "clientKey" => $apikey,
         "task" => [
         "type" => "HCaptchaTaskProxyless",
@@ -1159,16 +1164,16 @@ function anycaptcha($method,$sitekey,$pageurl,$rr=0) {
                 "hcaptcha" => $hcaptcha,
                 "recaptchav2" => $recaptchav2
             ];
-            $Create=json_decode(curl('https://api.anycaptcha.com/createTask',$h,$type[$method])[1]);
+            $Create = json_decode(curl('https://api.anycaptcha.com/createTask',$h,$type[$method])[1]);
             if($Create->errorId>0) {
                 exit(m.$Create->errorCode.n);
     } else {
         while(true) {
-            $base=json_encode([
+            $base = json_encode([
                 "clientKey" => $apikey,
                 "taskId" => $Create->taskId
             ]);
-            $Result=json_decode(curl('https://api.anycaptcha.com/getTaskResult',$h,$base)[1]);
+            $Result = json_decode(curl('https://api.anycaptcha.com/getTaskResult',$h,$base)[1]);
             if($Result->status == 'processing') {
                 print p.$Result->status;
                 sleep(5);
