@@ -1032,24 +1032,18 @@ function azcaptcha($method,$sitekey,$pageurl,$rr = 0) {
                 "action" => "get",
                 "id" => $id
             ]),$ua)[1];
-            if($r1 == "ERROR_CAPTCHA_UNSOLVABLE") {
-                print str_replace("_"," ",$r1);
-                sleep(5);
-                r();
-                goto refresh;
-            } elseif($r1 == "ERROR_INVALID_SITEKEY") {
-                str_replace("_"," ",$r1);
-                r();
-                goto refresh;
-            } elseif($r1 == "CAPCHA_NOT_READY") {
-                r();
+            if($r1 == "CAPCHA_NOT_READY") {
                 print str_replace("_"," ",$r1);
                 sleep(5);
                 r();
                 continue;
+            } elseif(explode('|', $r1)[1]) {
+                return explode('|', $r1)[1];
+            } else {
+                print str_replace("_"," ",$r1);
+                r();
+                goto refresh;
             }
-            r();
-            return explode('|', $r1)[1];
         }
     }
 }
@@ -1065,15 +1059,25 @@ function captchaai($method,$sitekey,$pageurl,$rr = 0) {
         "googlekey" => $sitekey,
         "pageurl" => $pageurl
     ]);
+    $recaptchav3 = http_build_query([
+        "key" => $apikey,
+        "method" => "userrecaptcha",
+        "version" => "v3",
+        "action" => "verify",
+        "min_score" => "0.3",
+        "googlekey" => $sitekey,
+        "pageurl" => $pageurl
+    ]);
     $hcaptcha = http_build_query([
         "key" => $apikey,
         "method" => "hcaptcha",
         "sitekey" => $sitekey,
         "pageurl" => $pageurl
     ]);
-    $type = [
-        "hcaptcha" => $hcaptcha,
-        "recaptchav2" => $recaptchav2
+    $type=[
+        "recaptchav2" => $recaptchav2,
+        "recaptchav3" => $recaptchav3,
+        "hcaptcha" => $hcaptcha
     ];
     $ua = [
         "host: ocr.captchaai.com",
@@ -1123,78 +1127,6 @@ function captchaai($method,$sitekey,$pageurl,$rr = 0) {
 
 
 
-function captbbchaai($method,$sitekey,$pageurl,$rr = 0) {
-    refresh: 
-    print p;
-    $name_api = "apikey_captchaai";
-    $apikey = save($name_api);
-    $recaptchav2 = http_build_query([
-        "key" => $apikey,
-        "method" => "userrecaptcha",
-        "googlekey" => $sitekey,
-        "pageurl" => $pageurl
-    ]);
-    $hcaptcha = http_build_query([
-        "key" => $apikey,
-        "method" => "hcaptcha",
-        "sitekey" => $sitekey,
-        "pageurl" => $pageurl
-    ]);
-    $type = [
-        "hcaptcha" => $hcaptcha,
-        "recaptchav2" => $recaptchav2
-    ];
-    $ua = [
-        "host: ocr.captchaai.com",
-        "content-type: application/json/x-www-form-urlencoded"
-    ];
-    $s = 0;
-    while(true) {
-        $s++;
-        $r = curl("http://ocr.captchaai.com/in.php?".$type[$method],$ua)[1];
-        if($r == "ERROR_USER_BALANCE_ZERO") {
-            unlink($name_api);
-            goto refresh;
-        } elseif($r == "ERROR_WRONG_USER_KEY") {
-            if($s == 3) {
-                unlink($name_api);
-                goto refresh;
-            }
-        }
-        $id = explode('|',$r)[1];
-        if(!$id) {
-            print "Get ID Captcha";
-            r();
-            continue;
-        }
-        sleep(5);
-        while(true) {
-            $r1 = curl("https://ocr.captchaai.com/res.php?".http_build_query([
-                "key" => $apikey,
-                "action" => "get",
-                "id" => $id
-            ]),$ua)[1];
-            if($r1 == "ERROR_CAPTCHA_UNSOLVABLE") {
-                print str_replace("_"," ",$r1);
-                sleep(5);
-                r();
-                goto refresh;
-            } elseif($r1 == "ERROR_INVALID_SITEKEY") {
-                str_replace("_"," ",$r1);
-                r();
-                goto refresh;
-            } elseif($r1 == "CAPCHA_NOT_READY") {
-                r();
-                print str_replace("_"," ",$r1);
-                sleep(5);
-                r();
-                continue;
-            }
-            r();
-            return explode('|', $r1)[1];
-        }
-    }
-}
 
 function anycaptcha($method,$sitekey,$pageurl,$rr=0) {
     refresh:
