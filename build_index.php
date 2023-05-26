@@ -173,7 +173,7 @@ function ket_line($a,$aa,$b=0,$bb=0,$c=0,$cc=0) {
     print n;
 }
 
-function curl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
+function ckkkkurl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
     while(true) {
         $ch= curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
@@ -221,6 +221,71 @@ function curl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
            }
     }
 }    
+
+function curl($url,$head = 0,$post = 0,$follow = 0,$cookiejar = 0) {
+    while(TRUE) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, array(
+            CURLOPT_RETURNTRANSFER => TRUE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_CONNECTTIMEOUT => 60,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HEADER => TRUE
+        )
+    );
+    if($follow) {
+        curl_setopt_array($ch, array(
+            CURLOPT_FOLLOWLOCATION => $follow
+        )
+    );
+}
+if($head) {
+    curl_setopt_array($ch, array(
+        CURLOPT_HTTPHEADER => $head
+    )
+);
+}
+if($cookiejar) {
+    curl_setopt_array($ch, array(
+        CURLOPT_COOKIEFILE => $cookiejar,
+        CURLOPT_COOKIEJAR => $cookiejar
+    )
+);
+}
+if($post) {
+    curl_setopt_array($ch, array(
+        CURLOPT_POST => TRUE,
+        CURLOPT_POSTFIELDS => $post
+    )
+);
+}
+$response = curl_exec($ch);
+if(!curl_getinfo($ch)) {
+    return "Curl Error : ".curl_error($ch);
+} else {
+    $respHeaders = substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+    $info = curl_getinfo($ch);
+    $body = substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+    foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line) {
+        if($i===0) {$headers['http_code'] = $line;
+        } else {
+            list($key, $value ) = explode(': ',$line);
+            $header[$key] = $value;}}
+            curl_close($ch);
+            $movePage=movePage()[$info["http_code"]];
+            if(!$info["primary_ip"]) {
+                print m.$movePage;
+                r();
+                continue;
+            } else {
+                print p.$movePage;r();
+            }
+            return [[$header,$info],$body];
+        }
+    }
+}
+
 
 function asci($string) {
     $res = ip();
