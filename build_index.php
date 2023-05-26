@@ -187,8 +187,8 @@ function curl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
         }
         curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
         curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
-        curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,10);
-        curl_setopt($ch,CURLOPT_TIMEOUT,15);
+        //curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,5);
+        //curl_setopt($ch,CURLOPT_TIMEOUT,20);
         if($post) {
         curl_setopt($ch,CURLOPT_POST,true);
         curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
