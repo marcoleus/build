@@ -1090,7 +1090,7 @@ function captchaai($method,$sitekey,$pageurl,$rr=0) {
         }
         $id=explode('|',$r)[1];
         if(!$id) {
-            sleep(15);
+            //sleep(15);
             continue;
         }
         sleep(5);
