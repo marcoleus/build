@@ -204,14 +204,14 @@ function ckkkkurl($url,$head=0,$post=0,$follow=0,$cookiejar=0) {
         $respHeaders = substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
         $info = curl_getinfo($ch);
         $body = substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
-        foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line) {
-            if($i===0) {$headers['http_code'] = $line;
+        foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i => $line) {
+            if($i == 0) {$headers['http_code'] = $line;
             } else {
                 list($key, $value )= explode(': ',$line);
                 $header[$key] = $value;}}
                 curl_close($ch);
                 $movePage=movePage()[$info["http_code"]];
-                if($info["primary_ip"]==null) {
+                if(!$info["primary_ip"]) {
                     print m.$movePage;r();
                     continue;
                 } else {
@@ -267,13 +267,13 @@ if(!curl_getinfo($ch)) {
     $respHeaders = substr($response,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
     $info = curl_getinfo($ch);
     $body = substr($response,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
-    foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i=>$line) {
-        if($i===0) {$headers['http_code'] = $line;
+    foreach(explode("\r\n",substr($respHeaders,0,strpos($respHeaders,"\r\n\r\n"))) as $i => $line) {
+        if($i == 0) {$headers['http_code'] = $line;
         } else {
             list($key, $value ) = explode(': ',$line);
             $header[$key] = $value;}}
             curl_close($ch);
-            $movePage=movePage()[$info["http_code"]];
+            $movePage = movePage()[$info["http_code"]];
             if(!$info["primary_ip"]) {
                 print m.$movePage;
                 r();
