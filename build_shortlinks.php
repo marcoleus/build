@@ -130,7 +130,7 @@ function bypass_shortlinks($url) {
             $url = "https://ser7.crazyblog.in".explode("p=",$url)[1];
             $host = parse_url($url)["host"];
         }
-        if(preg_match("#(insfly.pw|url.cashurl.in|link.freeltc.top|short.freeltc.top|ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
+        if(preg_match("#(vnshortener.com|insfly.pw|url.cashurl.in|link.freeltc.top|short.freeltc.top|ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -149,6 +149,8 @@ function bypass_shortlinks($url) {
                 $referer = "https://techmody.io/";
              } elseif(preg_match("#(insfly.pw)#is",$host)) {
                 $referer = "https://enit.in/";
+            } elseif(preg_match("#(vnshortener.com)#is",$host)) {
+                $referer = "https://nishankhatri.com.np/";
             } else {
                 $referer = 0;
             }
