@@ -42,7 +42,6 @@ function visit_short($r,$icon=0) {
                             if($res->shortlink) {
                                 $r1["url"] = $res->shortlink;
                                 goto run;
-                            }
                         }
                     } elseif(mode == "no_icon") {
                         $data = http_build_query([
@@ -93,7 +92,7 @@ function visit_short($r,$icon=0) {
         }
         up:
     }
-
+}
 
 
 
