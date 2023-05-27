@@ -1181,9 +1181,6 @@ function icon_bits() {
         $image = curl(host."system/libs/captcha/request.php?cid=0&hash=".$hash[$x],hmc(),0,true)[1];
         $file_sizes[] = strlen($image);
     }
-    for ($y = 0;$y<5;$y++) {
-        $file_sizes[$y] = $file_sizes[$y];
-    }
     for ($z = 0;$z<5;$z++) {
         if($file_sizes[$z] !== $file_sizes[0]) {
             if($z == 1) {
