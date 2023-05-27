@@ -1187,8 +1187,8 @@ function icon_bits() {
     for ($z = 0;$z<5;$z++) {
         if($file_sizes[$z] !== $file_sizes[0]) {
             if($z == 1) {
-                if($file_sizes[2] == $file_sizes[1]) {
-                    $ind = $z-$z;
+                if($file_sizes[1] == $file_sizes[2]) {
+                    $ind = 0;
                 }
             }
             $ind = $z;
