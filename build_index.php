@@ -175,8 +175,9 @@ function ket_line($a,$aa,$b=0,$bb=0,$c=0,$cc=0) {
 
 function curl($url,$head = 0,$post = 0,$follow = 0,$cookiejar = 0) {
     while(TRUE) {
-        $ch = curl_init($url);
+        $ch = curl_init();
         curl_setopt_array($ch, array(
+            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_SSL_VERIFYPEER => FALSE,
             CURLOPT_SSL_VERIFYHOST => FALSE,
