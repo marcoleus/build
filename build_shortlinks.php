@@ -1185,11 +1185,13 @@ function icon_bits() {
             if($z == 1) {
                 if($file_sizes[1] == $file_sizes[2]) {
                     $ind = 0;
+                    goto fix;
                 }
             }
             $ind = $z;
         }
     }
+    fix:
     $answer = $hash[$ind];
     $data1 = http_build_query([
         "cID" => 0,
