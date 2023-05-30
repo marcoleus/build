@@ -244,6 +244,12 @@ $config[]="mitly";
 $config[]="mitly.us";
 $config[]="mitlyus";
 
+//--------------------------------------------------------//
+//https://clks.pro/ClbeW
+$config[]="clk";
+$config[]="clks";
+$config[]="clks.pro";
+
 /*/--------------------------------------------------------//
 //http://go.megaurl.in/ET2Ra2JC
 $config[]="megaurl";
