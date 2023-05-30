@@ -11,6 +11,11 @@ $config[]="linksfly.me";
 $config[]="shortsfly.me";
 
 //--------------------------------------------------------//
+//https://link4.pw/vA1KDGg
+$config[]="linkvor.pw";
+
+
+//--------------------------------------------------------//
 //https://ez4short.com/xFTG
 $config[]="ez4short";
 $config[]="ez4short.com";
