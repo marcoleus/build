@@ -1,3 +1,6 @@
+<?php
+
+
 //die(bypass_shortlinks("https://link4.pw/OXQ8"));
 
 if(!file("config.php")) {
@@ -881,14 +884,60 @@ function bypass_shortlinks($url) {
             }
             $run = build($url);
             $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
-            if($r["url"]) 
-            {L($coundown);
+            if($r["url"]) {
+                L($coundown);
                 print h."success";
                 r();
                 return $r["url"];
         }
+    } elseif(preg_match("#(clks.pro)#is",$host)) {
+        if(file(cookie_short)) {
+            unlink(cookie_short);
+        }
+        while(true) {
+            $r = base_short($url);
+            $t = $r["token_csrf"];
+            $data = http_build_query([
+                $t[1][0] => $t[2][0],
+                $t[1][1] => $t[2][1]
+            ]);
+            $r1 = base_short($r["url1"][0],1,$data,$url);
+            $r2 = base_short($r1["url"]);
+            if(!$r2["url2"][0]) {
+                continue;
+            }
+            $r3 = base_short($r2["url2"][0]);
+            $method = "recaptchav2";
+            $t1 = $r3["token_csrf"];
+            if(!$t1[1][0]) {
+                continue;
+            }
+            $cap = request_captcha($method,$r3[$method],$r2["url2"][0]);
+            $data1 = http_build_query([
+                "g-recaptcha-response" => $cap,
+                $t1[1][0] => $t1[2][0],
+                $t1[1][1] => $t1[2][1]
+            ]);
+            $r4 = base_short($r2["url2"][0],1,$data1,$r2["url2"][0]);
+            for ($i = 1;$i<6;$i++) {L(15);
+                $data = http_build_query([
+                    $t1[1][0] => $i,
+                    $t1[1][1] => $t1[2][1]
+                ]);
+                $r5 = base_short($r2["url2"][0],1,$data,$r2["url2"][0]);
+                if($i == 5){print h."success";
+                    r();
+                    if(explode("url=",$r5["url"])[2]) {
+                        return explode("url=",$r5["url"])[2];
+                    } else {
+                        return $r5["url"];
+                    }
+                }
+            }
+        }
     }
 }
+
 
 
 
