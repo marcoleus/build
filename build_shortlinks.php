@@ -892,13 +892,14 @@ function bypass_shortlinks($url) {
             unlink(cookie_short);
         }
         while(true) {
-            $r = base_short($url);
+            $run = build($url);
+            $r = base_short($run["links"]);
             $t = $r["token_csrf"];
             $data = http_build_query([
                 $t[1][0] => $t[2][0],
                 $t[1][1] => $t[2][1]
             ]);
-            $r1 = base_short($r["url1"][0],1,$data,$url);
+            $r1 = base_short($r["url1"][0],1,$data,$run["links"]);
             $r2 = base_short($r1["url"]);
             if(!$r2["url2"][0]) {
                 continue;
