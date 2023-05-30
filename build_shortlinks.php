@@ -1,6 +1,3 @@
-<?php
-
-
 //die(bypass_shortlinks("https://link4.pw/OXQ8"));
 
 if(!file("config.php")) {
