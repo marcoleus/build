@@ -96,6 +96,15 @@ $config[]="adbull.me";
 
 
 //--------------------------------------------------------//
+//https://pingit.im/DGEg42E2
+$config[]="pingit";
+$config[]="pingit.im";
+$config[]="pngit";
+$config[]="pngit.live";
+
+
+
+//--------------------------------------------------------//
 //https://linkjust.com/CBbw64o0o5m
 $config[]="linkjust";
 $config[]="linkjust.com";
