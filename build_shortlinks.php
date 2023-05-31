@@ -739,7 +739,15 @@ function bypass_shortlinks($url) {
                     $t1[1][0] => $t1[2][0],
                     "g-recaptcha-response" => $cap
                 ]);
-                $r2 = base_short($run["links"],"",$data1);if($r2["timer"] or $r2["timer"] == 0) {L($coundown);$t2 = $r2["token_csrf"];$data2 = http_build_query([$t2[1][0] => $t2[2][0],$t2[1][1] => $t2[2][1],explode('"',$t2[1][2])[0] => rand(11111111,99999999)]);$r3 = base_short($run["go"][1],1,$data2);
+                $r2 = base_short($run["links"],"",$data1);
+                if($r2["timer"] or $r2["timer"] == 0) {
+                    L($coundown);$t2 = $r2["token_csrf"];
+                    $data2 = http_build_query([
+                        $t2[1][0] => $t2[2][0],
+                        $t2[1][1] => $t2[2][1],
+                        explode('"',$t2[1][2])[0] => rand(11111111,99999999)
+                    ]);
+                    $r3 = base_short($run["go"][1],1,$data2);
                     if($r3["url"]) {
                         print h."success";
                         r();
@@ -751,9 +759,15 @@ function bypass_shortlinks($url) {
             start:
             if(file(cookie_short)) {
                 unlink(cookie_short);
-                sleep(2);
             }
-            $res = base_short($url);
+            $method = "recaptchav2";
+            $r = base_short($url);
+            $res = base_short($r["url"]);
+            if($res[$method]) {
+                $res1 = $res; 
+                $res = $r["url"];
+                goto web1s_f;
+            }
             if(!$res["url1"][0]) {
                 sleep(2);
                 goto start;
@@ -776,16 +790,27 @@ function bypass_shortlinks($url) {
                 }
                 $client_id = build()["client_id"];
                 $par = parse_url($r1["url4"]);
+                if(strtoupper(substr(PHP_OS,0,3)) == 'WIN') {
+                    $screen="943x623";
+                    $browserVersion="113.0.0.0";
+                    $os="Windows";
+                    $osVersion=10;
+                } else {
+                    $screen="393x873";
+                    $browserVersion="107.0.0.0";
+                    $os="Android";
+                    $osVersion=11;
+                }
                 $data = http_build_query([
-                    "screen" => "393x873",
+                    "screen" => $screen,
                     "browser" => "Chrome",
-                    "browserVersion" => "107.0.0.0",
-                    "browserMajorVersion" => 107,
+                    "browserVersion" => $browserVersion,
+                    "browserMajorVersion" => explode(".",$browserVersion)[0],
                     "mobile" => true,
-                    "os" => "Android",
-                    "osVersion" => 11,
+                    "os" => $os,
+                    "osVersion" => $osVersion,
                     "cookies" => true,
-                    "flashVersion" => "nocheck",
+                    "flashVersion" => "no check",
                     "code" => $r1["code_data_ajax"][0],
                     "client_id" => $client_id,
                     "pathname" => $par["path"],
@@ -810,6 +835,8 @@ function bypass_shortlinks($url) {
                     if(!$r->url) {
                         continue;
                     }
+                    $res["url"] = $r->url;
+                    $res1 = base_short($res["url"]);
                     goto web1s_f;
                 } else {
                     goto web1s;
@@ -817,25 +844,23 @@ function bypass_shortlinks($url) {
             }
             web1s_f:
             while(true) {
-                $method = "recaptchav2";
-                $res = base_short($r->url);
-                if($res[$method]) {
-                    $t = $res["token_csrf"];
-                    $cap = request_captcha($method,$res[$method],$r->url);
+                if($res1[$method]) {
+                    $t = $res1["token_csrf"];
+                    $cap = request_captcha($method,$res1[$method],$res["url"]);
                     $data = http_build_query([
                         $t[1][0] => $t[2][0],
                         "g-recaptcha-response" => $cap
                     ]);
-                    $res = base_short($r->url,1,$data);
+                    base_short($res["url"],1,$data);
                     $data = http_build_query([
                         $t[1][0] => $t[2][0],
                         "countdown" => 1
                     ]);
-                    $res = base_short($r->url,1,$data);
+                    base_short($res["url"],1,$data);
                     $data = http_build_query([
                         $t[1][0] => $t[2][0]
                     ]);
-                    $respon = base_short($r->url,1,$data);
+                    $respon = base_short($res["url"],1,$data);
                     if(!$respon["url1"][0]) {
                         continue;
                     }
