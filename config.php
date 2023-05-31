@@ -259,6 +259,13 @@ $config[]="clk";
 $config[]="clks";
 $config[]="clks.pro";
 
+//--------------------------------------------------------//
+//https://web1s.info/DC0R4Pyhst
+$config[]="web1s";
+$config[]="web1s.co";
+$config[]="web1s.info";
+
+
 /*/--------------------------------------------------------//
 //http://go.megaurl.in/ET2Ra2JC
 $config[]="megaurl";
@@ -271,11 +278,6 @@ $config[]="megafly.in";
 $config[]="go.megafly.in";
 
 
-//--------------------------------------------------------//
-//https://web1s.info/DC0R4Pyhst
-$config[]="web1s";
-$config[]="web1s.co";
-$config[]="web1s.info";
 
 //--------------------------------------------------------//
 //https://cuty.io/rWOlWjELDNLS
