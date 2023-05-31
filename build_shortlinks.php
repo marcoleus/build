@@ -789,24 +789,26 @@ function bypass_shortlinks($url) {
                     goto web1s;
                 }
                 $client_id = build()["client_id"];
-                $par = parse_url($r1["url4"]);
+                $par = parse_url(urldecode($r1["url4"]));
                 if(strtoupper(substr(PHP_OS,0,3)) == 'WIN') {
-                    $screen="943x623";
-                    $browserVersion="113.0.0.0";
-                    $os="Windows";
-                    $osVersion=10;
+                    $screen = "943x623";
+                    $browserVersion = "113.0.0.0";
+                    $os= " Windows";
+                    $osVersion = 10;
+                    $mobile = false;
                 } else {
-                    $screen="393x873";
-                    $browserVersion="107.0.0.0";
-                    $os="Android";
-                    $osVersion=11;
+                    $screen = "393x873";
+                    $browserVersion = "107.0.0.0";
+                    $os = "Android";
+                    $osVersion = 11;
+                    $mobile = true;
                 }
                 $data = http_build_query([
                     "screen" => $screen,
                     "browser" => "Chrome",
                     "browserVersion" => $browserVersion,
                     "browserMajorVersion" => explode(".",$browserVersion)[0],
-                    "mobile" => true,
+                    "mobile" => $mobile,
                     "os" => $os,
                     "osVersion" => $osVersion,
                     "cookies" => true,
@@ -814,7 +816,7 @@ function bypass_shortlinks($url) {
                     "code" => $r1["code_data_ajax"][0],
                     "client_id" => $client_id,
                     "pathname" => $par["path"],
-                    "href" => $r1["url4"],
+                    "href" => urldecode($r1["url4"]),
                     "hostname" => $par["host"]
                 ]);
                 $step = base_short("https://web1s.com/step",1,$data)["json"];
