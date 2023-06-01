@@ -330,7 +330,7 @@ function bypass_shortlinks($url) {
                     return $r2->url;
                 }
             }
-        } elseif(preg_match("#(petafly.me|nonofly.me)#is",$host)) {
+        } elseif(preg_match("#(terafly.me|petafly.me|nonofly.me)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -339,6 +339,10 @@ function bypass_shortlinks($url) {
             $r = base_short($run["links"]);
             if(!$r["url"]) {
                 goto pet;
+            }
+            if(explode("?",$r["url"])[1]) {
+            $r2["url2"][0] = explode("?",$r["url"])[1];
+            goto next_st;
             }
             peta:
             $r1 = base_short($r["url"]);
@@ -350,6 +354,7 @@ function bypass_shortlinks($url) {
             if(!$r2["url2"][0]) {
                 goto petafly;
             }
+            next_st:
             $run = build($r2["url2"][0]);
             $r3 = base_short($run["links"]);
             $t3 = $r3["token_csrf"];
