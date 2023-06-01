@@ -153,6 +153,20 @@ $config[]="shorti";
 $config[]="freeltc";
 $config[]="freeltc.top";
 
+//https://terafly.me/oyoo/osZAP
+
+$config[]="ozoo";
+
+$config[]="opoo";
+
+$config[]="okoo";
+
+$config[]="oroo";
+
+$config[]="otoo";
+
+$config[]="oyoo";
+
 //--------------------------------------------------------//
 //http://petafly.me/Pofn
 $config[]="petafly";
