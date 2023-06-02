@@ -67,7 +67,9 @@ function visit_short($r,$icon=0) {
                             $r1["url"] = $r1["url1"];
                         } 
                     } elseif(mode == "sl_jepangwah") {
-                        $r1 = base_run(host."litecoin/".$r["visit"][$s]);
+                        $r1 = base_run(host."litecoin/".$r["visit"][$s
+                    } elseif(mode == "path") {
+                        $r1 = base_run(host.$r["visit"][$s]);
                     } else {
                         die(m."mode bypass not found".n);
                     }
