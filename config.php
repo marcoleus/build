@@ -14,6 +14,11 @@ $config[]="shortsfly.me";
 //https://link4.pw/vA1KDGg
 $config[]="linkvor.pw";
 
+//--------------------------------------------------------//
+//http://destyy.com/egUHMo
+$config[]="destyy.com";
+$config[]="destyy";
+$config[]="shortest";
 
 //--------------------------------------------------------//
 //https://ez4short.com/xFTG
