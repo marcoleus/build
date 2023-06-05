@@ -982,12 +982,16 @@ function bypass_shortlinks($url) {
             if(!$r["url"]) {
                 continue;
             }
-            $r1 = base_short("https://clkmein.com/shortest-url/end-adsession?adSessionId=26a33225d27ab993a7f3bc496edddb784fadcb80&adbd=0&callback=reqwest_".time(),0,0,$r["url"])["res"];
-            if(ex('":"','"',2,$r1) == "ok") {
-                L($coundown);
+            $r1 = base_short($r["url"]);
+            if(!$r1["sessionId"]) {
+                continue;
+            }
+            L($coundown);
+            $r2 = base_short("https://clkmein.com/shortest-url/end-adsession?adSessionId=".$r1["sessionId"]."&adbd=0&callback=reqwest_".time(),0,0,$r["url"])["res"];
+            if(ex('":"','"',2,$r2) == "ok") {
                 print h."succses";
                 r();
-                return str_replace("\/","/",ex('":"','"',1,$r1));
+                return str_replace("\/","/",ex('":"','"',1,$r2));
             }
         }
     }
@@ -1006,6 +1010,7 @@ function base_short($url,$xml=0,$data=0,$referer=0,$agent=0) {
     preg_match_all('#hidden" name="(.*?)" value="(.*?)"#is',$r[1],$token_csrf);
     preg_match('#(varcountdownValue=|PleaseWait|class="timer"value="|class="timer">)([0-9]{1}|[0-9]{2})(;|"|<|s)#is',str_replace([n," "],"",$r[1]),$timer);
     preg_match_all('#(dirrectSiteCode = |ai_data_id=|ai_ajax_url=)"(.*?)(")#is',$r[1],$code_data_ajax);
+    preg_match('#(sessionId: ")(.*?)(")#is',$r[1],$sessionId);
     return [
         "res" => $r[1],
         "hcaptcha" => $hcaptcha[2],
@@ -1018,7 +1023,8 @@ function base_short($url,$xml=0,$data=0,$referer=0,$agent=0) {
         "url2" => $url2[2],
         "url3" => $url3[2],
         "url4" => $url4[2],
-        "code_data_ajax" => $code_data_ajax[2]
+        "code_data_ajax" => $code_data_ajax[2],
+        "sessionId" => $sessionId[2]
     ];
 }
 
