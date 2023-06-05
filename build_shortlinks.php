@@ -19,7 +19,7 @@ function visit_short($r,$icon=0) {
         unlink(cookie_short);
         sleep(1);
     }
-    for($i=0;$i<100;$i++) {
+    for($i=0;$i<500;$i++) {
         for($s=0;$s<100;$s++) {
             $open = multiexplode(["_","{","[","(","-easy","-mid","-hard"],str_replace(" ","",strtolower($r["name"][$s])))[0];
                 if($asf[$i] == $open) {
