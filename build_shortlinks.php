@@ -184,7 +184,7 @@ function bypass_shortlinks($url) {
                     return $r1->url;
                 }
             }
-        } elseif(preg_match("#(linksly.co|go.linksly.co|illink.net|go.illink.net|shrinke.me|go1.urlcash.click|urlcashh.click|ser7.crazyblog.in|short.pe|shurt.pw|urlcashh.quest|softindex.site|go.urlcash.site|goes1.softindex.website)#is",$host)) {
+        } elseif(preg_match("#(coinpayz.link|linksly.co|go.linksly.co|illink.net|go.illink.net|shrinke.me|go1.urlcash.click|urlcashh.click|ser7.crazyblog.in|short.pe|shurt.pw|urlcashh.quest|softindex.site|go.urlcash.site|goes1.softindex.website)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
