@@ -279,6 +279,9 @@ $config[]="web1s";
 $config[]="web1s.co";
 $config[]="web1s.info";
 
+//--------------------------------------------------------//
+//https://coinpayz.link/nQe01oD
+$config[]="cplink";
 
 /*/--------------------------------------------------------//
 //http://go.megaurl.in/ET2Ra2JC
