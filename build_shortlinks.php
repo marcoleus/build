@@ -972,9 +972,25 @@ function bypass_shortlinks($url) {
                 }
             }
         }
+    } elseif(preg_match("#(destyy.com)#is",$host)) {
+        while(true) {
+            if(file(cookie_short)) {
+                unlink(cookie_short);
+            }
+            $run = build($url);
+            $r = base_short($run["links"]);
+            if(!$r["url"]) {
+                continue;
+            }
+            $r1 = base_short("https://clkmein.com/shortest-url/end-adsession?adSessionId=26a33225d27ab993a7f3bc496edddb784fadcb80&adbd=0&callback=reqwest_".time(),0,0,$r["url"])["res"];
+            if(ex('":"','"',2,$r1) == "ok") {
+                print h."succses";
+                r();
+                return str_replace("\/","/",ex('":"','"',1,$r1));
+            }
+        }
     }
 }
-
 
 
 
