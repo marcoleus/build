@@ -984,6 +984,7 @@ function bypass_shortlinks($url) {
             }
             $r1 = base_short("https://clkmein.com/shortest-url/end-adsession?adSessionId=26a33225d27ab993a7f3bc496edddb784fadcb80&adbd=0&callback=reqwest_".time(),0,0,$r["url"])["res"];
             if(ex('":"','"',2,$r1) == "ok") {
+                L($coundown);
                 print h."succses";
                 r();
                 return str_replace("\/","/",ex('":"','"',1,$r1));
