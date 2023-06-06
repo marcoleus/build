@@ -116,7 +116,8 @@ $config[]="linkjust.com";
 
 //--------------------------------------------------------//
 //http://nx.chainfo.xyz/CBvdzwhx79a
-//$config[]="chainfo";
+$config[]="chainfo";
+$config[]="chaininfo";
 $config[]="chainfo.xyz";
 
 
@@ -190,7 +191,7 @@ $config[]="shrinlearn";
 
 //--------------------------------------------------------//
 //https://shrinke.me/9SJRbamZ
-//$config[]="shrinkme";
+$config[]="shrinkme";
 $config[]="shrink.me";
 
 
@@ -282,6 +283,7 @@ $config[]="clks.pro";
 $config[]="web1s";
 $config[]="web1s.co";
 $config[]="web1s.info";
+$config[]="normal1s";
 
 //--------------------------------------------------------//
 //https://coinpayz.link/nQe01oD
