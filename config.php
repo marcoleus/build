@@ -161,16 +161,15 @@ $config[]="freeltc.top";
 //https://terafly.me/oyoo/osZAP
 
 $config[]="ozoo";
-
 $config[]="opoo";
-
 $config[]="okoo";
-
 $config[]="oroo";
-
 $config[]="otoo";
-
 $config[]="oyoo";
+$config[]="owoo";
+$config[]="omoo";
+$config[]="ogoo";
+
 
 //--------------------------------------------------------//
 //http://petafly.me/Pofn
