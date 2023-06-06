@@ -289,7 +289,7 @@ $config[]="normal1s";
 //https://coinpayz.link/nQe01oD
 $config[]="cplink";
 
-/*/--------------------------------------------------------//
+//--------------------------------------------------------//
 //http://go.megaurl.in/ET2Ra2JC
 $config[]="megaurl";
 $config[]="megaurl.in";
@@ -302,7 +302,7 @@ $config[]="go.megafly.in";
 
 
 
-//--------------------------------------------------------//
+/*/--------------------------------------------------------//
 //https://cuty.io/rWOlWjELDNLS
 $config[]="cuty";
 $config[]="cuty.io";
