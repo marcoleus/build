@@ -767,7 +767,7 @@ function bypass_shortlinks($url) {
                 unlink(cookie_short);
             }
             $run = build($url);
-            $r = base_short($run["links"]);
+            $r = base_short($run["links"],0,0,$run["links"]);
             $t = $r["token_csrf"];
             $data = http_build_query([
                 $t[1][0] => $t[2][0],
@@ -788,7 +788,7 @@ function bypass_shortlinks($url) {
                     explode('"',$t1[1][3])[0] => $t1[2][3],
                     explode('"',$t1[1][4])[0] => $t1[2][4]
                 ]);
-                $r2 = base_short($run["go"][0],1,$data1)["json"];
+                $r2 = base_short($run["go"][0],1,$data1,$run["links"])["json"];
                 if($r2->status == "success") {
                     print h.$r2->status;
                     r();
