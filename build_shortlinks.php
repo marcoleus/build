@@ -762,122 +762,6 @@ function bypass_shortlinks($url) {
                     }
                 }
             }
-        } elseif(preg_match("#(web1s.co|web1s.info)#is",$host)) {
-            start:
-            if(file(cookie_short)) {
-                unlink(cookie_short);
-            }
-            $method = "recaptchav2";
-            $r = base_short($url);
-            $res = base_short($r["url"]);
-            if($res[$method]) {
-                $res1 = $res; 
-                $res = $r["url"];
-                goto web1s_f;
-            }
-            if(!$res["url1"][0]) {
-                sleep(2);
-                goto start;
-            }
-            $n = 0;
-            web1s:
-            $n++;
-            if($n == 4) {
-                goto start;
-            }
-            $r1 = base_short($res["url1"][0]);
-            if(!$r1["code_data_ajax"][0]) {
-                goto web1s;
-            }
-            $n = 0;
-            while(true) {
-                $n++;
-                if($n == 3) {
-                    goto web1s;
-                }
-                $client_id = build()["client_id"];
-                $par = parse_url(urldecode($r1["url4"]));
-                if(strtoupper(substr(PHP_OS,0,3)) == 'WIN') {
-                    $screen = "943x623";
-                    $browserVersion = "113.0.0.0";
-                    $os= " Windows";
-                    $osVersion = 10;
-                    $mobile = false;
-                } else {
-                    $screen = "393x873";
-                    $browserVersion = "107.0.0.0";
-                    $os = "Android";
-                    $osVersion = 11;
-                    $mobile = true;
-                }
-                $data = http_build_query([
-                    "screen" => $screen,
-                    "browser" => "Chrome",
-                    "browserVersion" => $browserVersion,
-                    "browserMajorVersion" => explode(".",$browserVersion)[0],
-                    "mobile" => $mobile,
-                    "os" => $os,
-                    "osVersion" => $osVersion,
-                    "cookies" => true,
-                    "flashVersion" => "no check",
-                    "code" => $r1["code_data_ajax"][0],
-                    "client_id" => $client_id,
-                    "pathname" => $par["path"],
-                    "href" => urldecode($r1["url4"]),
-                    "hostname" => $par["host"]
-                ]);
-                $step = base_short("https://web1s.com/step",1,$data)["json"];
-                if($n == 1) {
-                    if(!$step->step) {
-                        goto start;
-                    }
-                }
-                print p."step".$step->step."/".$step->total_steps;
-                r();
-                $time = base_short("https://web1s.com/countdown",1,$data)["json"];
-                if(!$time->timer) {
-                    continue;
-                }
-                L($time->timer);
-                $r = base_short("https://web1s.com/continue",1,$data)["json"];
-                if($step->step == $step->total_steps) {
-                    if(!$r->url) {
-                        continue;
-                    }
-                    $res["url"] = $r->url;
-                    $res1 = base_short($res["url"]);
-                    goto web1s_f;
-                } else {
-                    goto web1s;
-                }
-            }
-            web1s_f:
-            while(true) {
-                if($res1[$method]) {
-                    $t = $res1["token_csrf"];
-                    $cap = request_captcha($method,$res1[$method],$res["url"]);
-                    $data = http_build_query([
-                        $t[1][0] => $t[2][0],
-                        "g-recaptcha-response" => $cap
-                    ]);
-                    base_short($res["url"],1,$data);
-                    $data = http_build_query([
-                        $t[1][0] => $t[2][0],
-                        "countdown" => 1
-                    ]);
-                    base_short($res["url"],1,$data);
-                    $data = http_build_query([
-                        $t[1][0] => $t[2][0]
-                    ]);
-                    $respon = base_short($res["url"],1,$data);
-                    if(!$respon["url1"][0]) {
-                        continue;
-                    }
-                    print h."success";
-                    r();
-                    return $respon["url1"][0];
-                }
-            }
         } elseif(preg_match("#(goo.st)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
@@ -992,6 +876,144 @@ function bypass_shortlinks($url) {
                 print h."succses";
                 r();
                 return str_replace("\/","/",ex('":"','"',1,$r2));
+            }
+        }
+    } elseif(preg_match("#(web1s.co|web1s.info)#is",$host)) {
+        start:
+        if(file(cookie_short)) {
+            unlink(cookie_short);
+        }
+        $method = "recaptchav2";
+        $r = base_short($url);
+        $res = base_short($r["url"]);
+        $host = parse_url($res["url"])["host"];
+        if(preg_match("#(app.covemarkets.com)#is",$host)) {
+            $r = base_short($res["url"]);
+            if($r["timer"]) {
+                L($r["timer"]);
+                $t = $r["token_csrf"];
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    $t[1][1] => $t[2][1]
+                ]);
+                $r1 = base_short($res["url"],1,$data);
+                $r2 = base_short($res["url"]);
+                if($r2["timer"]) {
+                    L($r2["timer"]);
+                    $t2 = $r2["token_csrf"];
+                    $data = http_build_query([
+                        $t2[1][0] => $t2[2][0],
+                        $t2[1][1] => $t2[2][1]
+                    ]);
+                    $r3 = base_short($res["url"],1,$data);
+                    $res1 = base_short($res["url"]);
+                    if($res1[$method]) {
+                        goto web1s_f;
+                    }
+                }
+            }
+        }
+        if(!$res["url1"][0]) {
+            sleep(2);
+            goto start;
+        }
+        $n = 0;
+        web1s:
+        $n++;
+        if($n == 4) {
+            goto start;
+        }
+        $r1 = base_short($res["url1"][0]);
+        if(!$r1["code_data_ajax"][0]) {
+            goto web1s;
+        }
+        $n = 0;
+        while(true) {
+            $n++;
+            if($n == 3) {
+                goto web1s;
+            }
+            $client_id = build()["client_id"];
+            $par = parse_url(urldecode($r1["url4"]));
+            if(strtoupper(substr(PHP_OS,0,3)) == 'WIN') {
+                $screen = "943x623";
+                $browserVersion = "113.0.0.0";
+                $os= " Windows";
+                $osVersion = 10;
+                $mobile = false;
+            } else {
+                $screen = "393x873";
+                $browserVersion = "107.0.0.0";
+                $os = "Android";
+                $osVersion = 11;
+                $mobile = true;
+            }
+            $data = http_build_query([
+                "screen" => $screen,
+                "browser" => "Chrome",
+                "browserVersion" => $browserVersion,
+                "browserMajorVersion" => explode(".",$browserVersion)[0],
+                "mobile" => $mobile,
+                "os" => $os,
+                "osVersion" => $osVersion,
+                "cookies" => true,
+                "flashVersion" => "no check",
+                "code" => $r1["code_data_ajax"][0],
+                "client_id" => $client_id,
+                "pathname" => $par["path"],
+                "href" => urldecode($r1["url4"]),
+                "hostname" => $par["host"]
+            ]);
+            $step = base_short("https://web1s.com/step",1,$data)["json"];
+            if($n == 1) {
+                if(!$step->step) {
+                    goto start;
+                }
+            }
+            print p."step".$step->step."/".$step->total_steps;
+            r();
+            $time = base_short("https://web1s.com/countdown",1,$data)["json"];
+            if(!$time->timer) {
+                continue;
+            }
+            L($time->timer);
+            $r = base_short("https://web1s.com/continue",1,$data)["json"];
+            if($step->step == $step->total_steps) {
+                if(!$r->url) {
+                    continue;
+                }
+                $res["url"] = $r->url;
+                $res1 = base_short($res["url"]);
+                goto web1s_f;
+            } else {
+                goto web1s;
+            }
+        }
+        web1s_f:
+        while(true) {
+            if($res1[$method]) {
+                $t = $res1["token_csrf"];
+                $cap = request_captcha($method,$res1[$method],$res["url"]);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    "g-recaptcha-response" => $cap
+                ]);
+                base_short($res["url"],1,$data);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0],
+                    "countdown" => 1
+                ]);
+                base_short($res["url"],1,$data);
+                $data = http_build_query([
+                    $t[1][0] => $t[2][0]
+                ]);
+                $respon = base_short($res["url"],1,$data);
+                if(!$respon["url1"][0]) {
+                    continue;
+                }
+                print h."success";
+                r();
+                return $respon["url1"][0];
             }
         }
     }
