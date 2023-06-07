@@ -1016,6 +1016,35 @@ function bypass_shortlinks($url) {
                 return $respon["url1"][0];
             }
         }
+    } elseif(preg_match("#(fc-lc.com)#is",$host)) {
+        if(file(cookie_short)) {
+            unlink(cookie_short);
+        }$run = build($url);
+        $r = base_short($run["links"]);
+        $t = $r["token_csrf"];
+        $data = http_build_query([
+            $t[1][0] => $t[2][0],
+            $t[1][1] => $t[2][1],
+            $t[1][2] => $t[2][2],
+        ]);
+        $r1 = base_short("https://webhostingpost.com/whmcs-alternate-options-prime-10-reviewed-in-2020/",1,$data);
+        $t = $r1["token_csrf"];
+        $data = http_build_query([
+            $t[1][0] => $t[2][0],
+            $t[1][1] => $t[2][1],
+            $t[1][2] => $t[2][2],
+            $t[1][3] => $t[2][3],
+            "ab" => 2,
+            explode('"',$t[1][4])[0] => $t[2][4],
+            explode('"',$t[1][5])[0] => $t[2][5]
+        ]);
+        $r2 = base_short($run["go"][0],1,$data)["json"];
+        if($r2->url) {
+            L($coundown);
+            print h."success";
+            r();
+            return $r2->url;
+        }
     }
 }
 
