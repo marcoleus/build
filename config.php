@@ -284,6 +284,7 @@ $config[]="web1s";
 $config[]="web1s.co";
 $config[]="web1s.info";
 $config[]="normal1s";
+$config[]="web1snormal2";
 
 //--------------------------------------------------------//
 //https://coinpayz.link/nQe01oD
