@@ -113,14 +113,17 @@ function bypass_shortlinks($url) {
             $url = "https://ser7.crazyblog.in".explode("p=",$url)[1];
             $host = parse_url($url)["host"];
         }
-        if(preg_match("#(pingit.im|link4.pw|vnshortener.com|insfly.pw|url.cashurl.in|link.freeltc.top|short.freeltc.top|ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
+        if(preg_match("#(coinpayz.link|linksly.co|go.linksly.co|illink.net|go.illink.net|shrinke.me|go1.urlcash.click|urlcashh.click|ser7.crazyblog.in|short.pe|shurt.pw|urlcashh.quest|softindex.site|go.urlcash.site|goes1.softindex.website|pingit.im|link4.pw|vnshortener.com|insfly.pw|url.cashurl.in|link.freeltc.top|short.freeltc.top|ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
-            if(preg_match("#(adbull.me)#is",$host)) {
+            if(preg_match("#(linksly.co|go.linksly.co)#is",$host)) {
+                $referer = "https://themezon.net/";
+            } elseif(preg_match("#(adbull.me)#is",$host)) {
                 $referer = "https://deportealdia.live/";
             } elseif(preg_match("#(linkjust.com)#is",$host)) {
-                $referer = "https://forexrw7.com/";     } elseif(preg_match("#(flyzu.icu|go.flyzu.icu)#is",$host)) {
+                $referer = "https://forexrw7.com/";
+            } elseif(preg_match("#(flyzu.icu|go.flyzu.icu)#is",$host)) {
                 $referer = "https://zubatecno.com/";
             } elseif(preg_match("#(nx.chainfo.xyz|go.bitcosite.com)#is",$host)) {
                 $referer = "https://bitzite.com/";
@@ -139,12 +142,12 @@ function bypass_shortlinks($url) {
             } else {
                 $referer = 0;
             }
-            if(preg_match("#(birdurls.com|owllink.net|go.birdurls.com|go.owllink.net)#is",$host)) {
+            if(preg_match("#(illink.net|go.illink.net|birdurls.com|owllink.net|go.birdurls.com|go.owllink.net)#is",$host)) {
                 $cloud = 1;
             } else {
                 $cloud = 0;
             }
-            $url = str_replace("pingit.im","pngit.live",str_replace("link4.pw","g.linkvor.pw",str_replace("url.cashurl.in","go.cashurl.in",str_replace("link.freeltc.top","short.freeltc.top",str_replace("nx.chainfo.xyz","go.bitcosite.com",str_replace("flyzu.icu","go.flyzu.icu",str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","go.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))))))))))));
+            $url = str_replace("linksly.co","go.linksly.co",str_replace("go.illink.net","illink.net",str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",str_replace("pingit.im","pngit.live",str_replace("link4.pw","g.linkvor.pw",str_replace("url.cashurl.in","go.cashurl.in",str_replace("link.freeltc.top","short.freeltc.top",str_replace("nx.chainfo.xyz","go.bitcosite.com",str_replace("flyzu.icu","go.flyzu.icu",str_replace("go.birdurls.com","birdurls.com",str_replace("go.owllink.net","owllink.net",str_replace("link.usalink.io","go.theconomy.me",str_replace("go.megaurl.in","get.megaurl.in",str_replace("go.megafly.in","get.megafly.in",str_replace("go.alwrificlick.site","alwrificlick.site",str_replace("link.shorti.io","shorti.io",str_replace("link.adshorti.xyz","adshorti.xyz",str_replace("url.mozlink.net","go.mozlink.net",str_replace("go.cuturl.in","go.mozlink.net",str_replace("go.softindex.website","softindex.website",str_replace("link.shorti.io","blog.financeandinsurance.xyz",str_replace("ser2","ser3",$url)))))))))))))))))))))))));
             $run = build($url);
             $r = base_short($run["links"],0,0,$referer,$cloud);
             $t = $r["token_csrf"];
@@ -159,65 +162,11 @@ function bypass_shortlinks($url) {
                 $data = http_build_query([
                     $t[1][0] => $t[2][0],
                     explode('"',$t[1][1])[0] => $t[2][1],
-                    $t[1][2] => $t[2][2],
-                    $t[1][3] => $t[2][3],
+                    "ref" => "",
+                    "f_n" => "slc",
                     "g-recaptcha-response" => $cap,
                     explode('"',$t[1][4])[0] => $t[2][4],
                     explode('"',$t[1][5])[0] => $t[2][5]
-                ]);
-                $r = base_short($run["links"],"",$data,$run["links"],$cloud);
-                $t = $r["token_csrf"];
-            }
-            if($r["timer"] or $r["timer"] == 0) {
-                L($coundown);
-                $data = http_build_query([
-                    $t[1][0] => $t[2][0],
-                    explode('"',$t[1][1])[0] => $t[2][1],
-                    $t[1][2] => $t[2][2],
-                    explode('"',$t[1][3])[0] => $t[2][3],
-                    explode('"',$t[1][4])[0] => $t[2][4]
-                ]);
-                $r1 = base_short($run["go"][0],1,$data,0,$cloud)["json"];
-                if($r1->status == "success") {
-                    print h.$r1->status;
-                    r();
-                    return $r1->url;
-                }
-            }
-        } elseif(preg_match("#(coinpayz.link|linksly.co|go.linksly.co|illink.net|go.illink.net|shrinke.me|go1.urlcash.click|urlcashh.click|ser7.crazyblog.in|short.pe|shurt.pw|urlcashh.quest|softindex.site|go.urlcash.site|goes1.softindex.website)#is",$host)) {
-            if(file(cookie_short)) {
-                unlink(cookie_short);
-            }
-            if(preg_match("#(linksly.co|go.linksly.co)#is",$host)) {
-                $referer = "https://themezon.net/";
-            } else {
-                $referer = 0;
-            }
-            if(preg_match("#(illink.net|go.illink.net)#is",$host)) {
-                $cloud = 1;
-            } else {
-                $cloud = 0;
-            }
-            $url = str_replace("linksly.co","go.linksly.co",str_replace("go.illink.net","illink.net",str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",$url))))));
-            $run = build($url);
-            $r = base_short($run["links"],0,0,$referer,$cloud);
-            $t = $r["token_csrf"];
-            if(explode('"',$t[1][2])[0] == "ad_form_data") {
-                $request_captcha = false;
-            } else {
-                $request_captcha = true;
-            }
-            if($request_captcha == true) {
-                $method = "recaptchav2";
-                $cap = request_captcha($method,$r[$method],$run["links"]);
-                $data = http_build_query([
-                    $t[1][0] => $t[2][0],
-                    explode('"',$t[1][1])[0] => $t[2][1],
-                    explode('"',$t[1][2])[0] => "",
-                    "f_n" => $t[2][2],
-                    "g-recaptcha-response" => $cap,
-                    explode('"',$t[1][3])[0] => $t[2][3],
-                    explode('"',$t[1][4])[0] => $t[2][4]
                 ]);
                 $r = base_short($run["links"],"",$data,$run["links"],$cloud);
                 $t = $r["token_csrf"];
