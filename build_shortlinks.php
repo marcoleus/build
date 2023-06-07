@@ -909,9 +909,9 @@ function bypass_shortlinks($url) {
                 "flashVersion" => "no check",
                 "code" => $r1["code_data_ajax"][0],
                 "client_id" => $client_id,
-                "pathname" => $par["path"],
+                "pathname" => urldecode($par["path"]),
                 "href" => urldecode($r1["url4"]),
-                "hostname" => $par["host"]
+                "hostname" => urldecode($par["host"])
             ]);
             $step = base_short("https://web1s.com/step",1,$data)["json"];
             if($n == 1) {
