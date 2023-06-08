@@ -84,6 +84,7 @@ $config[]="goo.st";
 //https://owllink.net/ckjv
 $config[]="birdurl";
 $config[]="birdurls";
+$config[]="birdsurl";
 $config[]="birdurls.com";
 $config[]="owlink";
 $config[]="owllink";
