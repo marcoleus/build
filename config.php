@@ -26,6 +26,16 @@ $config[]="ez4short";
 $config[]="ez4short.com";
 $config[]="insfly";
 
+
+//--------------------------------------------------------//
+//https://fc-lc.com/urdbrOD
+$config[]="fc";
+$config[]="fclc";
+$config[]="fc-lc";
+$config[]="fc-lc.com";
+
+
+
 //--------------------------------------------------------//
 //https://adrev.link/LR5R
 $config[]="adrevlinks";
