@@ -22,7 +22,7 @@ function visit_short($r,$icon=0) {
     for($i=0;$i<500;$i++) {
         for($s=0;$s<100;$s++) {
             $open = multiexplode(["_","{","[","(","-desktop","-easy","-mid","-hard"],str_replace(" ","",strtolower($r["name"][$s])))[0];
-                if($asf[$i] == $open) {
+                if(strtolower($asf[$i]) == $open) {
                     if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
                         goto up;
                     }
