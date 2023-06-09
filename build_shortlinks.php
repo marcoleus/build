@@ -10,11 +10,9 @@ function multiexplode($delimiters,$string) {
     return explode($delimiters[0],$ready);
 }
 
-
 function visit_short($r,$icon=0) {
-    global $config;
+    global $off_shortlinks;
     $exp = 0;
-    $asf = $config;
     if(file(cookie_short)) {
         unlink(cookie_short);
         sleep(1);
@@ -22,9 +20,11 @@ function visit_short($r,$icon=0) {
     for($i=0;$i<500;$i++) {
         for($s=0;$s<100;$s++) {
             $open = multiexplode(["_","{","[","(","-desktop","-easy","-mid","-hard"],str_replace(" ","",strtolower($r["name"][$s])))[0];
-                if(strtolower($asf[$i]) == $open) {
-                    if(explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
-                        goto up;
+                if(strtolower(config()[$i]) == $open) {
+                    for($k=0;$k<50;$k++){
+                        if(strtolower($off_shortlinks[host][$k]) == $open or explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
+                            goto up;
+                        }
                     }
                     if(preg_replace("/[^0-9]/","",$r["visit"][$s])) {
                         if(mode == "af") {
@@ -42,63 +42,61 @@ function visit_short($r,$icon=0) {
                             if($res->shortlink) {
                                 $r1["url"] = $res->shortlink;
                                 goto run;
-                        }
-                    } elseif(mode == "no_icon") {
-                        $data = http_build_query([
-                            "a" => "getShortlink",
-                            "data" => preg_replace("/[^0-9]/",
-                            "",$r["visit"][$s]),
-                            "token" => $r["token"]
-                        ]);
-                        $res = base_run(host."system/ajax.php",$data)["json"];
-                        if($res->shortlink) {
-                            $r1["url"] = $res->shortlink;
-                            goto run;
-                        }
-                    } elseif(mode == "vie_free") {
-                        if($r["token_csrf"][1][0]) {
+                            }
+                        } elseif(mode == "no_icon") {
                             $data = http_build_query([
-                                explode('"',$r["token_csrf"][1][0])[0] => $r["token_csrf"][2][0],
-                                $r["token_csrf"][1][1] => $r["token_csrf"][2][1]
+                                "a" => "getShortlink",
+                                "data" => preg_replace("/[^0-9]/",
+                                "",$r["visit"][$s]),
+                                "token" => $r["token"]
                             ]);
+                            $res = base_run(host."system/ajax.php",$data)["json"];
+                            if($res->shortlink) {
+                                $r1["url"] = $res->shortlink;
+                                goto run;
+                            }
+                        } elseif(mode == "vie_free") {
+                            if($r["token_csrf"][1][0]) {
+                                $data = http_build_query([
+                                    explode('"',$r["token_csrf"][1][0])[0] => $r["token_csrf"][2][0],
+                                    $r["token_csrf"][1][1] => $r["token_csrf"][2][1]
+                                ]);
+                            }
+                            $r1 = base_run($r["visit"][$s],$data);
+                            if($r1["url1"]) {
+                                $r1["url"] = $r1["url1"];
+                            }
+                        } elseif(mode == "sl_jepangwah") {
+                            $r1 = base_run(host."litecoin/".$r["visit"][$s]);
+                        } elseif(mode == "path") {
+                            $r1 = base_run(host.$r["visit"][$s]);
+                        } else {
+                            die(m."mode bypass not found".n);
                         }
-                        $r1 = base_run($r["visit"][$s],$data);
-                        if($r1["url1"]) {
-                            $r1["url"] = $r1["url1"];
-                        } 
-                    } elseif(mode == "sl_jepangwah") {
-                        $r1 = base_run(host."litecoin/".$r["visit"][$s]);
-                    } elseif(mode == "path") {
-                        $r1 = base_run(host.$r["visit"][$s]);
-                    } else {
-                        die(m."mode bypass not found".n);
+                        run:
+                        if(!parse_url($r1["url"])["scheme"]) {
+                            print m."Failed to generate this link ".p.$r["name"][$s];
+                            r();
+                            return "refresh";
+                        }
+                        ket_line("",$r["name"][$s],"left",trim(explode("<",$r["left"][$s])[0]));
+                        ket("",k.$r1["url"]).line();
+                        refresh:
+                        $exp++;
+                        if($exp == 2) {
+                            goto up;
+                        }
+                        $r2 = bypass_shortlinks($r1["url"]);
+                        if(!$r2) {
+                            goto refresh;
+                        }
+                        return $r2;
                     }
-                    run:
-                    if(!parse_url($r1["url"])["scheme"]) {
-                        print m."Failed to generate this link ".p.$r["name"][$s];
-                        r();
-                        return "refresh";
-                    }
-                    ket_line("",$r["name"][$s],"left",trim(explode("<",$r["left"][$s])[0]));
-                    ket("",k.$r1["url"]).line();
-                    refresh:
-                    $exp++;
-                    if($exp == 2) {
-                        goto up;
-                    }
-                    $r2 = bypass_shortlinks($r1["url"]);
-                    if(!$r2) {
-                        goto refresh;
-                    }
-                    return $r2;
                 }
             }
-        }
         up:
     }
 }
-
-
 
 function bypass_shortlinks($url) {
     $coundown = 15;
@@ -1479,4 +1477,245 @@ $r = urldecode($dec[2]);
             }
         }
     }
+}
+   
+function config() {
+    //--------------------------------------------------------//
+    //https://linksfly.me/CBa0ydu31nb
+    //http://shortsfly.me/roakE1pV
+    $config[] ="linksfly";
+    $config[] ="shortfly";
+    $config[] ="shortsfly";
+    $config[] ="linksfly.me";
+    $config[] ="shortsfly.me";
+    //--------------------------------------------------------//
+    //https://link4.pw/vA1KDGg
+    $config[] ="linkvor.pw";
+    //--------------------------------------------------------//
+    //http://destyy.com/egUHMo
+    $config[] ="destyy.com";
+    $config[] ="destyy";
+    $config[] ="shortest";
+    //--------------------------------------------------------//
+    //https://ez4short.com/xFTG
+    $config[] ="ez4short";
+    $config[] ="ez4short.com";
+    $config[] ="insfly";
+    //--------------------------------------------------------//
+    //https://fc-lc.com/urdbrOD
+    $config[] ="fc";
+    $config[] ="fclc";
+    $config[] ="fc-lc";
+    $config[] ="fc-lc.com";
+    //--------------------------------------------------------//
+    //https://adrev.link/LR5R
+    $config[] ="adrevlinks";
+    //--------------------------------------------------------//
+    //https://cbshort.com/st?api =406af259d31c828d9eb96f3c1623e6f247477d2e&amp;url =sclick.crazyblog.in/CBt6m0km8yr
+    $config[] ="shrinkclick";
+    $config[] ="hrshort";
+    //--------------------------------------------------------//
+    //https://ex-foary.com/CBgjr6qiyru
+    $config[] ="exfoary";
+    $config[] ="ex-foary";
+    $config[] ="ex-foary.com";
+    //--------------------------------------------------------//
+    //http://link.adshorti.xyz/CBah1e6pyg5
+    $config[] ="adshorti2";
+    $config[] ="adshorti.xyz";
+    //--------------------------------------------------------//
+    //https://shortzu.icu/CBikellupjp
+    //https://clickzu.icu/CBxwz99ht0y
+    $config[] ="shortzu";
+    $config[] ="shortzu.icu";
+    $config[] ="clickzu";
+    $config[] ="clickzu.icu";
+    //--------------------------------------------------------//
+    //https://droplink.co/NQWbVQ9C
+    $config[] ="droplink";
+    $config[] ="droplink.co";
+    //--------------------------------------------------------//
+    $config[] ="cbshort";
+    //--------------------------------------------------------//
+    //https://try2link.com/xenvu
+    $config[] ="try2link";
+    $config[] ="try2link.com";
+    //--------------------------------------------------------//
+    //https://goo.st/xZ6PH
+    $config[] ="goo";
+    $config[] ="goo.st";
+    //--------------------------------------------------------//
+    //https://birdurls.com/CBd2opxqf21
+    //https://owllink.net/ckjv
+    $config[] ="birdurl";
+    $config[] ="birdurls";
+    $config[] ="birdsurl";
+    $config[] ="birdurls.com";
+    $config[] ="owlink";
+    $config[] ="owllink";
+    $config[] ="owllink.net";
+    //--------------------------------------------------------//
+    //https://zuba.link/CBv74a1l73i
+    $config[] ="zuba";
+    $config[] ="zuba.link";
+    //--------------------------------------------------------//
+    //https://adbull.me/CB8qnrlamx2
+    $config[] ="adbull";
+    $config[] ="adbull.me";
+    //--------------------------------------------------------//
+    //https://pingit.im/DGEg42E2
+    $config[] ="pingit";
+    $config[] ="pingit.im";
+    $config[] ="pngit";
+    $config[] ="pngit.live";
+    //--------------------------------------------------------//
+    //https://linkjust.com/CBbw64o0o5m
+    $config[] ="linkjust";
+    $config[] ="linkjust.com";
+    //--------------------------------------------------------//
+    //http://nx.chainfo.xyz/CBvdzwhx79a
+    $config[] ="chainfo";
+    $config[] ="chaininfo";
+    $config[] ="chainfo.xyz";
+    //--------------------------------------------------------//
+    //https://linksly.co/CBmqwaf22mp
+    $config[] ="linksly";
+    $config[] ="linksly.co";
+    //--------------------------------------------------------//
+    //https://link1s.com/FbFM
+    //http://link1s.net/roakE1pV
+    $config[] ="link1s";
+    $config[] ="link1scom";
+    $config[] ="link1s.com";
+    $config[] ="link1snet";
+    $config[] ="link1s.net";
+    //--------------------------------------------------------//
+    //https://vnshortener.com/XRf8
+    $config[] ="vns";
+    //--------------------------------------------------------//
+    //https://flyzu.icu/CBbf0nm40mw
+    $config[] ="flzu";
+    $config[] ="flyzu";
+    $config[] ="flyzu.icu";
+    //--------------------------------------------------------//
+    //https://link.shorti.io/CBemtfk2g7f
+    $config[] ="shorti.io";
+    $config[] ="shorti";
+    //--------------------------------------------------------//
+    //https://link.freeltc.top/jmQRa3F
+    $config[] ="freeltc";
+    $config[] ="freeltc.top";
+    //https://terafly.me/oyoo/osZAP
+    $config[] ="ozoo";
+    $config[] ="opoo";
+    $config[] ="okoo";
+    $config[] ="oroo";
+    $config[] ="otoo";
+    $config[] ="oyoo";
+    $config[] ="owoo";
+    $config[] ="omoo";
+    $config[] ="ogoo";
+    //--------------------------------------------------------//
+    //http://petafly.me/Pofn
+    $config[] ="petafly";
+    $config[] ="petafly.me";
+    //--------------------------------------------------------//
+    //http://nonofly.me/lGxARjil
+    $config[] ="nonofly";
+    $config[] ="nonofly.me";
+    //--------------------------------------------------------//
+    //https://tii.la/j9G65aIe9l
+    $config[] ="shrinkearn";
+    $config[] ="shrinkearn.com";
+    $config[] ="tii.la";
+    $config[] ="shrinlearn";
+    //--------------------------------------------------------//
+    //https://shrinke.me/9SJRbamZ
+    $config[] ="shrinkme";
+    $config[] ="shrink.me";
+    //--------------------------------------------------------//
+    //https://shurt.pw/CB30zdl9eve
+    $config[] ="peshort";
+    //--------------------------------------------------------//
+    //https://linkfly.me/CBeqipa3vzk
+    $config[] ="linkfly2";
+    //--------------------------------------------------------//
+    //https://go.cuturl.in/CBdy9nokxt5
+    $config[] ="mozlink";
+    //--------------------------------------------------------//
+    //https://alwrificlick.site/CB2wz1n1b3q
+    $config[] ="alwrificlick";
+    //--------------------------------------------------------//
+    //https://urlcashh.click/CB3gnemgw8v
+    //https://urlcashh.quest/CBfwuw0urbe
+    $config[] ="urlcash";
+    //--------------------------------------------------------//
+    //https://m.pkr.pw/CBx7tq1rre9
+    //https://jameeltips.us/blog/CB7nesuu74g
+    $config[] ="cashurl";
+    $config[] ="cashurl.win";
+    //--------------------------------------------------------//
+    //https://illink.net/CBlwbocwnke
+    $config[] ="illink";
+    $config[] ="illink.net";
+    //--------------------------------------------------------//
+    //http://shortnow.xyz/OfgAYe
+    $config[] ="shortnow";
+    $config[] ="shortnow.xyz";
+    //--------------------------------------------------------//
+    //https://oko.sh/Gi2zocb4r
+    $config[] ="clksh";
+    $config[] ="clk-sh";
+    $config[] ="oko.sh";
+    $config[] ="clk.sh";
+    //--------------------------------------------------------//
+    //https://go.softindex.website/CB9qsfrvddp
+    $config[] ="softindex.website";
+    $config[] ="softindex";
+    //--------------------------------------------------------//
+    //https://softindex.site/CBwozes7joh
+    $config[] ="softindex2";
+    //--------------------------------------------------------//
+    //https://link.usalink.io/6ZCdmoW
+    $config[] ="usalink";
+    $config[] ="usalink.io";
+    $config[] ="link.usalink.io";
+    //--------------------------------------------------------//
+    //https://adshort.co/CBl31rajnk3
+    $config[] ="adshort";
+    $config[] ="adshort.co";
+    //--------------------------------------------------------//
+    //https://mitly.us/CBm8pkpuc0j
+    $config[] ="mitly";
+    $config[] ="mitly.us";
+    $config[] ="mitlyus";
+    //--------------------------------------------------------//
+    //https://clks.pro/ClbeW
+    $config[] ="clk";
+    $config[] ="clks";
+    $config[] ="clks.pro";
+    //--------------------------------------------------------//
+    //https://web1s.info/DC0R4Pyhst
+    $config[] ="web1s";
+    $config[] ="web1s.co";
+    $config[] ="web1s.info";
+    $config[] ="normal1s";
+    $config[] ="web1snormal2";
+    //--------------------------------------------------------//
+    //https://coinpayz.link/nQe01oD
+    $config[] ="cplink";
+    //--------------------------------------------------------//
+    //http://go.megaurl.in/ET2Ra2JC
+    $config[] ="megaurl";
+    $config[]  = "megaurl.in";
+    $config[] ="go.megaurl.in";
+    //--------------------------------------------------------//
+    $config[] ="megafly";
+    $config[] ="megafly.in";
+    $config[] ="go.megafly.in";
+    //--------------------------------------------------------//
+    //https://cuty.io/rWOlWjELDNLS
+    $config[] ="cuty";
+    $config[] ="cuty.io";
+    return $config;
 }
