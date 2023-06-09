@@ -40,5 +40,6 @@ $off_shortlinks = [
 untuk cara mematikannya bisa diamati di atas
 tinggal kita isi untuk name tergantung nama 
 shortlink dari webnya langsung ya guys
-contonya cuty atau bisa aja cuty.io & cutyio
+contohnya cuty atau bisa aja cuty.io & cutyio
+oh iya untuk web beserta nomor itu ganti juga ya 
 */
