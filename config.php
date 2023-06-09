@@ -157,6 +157,7 @@ $config[]="vns";
 //https://flyzu.icu/CBbf0nm40mw
 $config[]="flzu";
 $config[]="flyzu";
+$config[]="flyzu.icu";
 
 
 
