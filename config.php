@@ -2,44 +2,38 @@
 
 
 $off_shortlinks = [
-    "autofaucet.org" => [
+    "all_brand" => [
         "Cuty",
+		"Web1s"
+    ],
+    "trxking.xyz" => [
         "Shrinkme"
     ],
-    "autoclaim.in" => [
-        "Cuty",
-        "Shrinkme"
+    "faucetofbob.xyz" => [
+        "megaurl",
+        "megafly",
     ],
-    "autobitco.in" => [
-        "Cuty",
-        "Shrinkme"
-    ],
-    "web4" => [
-        "name",
+	"web1" => [
         "name",
 		"name"
     ],
-    "web5" => [
-        "name",
-        "name",
-		"name"
-    ],
-    "web6" => [
-        "name",
+	"web2" => [
         "name",
 		"name"
     ],
-    "web7" => [
-        "name",
+	"web3" => [
         "name",
 		"name"
-        ]
+    ],
+	"web4" => [
+        "name",
+		"name"
+    ]
     ];
 	
 /*
 untuk cara mematikannya bisa diamati di atas
 tinggal kita isi untuk name tergantung nama 
 shortlink dari webnya langsung ya guys
-contohnya cuty atau bisa aja cuty.io & cutyio
-oh iya untuk web beserta nomor itu ganti juga ya 
+contonya cuty atau bisa aja cuty.io & cutyio
 */
