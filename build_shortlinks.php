@@ -22,7 +22,7 @@ function visit_short($r,$icon=0) {
             $open = multiexplode(["_","{","[","(","-desktop","-easy","-mid","-hard"],str_replace(" ","",strtolower($r["name"][$s])))[0];
                 if(strtolower(config()[$i]) == $open) {
                     for($k=0;$k<50;$k++){
-                        if(strtolower($off_shortlinks[parse_url(host)["host"]][$k]) == $open or explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
+                        if(strtolower($off_shortlinks["all_brand"][$k]) == $open or $off_shortlinks[parse_url(host)["host"]][$k]) == $open or explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
                             goto up;
                         }
                     }
@@ -111,7 +111,7 @@ function bypass_shortlinks($url) {
             $url = "https://ser7.crazyblog.in".explode("p=",$url)[1];
             $host = parse_url($url)["host"];
         }
-        if(preg_match("#(pingit.im|link4.pw|vnshortener.com|insfly.pw|url.cashurl.in|link.freeltc.top|short.freeltc.top|ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
+        if(preg_match("#(blog.shrinkme.link|pingit.im|link4.pw|vnshortener.com|insfly.pw|url.cashurl.in|link.freeltc.top|short.freeltc.top|ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
