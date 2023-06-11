@@ -1,10 +1,11 @@
 <?php
 
-
 $off_shortlinks = [
     "all_brand" => [
         "Cuty",
-		"Web1s"
+        "Cutyio",
+        "Cuty.io",
+        "Web1s"
     ],
     "trxking.xyz" => [
         "Shrinkme"
@@ -13,24 +14,25 @@ $off_shortlinks = [
         "megaurl",
         "megafly",
     ],
-	"web1" => [
+    "web1" => [
         "name",
-		"name"
+        "name"
     ],
-	"web2" => [
+    "web2" => [
         "name",
-		"name"
+        "name"
     ],
-	"web3" => [
+    "web3" => [
         "name",
-		"name"
+        "name"
     ],
-	"web4" => [
+    "web4" => [
         "name",
-		"name"
-    ]
+        "name"
+        ]
     ];
-	
+    
+    
 /*
 untuk cara mematikannya bisa diamati di atas
 tinggal kita isi untuk name tergantung nama 
