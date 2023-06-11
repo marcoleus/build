@@ -112,6 +112,7 @@ function bypass_shortlinks($url) {
             $host = parse_url($url)["host"];
         }
         if(preg_match("#(blog.shrinkme.link|pingit.im|link4.pw|vnshortener.com|insfly.pw|url.cashurl.in|link.freeltc.top|short.freeltc.top|ez4short.com|droplink.co|zuba.link|nx.chainfo.xyz|go.bitcosite.com|flyzu.icu|go.flyzu.icu|linkjust.com|owllink.net|birdurls.com|go.birdurls.com|go.owllink.net|adbull.me|link1s.net|link1s.com|ex-foary.com|shortzu.icu|clickzu.icu|ser2.crazyblog.in|ser3.crazyblog.in|link.adshorti.xyz|go.softindex.website|cbshort.com|link.shorti.io|sclick.crazyblog.in|adrev.link|go.cuturl.in|linkfly.me|alwrificlick.site|go.alwrificlick.site|url.mozlink.net|go.megafly.in|go.megaurl.in|link.usalink.io)#is",$host)) {
+            fix_1:
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -152,6 +153,9 @@ function bypass_shortlinks($url) {
                 $request_captcha = true;
             }
             if($request_captcha == true) {
+                if(!$t[1][2]) {
+                     goto fix_1;
+                }
                 $method = "recaptchav2";
                 $cap = request_captcha($method,$r[$method],$run["links"]);
                 $data = http_build_query([
@@ -183,6 +187,7 @@ function bypass_shortlinks($url) {
                 }
             }
         } elseif(preg_match("#(coinpayz.link|linksly.co|go.linksly.co|illink.net|go.illink.net|shrinke.me|go1.urlcash.click|urlcashh.click|ser7.crazyblog.in|short.pe|shurt.pw|urlcashh.quest|softindex.site|go.urlcash.site|goes1.softindex.website)#is",$host)) {
+            fix_2:
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
@@ -206,6 +211,9 @@ function bypass_shortlinks($url) {
                 $request_captcha = true;
             }
             if($request_captcha == true) {
+                if(!$t[1][2]) {
+                     goto fix_2;
+                }
                 $method = "recaptchav2";
                 $cap = request_captcha($method,$r[$method],$run["links"]);
                 $data = http_build_query([
