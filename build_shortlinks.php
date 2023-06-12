@@ -1547,6 +1547,7 @@ function config() {
     //--------------------------------------------------------//
     //https://try2link.com/xenvu
     $config[] ="try2link";
+    $config[] ="try2";
     $config[] ="try2link.com";
     //--------------------------------------------------------//
     //https://goo.st/xZ6PH
@@ -1559,6 +1560,7 @@ function config() {
     $config[] ="birdurls";
     $config[] ="birdsurl";
     $config[] ="birdurls.com";
+    $config[] ="owl";
     $config[] ="owlink";
     $config[] ="owllink";
     $config[] ="owllink.net";
