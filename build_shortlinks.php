@@ -1198,6 +1198,9 @@ function azcaptcha($method,$sitekey,$pageurl,$rr = 0) {
 }
 
 function captchaai($method,$sitekey,$pageurl,$rr = 0) {
+    if($method == 'hcaptcha' or $method == 'recaptchav3') {
+        die(m.'sorry anti byppass '.$method.n);
+    }
     refresh: 
     print p;
     $name_api = "apikey_captchaai";
