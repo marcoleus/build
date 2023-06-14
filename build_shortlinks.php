@@ -244,7 +244,7 @@ function bypass_shortlinks($url) {
                     return $r1->url;
                 }
             }
-        } elseif(preg_match("#(clik.pw)#is",$host)) {
+        } elseif(preg_match("#(clik.pw_off)#is",$host)) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
