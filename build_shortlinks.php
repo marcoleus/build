@@ -1512,6 +1512,7 @@ function config() {
     $config[] ="ez4short";
     $config[] ="ez4short.com";
     $config[] ="insfly";
+    $config[] ="insfly.pw";
     //--------------------------------------------------------//
     //https://fc-lc.com/urdbrOD
     $config[] ="fc";
