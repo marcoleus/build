@@ -862,7 +862,7 @@ function bypass_shortlinks($url) {
                 }
             }
         }
-    } elseif(preg_match("#(destyy.com|festyy.com|gestyy.com|hestyy.com)#is",$host)) {
+    } elseif(preg_match("#(destyy.com|festyy.com|gestyy.com|hestyy.com|ceesty.com)#is",$host)) {
         while(true) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
