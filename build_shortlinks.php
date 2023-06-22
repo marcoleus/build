@@ -1647,6 +1647,7 @@ function config() {
     //https://shrinke.me/9SJRbamZ
     $config[] ="shrinkme";
     $config[] ="shrink.me";
+    $config[] ="shrinkme.link";
     //--------------------------------------------------------//
     //https://shurt.pw/CB30zdl9eve
     $config[] ="peshort";
