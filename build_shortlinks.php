@@ -18,10 +18,10 @@ function visit_short($r,$icon=0) {
         sleep(1);
     }
     for($i=0;$i<500;$i++) {
-        for($s=0;$s<100;$s++) {
+        for($s=0;$s<200;$s++) {
             $open = multiexplode(["_","{","[","(","-desktop","-easy","-mid","-hard"],str_replace(" ","",strtolower($r["name"][$s])))[0];
                 if(strtolower(config()[$i]) == $open) {
-                    for($k=0;$k<50;$k++){
+                    for($k=0;$k<500;$k++){
                         if(strtolower($off_shortlinks["all_brand"][$k]) == $open or strtolower($off_shortlinks[parse_url(host)["host"]][$k]) == $open or explode("/",trim(explode("<",$r["left"][$s])[0]))[0] == 0 or explode("/",trim(explode("<",$r["left"][$s])[0]))[0][0] == "-") {
                             goto up;
                         }
