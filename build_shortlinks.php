@@ -1051,6 +1051,48 @@ function bypass_shortlinks($url) {
             r();
             return $r2->url;
         }
+    } elseif(preg_match("#(webtogo.site)#is",$host)) {
+        if(file(cookie_short)) {
+            unlink(cookie_short);
+        }
+        while(true) {
+            $r = base_short($url);
+            $r1 = base_short($r["url"]);
+            $r2 = base_short($r1["url"]);
+            if(!$r2["url2"][0]) {
+                continue;
+            }
+            $r3 = base_short($r2["url2"][0]);
+            $method = "recaptchav2";
+            if(!$r3[$method]) {
+                continue;
+            }
+            for ($i = 2;$i>-1;$i--) {
+                if($i == 2) {
+                    $n = "next1";
+                    $s = "Step ".$i;
+                }elseif($i == 1) {
+                    $n = "next2";
+                    $s = "Step ".$i;
+                } else {
+                    $n = "submit";
+                    $s = "Step ".$i;
+                    $cap = request_captcha($method,$r3[$method],$r2["url2"][0]);
+                }
+                $data1 = http_build_query([
+                    "g-recaptcha-response" => $cap,
+                    $n => $s
+                ]);
+                $r4 = base_short($r2["url2"][0],1,$data1,$r2["url2"][0]);
+                if($i == 0){
+                    if($r4["url"]) {
+                        print h."success";
+                        r();
+                        return $r4["url"];
+                    }
+                }
+            }
+        }
     }
 }
 
