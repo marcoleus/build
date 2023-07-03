@@ -805,13 +805,13 @@ function bypass_shortlinks($url) {
             if(file(cookie_short)) {
                 unlink(cookie_short);
             }
-            if(preg_match("#(feyorra.top|claimtrx.com|liteearn.com|cryptosfaucet.top|paidtomoney.com)#is",parse_url(host)["host"])) {
+            /*if(preg_match("#(feyorra.top|claimtrx.com|liteearn.com|cryptosfaucet.top|paidtomoney.com)#is",parse_url(host)["host"])) {
                 $coundown = 100;
-            }
+            }*/
             $run = build($url);
             $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
             if($r["url"]) {
-                L($coundown);
+                L(70);
                 print h."success";
                 r();
                 return $r["url"];
