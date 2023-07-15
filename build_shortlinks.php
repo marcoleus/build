@@ -811,7 +811,7 @@ function bypass_shortlinks($url) {
             $run = build($url);
             $r = base_short($run["inc"],0,0,"https://shinbhu.net/");
             if($r["url"]) {
-                L(70);
+                L(120);
                 print h."success";
                 r();
                 return $r["url"];
