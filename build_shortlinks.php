@@ -192,7 +192,7 @@ function bypass_shortlinks($url) {
                 unlink(cookie_short);
             }
             if(preg_match("#(linksly.co|go.linksly.co)#is",$host)) {
-                $referer = "https://themezon.net/";
+                $referer = "https://en.themezon.net/";
             } else {
                 $referer = 0;
             }
