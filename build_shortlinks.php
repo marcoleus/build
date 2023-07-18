@@ -119,7 +119,8 @@ function bypass_shortlinks($url) {
             if(preg_match("#(adbull.me)#is",$host)) {
                 $referer = "https://deportealdia.live/";
             } elseif(preg_match("#(linkjust.com)#is",$host)) {
-                $referer = "https://forexrw7.com/";     } elseif(preg_match("#(flyzu.icu|go.flyzu.icu)#is",$host)) {
+                $referer = "https://forexrw7.com/";
+            } elseif(preg_match("#(flyzu.icu|go.flyzu.icu)#is",$host)) {
                 $referer = "https://zubatecno.com/";
             } elseif(preg_match("#(nx.chainfo.xyz|go.bitcosite.com)#is",$host)) {
                 $referer = "https://bitzite.com/";
@@ -193,6 +194,8 @@ function bypass_shortlinks($url) {
             }
             if(preg_match("#(linksly.co|go.linksly.co)#is",$host)) {
                 $referer = "https://en.themezon.net/";
+            } elseif(preg_match("#(shrinke.me|en.shrinke.me)#is",$host)) {
+                $referer = "https://mrproblogger.com/";
             } else {
                 $referer = 0;
             }
@@ -201,7 +204,7 @@ function bypass_shortlinks($url) {
             } else {
                 $cloud = 0;
             }
-            $url = str_replace("linksly.co","go.linksly.co",str_replace("go.illink.net","illink.net",str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",$url))))));
+            $url = str_replace("shrinke.me","en.shrinke.me",str_replace("linksly.co","go.linksly.co",str_replace("go.illink.net","illink.net",str_replace("goes1.softindex.website","softindex.site",str_replace("go.urlcash.site","urlcashh.quest",str_replace("go1.urlcash.click","urlcashh.click",str_replace("short.pe","shurt.pw",$url)))))));
             $run = build($url);
             $r = base_short($run["links"],0,0,$referer,$cloud);
             $t = $r["token_csrf"];
